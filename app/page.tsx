@@ -462,10 +462,10 @@ export default function Home() {
         <div className="project-grid">
           {filteredProjects.map((project) => (
             <article className="project-card" key={project.title} id={`project-${project.slug}`}>
-              <a href={project.link ?? `#project-${project.slug}`} className="project-visual-link" target={project.link ? "_blank" : undefined} rel={project.link ? "noreferrer" : undefined} aria-label={`${project.title} project details`}>
+              <a href={`/projects/${project.slug}`} className="project-visual-link" aria-label={`${project.title} project details`}>
                 <div className={`project-visual project-${project.tone}`}><div className="project-no">{project.number}</div><div className="project-mark">{project.mark}</div><div className="project-visual-detail">{project.engine} / {project.year}</div><span className="project-open">↗</span></div>
               </a>
-              <div className="project-info"><div><p className="project-kicker">{project.subtitle[language]}</p><h3>{project.title}</h3></div><span className="project-year">{project.year}</span></div>
+              <div className="project-info"><div><p className="project-kicker">{project.subtitle[language]}</p><a className="project-title-link" href={`/projects/${project.slug}`}><h3>{project.title}</h3></a></div><span className="project-year">{project.year}</span></div>
               <p className="project-description">{project.description[language]}</p>
               <div className="project-tags">{project.contributions.map((contribution) => <span key={contribution}>{contribution}</span>)}<span className="engine-tag">{project.engine}</span></div>
               <div className="project-facts">{project.facts[language].map((fact) => <span key={fact}>{fact}</span>)}</div>
