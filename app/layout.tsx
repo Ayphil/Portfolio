@@ -2,9 +2,9 @@ import type { Metadata } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "Ayphil 75 — Game design portfolio",
+  title: "Emmanuel Cyr — Game design portfolio",
   description:
-    "A bilingual portfolio for Ayphil 75, exploring UX, systems, and technical design across games and interactive projects.",
+    "Emmanuel Cyr's bilingual portfolio of game design, UX, systems, and technical design work.",
   icons: {
     icon: "/favicon.svg",
     shortcut: "/favicon.svg",

@@ -1,8 +1,8 @@
 "use client";
 
 import { useEffect, useMemo, useState } from "react";
+import { useLanguage } from "./language";
 
-type Language = "en" | "fr";
 type Engine = "Unreal Engine 5" | "Figma";
 
 type MediaPlaceholder = {
@@ -264,7 +264,7 @@ const projects: Project[] = [
 
 const copy = {
   en: {
-    nav: { reel: "Reel", work: "Selected work", about: "About", contact: "Contact" },
+    nav: { reel: "Reel", work: "Selected work", about: "About", contact: "Contact", cv: "CV" },
     kicker: "Game designer / systems thinker",
     heroTitle: "Designing\nmeaningful\nsystems.",
     heroBody:
@@ -285,14 +285,18 @@ const copy = {
     showing: "Showing",
     projects: "projects",
     all: "All work",
-    openNotes: "Open project notes",
-    closeNotes: "Close project notes",
-    visitProject: "Visit project",
-    mediaPlaceholder: "Media placeholder",
     aboutKicker: "A little context",
     aboutTitle: "Good design leaves\nroom for discovery.",
     aboutBody:
-      "I'm a game designer who likes the space between intention and accident. My practice moves between player research, paper prototypes, systems tuning, and the technical conversations that get ideas into a playable shape.",
+      "I'm Emmanuel, a bilingual game design student based in Montréal. I move between player research, paper prototypes, systems tuning, and the technical conversations that get ideas into a playable shape. Outside of games, I spend time canot-camping, hiking, running, and camping.",
+    background: "Background",
+    backgroundItems: [
+      { label: "Education", value: "B.A. in video game creation, design concentration — UQAT / 2025–present" },
+      { label: "Web and content", value: "Webmaster assistant — Office of the Commissioner of Official Languages / May 2024–June 2025" },
+      { label: "Published work", value: "Node RPG — Steam / October 2024–present" },
+      { label: "Recognition", value: "Ubisoft Game Lab — Best Game Design; three additional nominations / 2026" },
+      { label: "Languages", value: "French first language / English bilingual" },
+    ],
     approach: "My approach",
     approachBody: "Observe → simplify → test → make it sing.",
     availability: "Available for select collaborations",
@@ -300,9 +304,12 @@ const copy = {
     contactBody: "Tell me what you're making. I'd love to hear the messy first version.",
     contactCta: "Start a conversation",
     footer: "Game design, systems, and the good kind of impossible.",
+    linkedin: "LinkedIn",
+    cv: "View CV",
+    backToTop: "Back to top ↑",
   },
   fr: {
-    nav: { reel: "Reel", work: "Projets choisis", about: "À propos", contact: "Contact" },
+    nav: { reel: "Reel", work: "Projets choisis", about: "À propos", contact: "Contact", cv: "CV" },
     kicker: "Game designer / pensée systémique",
     heroTitle: "Concevoir des\nsystèmes qui\ncomptent.",
     heroBody:
@@ -323,14 +330,18 @@ const copy = {
     showing: "Afficher",
     projects: "projets",
     all: "Tous les projets",
-    openNotes: "Ouvrir les notes du projet",
-    closeNotes: "Fermer les notes du projet",
-    visitProject: "Voir le projet",
-    mediaPlaceholder: "Média à remplacer",
     aboutKicker: "Un peu de contexte",
     aboutTitle: "Le bon design laisse\nplace à la découverte.",
     aboutBody:
-      "Je suis game designer et j'aime l'espace entre l'intention et l'accident. Ma pratique navigue entre recherche joueur, prototypes papier, équilibrage des systèmes et conversations techniques pour donner une forme jouable aux idées.",
+      "Je m'appelle Emmanuel et j'étudie le design de jeux vidéo à l'UQAT. Je navigue entre la recherche joueur, les prototypes papier, l'équilibrage des systèmes et les conversations techniques qui donnent une forme jouable aux idées. En dehors des jeux, j'aime le canot-camping, la randonnée, la course et le camping.",
+    background: "Parcours",
+    backgroundItems: [
+      { label: "Éducation", value: "Baccalauréat en création de jeux vidéo, concentration Design — UQAT / 2025–aujourd'hui" },
+      { label: "Web et contenu", value: "Assistant au webmestre — Commissariat aux langues officielles / mai 2024–juin 2025" },
+      { label: "Projet publié", value: "Node RPG — Steam / octobre 2024–aujourd'hui" },
+      { label: "Reconnaissance", value: "Ubisoft Game Lab — Meilleur Game Design; trois autres nominations / 2026" },
+      { label: "Langues", value: "Français langue première / anglais bilingue" },
+    ],
     approach: "Ma méthode",
     approachBody: "Observer → simplifier → tester → faire chanter.",
     availability: "Disponible pour quelques collaborations",
@@ -338,6 +349,9 @@ const copy = {
     contactBody: "Parlez-moi de ce que vous créez. J'aimerais voir la première version, même brouillonne.",
     contactCta: "Ouvrir la conversation",
     footer: "Game design, systèmes et impossibilités bien choisies.",
+    linkedin: "LinkedIn",
+    cv: "Voir le CV",
+    backToTop: "Retour en haut ↑",
   },
 };
 
@@ -346,18 +360,8 @@ const filterGroups = {
   engine: ["Unreal Engine 5", "Figma"],
 };
 
-function MediaPlaceholderCard({ media, label }: { media: MediaPlaceholder; label: string }) {
-  return (
-    <div className={`media-placeholder media-${media.kind}`} role="img" aria-label={`${label}: ${media.label}`}>
-      <span className="media-placeholder-index">{media.kind === "video" ? "▶" : media.kind === "blueprint" ? "BP" : "IMG"}</span>
-      <span className="media-placeholder-label">{media.label}</span>
-      <span className="media-placeholder-note">{label}</span>
-    </div>
-  );
-}
-
 export default function Home() {
-  const [language, setLanguage] = useState<Language>("en");
+  const [language, setLanguage] = useLanguage();
   const [activeContributions, setActiveContributions] = useState<string[]>([]);
   const [activeEngines, setActiveEngines] = useState<string[]>([]);
   const [isPlaying, setIsPlaying] = useState(false);
@@ -408,6 +412,7 @@ export default function Home() {
           <a href="#work">{t.nav.work}</a>
           <a href="#about">{t.nav.about}</a>
           <a href="#contact">{t.nav.contact}</a>
+          <a href="/CV_Emmanuel_Cyr.pdf" target="_blank" rel="noreferrer">{t.nav.cv}</a>
         </nav>
         <div className="header-tools">
           <span className="availability-dot" aria-hidden="true" />
@@ -469,13 +474,6 @@ export default function Home() {
               <p className="project-description">{project.description[language]}</p>
               <div className="project-tags">{project.contributions.map((contribution) => <span key={contribution}>{contribution}</span>)}<span className="engine-tag">{project.engine}</span></div>
               <div className="project-facts">{project.facts[language].map((fact) => <span key={fact}>{fact}</span>)}</div>
-              <details className="project-details">
-                <summary><span className="details-open">{t.openNotes}</span><span className="details-close">{t.closeNotes}</span><span className="details-plus">+</span></summary>
-                <div className="project-detail-content">
-                  {project.sections.map((section) => <section className="detail-section" key={section.heading.en}><h4>{section.heading[language]}</h4>{section.body && <p>{section.body[language]}</p>}{section.bullets && <ul>{section.bullets[language].map((bullet) => <li key={bullet}>{bullet}</li>)}</ul>}{section.media && <div className="media-grid">{section.media.map((media) => <MediaPlaceholderCard key={media.label} media={media} label={t.mediaPlaceholder} />)}</div>}</section>)}
-                  {project.link && <a className="detail-project-link" href={project.link} target="_blank" rel="noreferrer">{t.visitProject}<span>↗</span></a>}
-                </div>
-              </details>
             </article>
           ))}
         </div>
@@ -484,14 +482,14 @@ export default function Home() {
 
       <section className="about-section section-wrap" id="about" aria-labelledby="about-title">
         <div className="about-stamp"><span>03</span><span>ABOUT<br />THE<br />PRACTICE</span></div>
-        <div className="about-copy"><p className="eyebrow">{t.aboutKicker}</p><h2 id="about-title">{t.aboutTitle.split("\n").map((line) => <span key={line}>{line}</span>)}</h2><p className="about-body">{t.aboutBody}</p><div className="approach-row"><span className="approach-label">{t.approach}</span><span className="approach-text">{t.approachBody}</span></div></div>
+        <div className="about-copy"><p className="eyebrow">{t.aboutKicker}</p><h2 id="about-title">{t.aboutTitle.split("\n").map((line) => <span key={line}>{line}</span>)}</h2><p className="about-body">{t.aboutBody}</p><div className="about-facts" aria-label={t.background}>{t.backgroundItems.map((item) => <div className="about-fact" key={item.label}><span>{item.label}</span><strong>{item.value}</strong></div>)}</div><div className="about-links"><a href="https://store.steampowered.com/app/3661570/Node_RPG/" target="_blank" rel="noreferrer">Node RPG / Steam <span>↗</span></a><a href="https://www.linkedin.com/in/emmanuelcyr/" target="_blank" rel="noreferrer">{t.linkedin} <span>↗</span></a><a href="/CV_Emmanuel_Cyr.pdf" target="_blank" rel="noreferrer">{t.cv} <span>↗</span></a></div><div className="approach-row"><span className="approach-label">{t.approach}</span><span className="approach-text">{t.approachBody}</span></div></div>
         <div className="about-visual" aria-hidden="true"><div className="about-visual-ring ring-a" /><div className="about-visual-ring ring-b" /><div className="about-cross cross-a" /><div className="about-cross cross-b" /><span>ITERATE<br />WITH INTENT</span></div>
       </section>
 
       <footer className="contact-section section-wrap" id="contact">
         <div className="contact-topline"><span className="eyebrow">04 / {t.availability}</span><span className="contact-index">2026—∞</span></div>
-        <div className="contact-grid"><h2>{t.contactTitle.split("\n").map((line) => <span key={line}>{line}</span>)}</h2><div className="contact-copy"><p>{t.contactBody}</p><a className="contact-cta" href="mailto:hello@yourname.dev"><span>{t.contactCta}</span><span className="contact-arrow">↗</span></a></div></div>
-        <div className="footer-bottom"><span>{t.footer}</span><div className="footer-links"><a href="mailto:hello@yourname.dev">Email</a><a href="#reel">Back to top ↑</a></div></div>
+        <div className="contact-grid"><h2>{t.contactTitle.split("\n").map((line) => <span key={line}>{line}</span>)}</h2><div className="contact-copy"><p>{t.contactBody}</p><a className="contact-cta" href="mailto:emmanuel.cyr159@gmail.com"><span>{t.contactCta}</span><span className="contact-arrow">↗</span></a></div></div>
+        <div className="footer-bottom"><span>{t.footer}</span><div className="footer-links"><a href="mailto:emmanuel.cyr159@gmail.com">Email</a><a href="https://www.linkedin.com/in/emmanuelcyr/" target="_blank" rel="noreferrer">{t.linkedin}</a><a href="/CV_Emmanuel_Cyr.pdf" target="_blank" rel="noreferrer">{t.cv}</a><a href="#reel">{t.backToTop}</a></div></div>
       </footer>
     </main>
   );

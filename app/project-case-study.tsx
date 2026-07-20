@@ -1,10 +1,9 @@
 "use client";
 
 import Link from "next/link";
-import { useMemo, useState } from "react";
+import { useMemo } from "react";
 import type { ProjectMedia, ProjectPageContent } from "./project-pages";
-
-type Language = "en" | "fr";
+import { useLanguage } from "./language";
 
 const copy = {
   en: {
@@ -19,6 +18,7 @@ const copy = {
     next: "Next project",
     previous: "Previous project",
     menu: "Portfolio navigation",
+    cv: "CV",
   },
   fr: {
     back: "Retour aux projets choisis",
@@ -32,6 +32,7 @@ const copy = {
     next: "Projet suivant",
     previous: "Projet précédent",
     menu: "Navigation du portfolio",
+    cv: "CV",
   },
 };
 
@@ -46,7 +47,7 @@ function CaseStudyMedia({ media, label }: { media: ProjectMedia; label: string }
 }
 
 export default function ProjectCaseStudy({ project }: { project: ProjectPageContent }) {
-  const [language, setLanguage] = useState<Language>("en");
+  const [language, setLanguage] = useLanguage();
   const t = copy[language];
   const currentIndex = useMemo(() => project.number === "01" ? 0 : project.number === "02" ? 1 : project.number === "03" ? 2 : 3, [project.number]);
   const previous = ["super-maiden-riot", "think-outside-the-disk", "drylite", "graphic-design-projects"][(currentIndex + 3) % 4];
@@ -62,6 +63,7 @@ export default function ProjectCaseStudy({ project }: { project: ProjectPageCont
         <nav className="case-study-nav" aria-label={t.menu}>
           <Link href="/#work">{t.back}</Link>
           <Link href="/#contact">Contact</Link>
+          <a href="/CV_Emmanuel_Cyr.pdf" target="_blank" rel="noreferrer">{t.cv}</a>
         </nav>
         <button className="language-toggle" type="button" onClick={() => setLanguage((current) => current === "en" ? "fr" : "en")} aria-label="Switch language">
           <span className={language === "en" ? "is-active" : ""}>EN</span><span className="language-divider">/</span><span className={language === "fr" ? "is-active" : ""}>FR</span>
