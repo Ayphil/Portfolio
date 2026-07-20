@@ -158,6 +158,18 @@ h2 { font-size: clamp(51px, 7vw, 103px); font-weight: 800; margin-bottom: 0; }
 .project-turn { background: #d6e6ff; }
 .project-turn::before { background: repeating-linear-gradient(90deg, transparent 0 23px, rgba(37, 55, 104, .7) 24px 25px); content: ""; inset: 0 0 0 35%; position: absolute; transform: skewX(-30deg); }
 .project-turn .project-mark { color: #263768; }
+.project-maiden { background: linear-gradient(135deg, #2f1822 0 32%, #e26a59 32.4% 64%, #ffd34f 64.4%); }
+.project-maiden::before { background: repeating-linear-gradient(135deg, transparent 0 22px, rgba(241, 237, 228, .55) 23px 25px); content: ""; inset: 0 0 0 48%; opacity: .45; position: absolute; }
+.project-maiden .project-mark { color: #241722; }
+.project-disk { background: radial-gradient(ellipse at 68% 55%, transparent 0 14%, rgba(214, 255, 69, .9) 14.4% 15.2%, transparent 15.6% 26%, rgba(241, 237, 228, .82) 26.4% 27%, transparent 27.4%), linear-gradient(135deg, #15283a, #375e78 52%, #ee7045 52.4%); }
+.project-disk::before { border: 1px solid rgba(241, 237, 228, .5); border-radius: 50%; content: ""; height: 128%; left: 48%; position: absolute; top: -16%; transform: rotate(52deg); width: 25%; }
+.project-disk .project-mark { color: var(--paper); }
+.project-drylite { background: linear-gradient(135deg, #111c1d, #38564c 52%, #d8ed57 52.4%); }
+.project-drylite::before { background-image: linear-gradient(rgba(241, 237, 228, .15) 1px, transparent 1px), linear-gradient(90deg, rgba(241, 237, 228, .15) 1px, transparent 1px); background-size: 26px 26px; content: ""; inset: 0 0 0 48%; opacity: .5; position: absolute; transform: skewX(-20deg); }
+.project-drylite .project-mark { color: var(--acid); }
+.project-graphic { background: linear-gradient(135deg, #f6efe1 0 47%, #ee7045 47.3% 66%, #263c54 66.3%); }
+.project-graphic::before { border: 1px solid rgba(23, 21, 19, .42); content: ""; height: 58%; left: 20%; position: absolute; top: 20%; transform: rotate(-8deg); width: 30%; }
+.project-graphic .project-mark { color: #16293b; }
 .project-info { align-items: start; display: flex; justify-content: space-between; padding-top: 20px; }
 .project-kicker { color: var(--muted); font-family: monospace; font-size: 10px; margin-bottom: 7px; text-transform: uppercase; }
 .project-info h3 { font-family: var(--display); font-size: clamp(27px, 3vw, 42px); font-weight: 800; letter-spacing: -.07em; line-height: .9; margin: 0; text-transform: uppercase; }
@@ -166,6 +178,36 @@ h2 { font-size: clamp(51px, 7vw, 103px); font-weight: 800; margin-bottom: 0; }
 .project-tags { display: flex; flex-wrap: wrap; gap: 6px; }
 .project-tags span { border: 1px solid var(--line); border-radius: 999px; font-size: 9px; padding: 5px 8px; }
 .project-tags .engine-tag { background: var(--ink); border-color: var(--ink); color: var(--paper); }
+.project-facts { border-left: 2px solid var(--orange); display: grid; gap: 6px; margin-top: 18px; padding-left: 12px; }
+.project-facts span { color: var(--muted); font-size: 10px; line-height: 1.35; }
+.project-details { border-top: 1px solid var(--line); margin-top: 25px; }
+.project-details summary { align-items: center; color: var(--ink); cursor: pointer; display: flex; font-size: 10px; font-weight: 800; justify-content: space-between; letter-spacing: .08em; list-style: none; padding: 14px 0; text-transform: uppercase; }
+.project-details summary::-webkit-details-marker { display: none; }
+.project-details summary:hover { color: var(--orange); }
+.details-close { display: none; }
+.project-details[open] .details-open { display: none; }
+.project-details[open] .details-close { display: inline; }
+.details-plus { color: var(--orange); font-size: 19px; font-weight: 300; line-height: .6; transition: transform .2s ease; }
+.project-details[open] .details-plus { transform: rotate(45deg); }
+.project-detail-content { border-top: 1px solid var(--line); padding-top: 26px; }
+.detail-section { border-bottom: 1px solid var(--line); padding: 0 0 28px; }
+.detail-section + .detail-section { padding-top: 28px; }
+.detail-section h4 { font-family: var(--display); font-size: 23px; letter-spacing: -.055em; line-height: .95; margin: 0 0 13px; text-transform: uppercase; }
+.detail-section p { color: var(--muted); font-size: 13px; line-height: 1.55; margin-bottom: 15px; }
+.detail-section ul { color: var(--muted); font-size: 12px; line-height: 1.45; margin: 0 0 18px; padding-left: 17px; }
+.detail-section li + li { margin-top: 6px; }
+.media-grid { display: grid; gap: 8px; grid-template-columns: repeat(2, minmax(0, 1fr)); margin-top: 18px; }
+.media-placeholder { align-items: flex-end; aspect-ratio: 1.34 / 1; background-color: #292723; background-image: linear-gradient(135deg, transparent 47%, rgba(214, 255, 69, .28) 47.5% 51%, transparent 51.5%), repeating-linear-gradient(0deg, transparent 0 9px, rgba(241, 237, 228, .06) 10px 11px); color: var(--paper); display: flex; flex-wrap: wrap; gap: 4px 7px; overflow: hidden; padding: 10px; position: relative; }
+.media-placeholder::after { border: 1px solid rgba(241, 237, 228, .27); content: ""; inset: 7px; pointer-events: none; position: absolute; }
+.media-placeholder-index { color: var(--acid); font-family: monospace; font-size: 9px; font-weight: 800; position: relative; z-index: 1; }
+.media-placeholder-label { font-size: 10px; font-weight: 800; line-height: 1.1; max-width: 72%; position: relative; text-transform: uppercase; z-index: 1; }
+.media-placeholder-note { color: #aaa79d; font-family: monospace; font-size: 8px; margin-left: auto; position: relative; text-transform: uppercase; z-index: 1; }
+.media-image { background-color: #303f4a; }
+.media-blueprint { background-color: #27364a; background-image: linear-gradient(rgba(122, 155, 255, .25) 1px, transparent 1px), linear-gradient(90deg, rgba(122, 155, 255, .25) 1px, transparent 1px); background-size: 15px 15px; }
+.media-video { background-color: #3b2425; }
+.media-video .media-placeholder-index { color: var(--orange); }
+.detail-project-link { align-items: center; border-bottom: 1px solid var(--ink); display: flex; font-size: 10px; font-weight: 800; justify-content: space-between; letter-spacing: .08em; margin-top: 23px; padding: 12px 0; text-transform: uppercase; }
+.detail-project-link span { color: var(--orange); font-size: 18px; }
 .empty-state { border: 1px dashed var(--line); padding: 60px; text-align: center; }
 .empty-state p { color: var(--muted); }
 .empty-state button { background: var(--ink); border: 0; color: var(--paper); font-size: 11px; padding: 10px 15px; text-transform: uppercase; }
