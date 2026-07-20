@@ -281,6 +281,14 @@ h2 { font-size: clamp(51px, 7vw, 103px); font-weight: 800; margin-bottom: 0; }
 .about-copy h2 { margin-bottom: 38px; }
 .about-copy h2 span:nth-child(2) { color: var(--acid); }
 .about-body { color: #b5b2aa; font-size: 16px; line-height: 1.6; max-width: 560px; }
+.about-facts { border-top: 1px solid rgba(241, 237, 228, .22); margin-top: 42px; max-width: 650px; }
+.about-fact { border-bottom: 1px solid rgba(241, 237, 228, .14); display: grid; gap: 20px; grid-template-columns: 120px 1fr; padding: 14px 0; }
+.about-fact > span { color: var(--acid); font-size: 10px; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; }
+.about-fact strong { color: #b5b2aa; font-size: 13px; font-weight: 400; line-height: 1.45; }
+.about-links { display: flex; flex-wrap: wrap; gap: 10px 25px; margin-top: 25px; }
+.about-links a { border-bottom: 1px solid rgba(241, 237, 228, .4); color: var(--paper); font-size: 10px; font-weight: 800; letter-spacing: .06em; padding-bottom: 5px; text-transform: uppercase; }
+.about-links a span { color: var(--orange); font-size: 15px; margin-left: 5px; }
+.about-links a:hover { color: var(--acid); }
 .approach-row { border-top: 1px solid rgba(241, 237, 228, .22); display: grid; gap: 18px; grid-template-columns: 130px 1fr; margin-top: 50px; padding-top: 17px; }
 .approach-label { color: var(--acid); font-size: 10px; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; }
 .approach-text { color: var(--paper); font-family: var(--display); font-size: 19px; letter-spacing: -.03em; }
@@ -349,6 +357,7 @@ h2 { font-size: clamp(51px, 7vw, 103px); font-weight: 800; margin-bottom: 0; }
   .about-section { display: flex; flex-direction: column; align-items: stretch; padding-bottom: 90px; padding-top: 90px; }
   .about-stamp { flex-direction: row; justify-content: space-between; }
   .about-visual { align-self: flex-end; width: 64%; }
+  .about-fact { gap: 5px; grid-template-columns: 1fr; }
   .approach-row { grid-template-columns: 1fr; gap: 9px; }
   .contact-grid { padding-bottom: 80px; padding-top: 80px; }
   .contact-grid h2 { font-size: clamp(60px, 18vw, 100px); }
