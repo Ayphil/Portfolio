@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
+import { useMemo, useState } from "react";
 import { useLanguage } from "./language";
 
 type Engine = "Unreal Engine 5" | "Figma";
@@ -265,15 +265,12 @@ const projects: Project[] = [
 const copy = {
   en: {
     nav: { reel: "Reel", work: "Selected work", about: "About", contact: "Contact", cv: "CV" },
-    kicker: "Game designer / systems thinker",
-    heroTitle: "Designing\nmeaningful\nsystems.",
-    heroBody:
-      "I turn complex rules into clear, tactile experiences — from the first input to the moment a player surprises themselves.",
+    heroTitle: "Emmanuel Cyr",
+    heroBody: "Tech Design, UX design and Systems",
     heroCta: "Explore the work",
     reelLabel: "Demo reel / 01:18",
     reelPlay: "Play demo reel",
     reelPause: "Pause reel",
-    reelNote: "A cut of worlds, rules, and readable moments.",
     selectedKicker: "Selected work / 04 projects",
     selectedTitle: "Different worlds.\nSame obsession.",
     selectedBody:
@@ -310,15 +307,12 @@ const copy = {
   },
   fr: {
     nav: { reel: "Reel", work: "Projets choisis", about: "À propos", contact: "Contact", cv: "CV" },
-    kicker: "Game designer / pensée systémique",
-    heroTitle: "Concevoir des\nsystèmes qui\ncomptent.",
-    heroBody:
-      "Je transforme des règles complexes en expériences claires et tactiles — de la première action au moment où le joueur se surprend lui-même.",
+    heroTitle: "Emmanuel Cyr",
+    heroBody: "Design technique, design UX et systèmes",
     heroCta: "Voir les projets",
     reelLabel: "Demo reel / 01:18",
     reelPlay: "Lancer le demo reel",
     reelPause: "Mettre en pause",
-    reelNote: "Un montage de mondes, de règles et de moments lisibles.",
     selectedKicker: "Projets choisis / 04 projets",
     selectedTitle: "Des mondes différents.\nLa même obsession.",
     selectedBody:
@@ -365,22 +359,7 @@ export default function Home() {
   const [activeContributions, setActiveContributions] = useState<string[]>([]);
   const [activeEngines, setActiveEngines] = useState<string[]>([]);
   const [isPlaying, setIsPlaying] = useState(false);
-  const [progress, setProgress] = useState(0);
   const t = copy[language];
-
-  useEffect(() => {
-    if (!isPlaying) return;
-    const timer = window.setInterval(() => {
-      setProgress((value) => {
-        if (value >= 100) {
-          setIsPlaying(false);
-          return 0;
-        }
-        return value + 0.42;
-      });
-    }, 300);
-    return () => window.clearInterval(timer);
-  }, [isPlaying]);
 
   const filteredProjects = useMemo(() => {
     return projects.filter((project) => {
@@ -424,12 +403,7 @@ export default function Home() {
       </header>
 
       <section className="hero-section" id="reel" aria-labelledby="hero-title">
-        <a className="hero-scroll-cue" href="#work" aria-label="Scroll to selected work">
-          <span>Scroll to explore</span>
-          <span aria-hidden="true">↓</span>
-        </a>
         <div className="hero-copy">
-          <p className="eyebrow"><span>01</span>{t.kicker}</p>
           <h1 id="hero-title">{t.heroTitle.split("\n").map((line) => <span key={line}>{line}</span>)}</h1>
           <p className="hero-body">{t.heroBody}</p>
           <a className="text-link" href="#work"><span>{t.heroCta}</span><span className="link-arrow">↘</span></a>
@@ -446,18 +420,15 @@ export default function Home() {
               <button className="reel-play" type="button" onClick={() => setIsPlaying((current) => !current)} aria-label={isPlaying ? t.reelPause : t.reelPlay}>
                 <span className="play-icon">{isPlaying ? "Ⅱ" : "▶"}</span><span>{isPlaying ? t.reelPause : t.reelPlay}</span>
               </button>
-              <span className="reel-time">00:{String(Math.floor(progress * 0.78)).padStart(2, "0")} / 01:18</span>
             </div>
-            <div className="reel-controls"><span className="reel-control-label">01</span><div className="reel-progress" aria-hidden="true"><span style={{ width: `${progress}%` }} /></div><span className="reel-control-label">04</span></div>
           </div>
-          <p className="reel-note">{t.reelNote}<span>↖</span></p>
         </div>
       </section>
       </div>
 
       <section className="work-section section-wrap" id="work" aria-labelledby="work-title">
         <div className="section-intro">
-          <p className="eyebrow"><span>02</span>{t.selectedKicker}</p>
+          <p className="eyebrow"><span>01</span>{t.selectedKicker}</p>
           <div className="work-heading-grid"><h2 id="work-title">{t.selectedTitle.split("\n").map((line) => <span key={line}>{line}</span>)}</h2><p>{t.selectedBody}</p></div>
         </div>
 
@@ -487,13 +458,13 @@ export default function Home() {
       </section>
 
       <section className="about-section section-wrap" id="about" aria-labelledby="about-title">
-        <div className="about-stamp"><span>03</span><span>ABOUT<br />THE<br />PRACTICE</span></div>
+        <div className="about-stamp"><span>02</span><span>ABOUT<br />THE<br />PRACTICE</span></div>
         <div className="about-copy"><p className="eyebrow">{t.aboutKicker}</p><h2 id="about-title">{t.aboutTitle.split("\n").map((line) => <span key={line}>{line}</span>)}</h2><p className="about-body">{t.aboutBody}</p><div className="about-facts" aria-label={t.background}>{t.backgroundItems.map((item) => <div className="about-fact" key={item.label}><span>{item.label}</span><strong>{item.value}</strong></div>)}</div><div className="about-links"><a href="https://store.steampowered.com/app/3661570/Node_RPG/" target="_blank" rel="noreferrer">Node RPG / Steam <span>↗</span></a><a href="https://www.linkedin.com/in/emmanuelcyr/" target="_blank" rel="noreferrer">{t.linkedin} <span>↗</span></a><a href="/CV_Emmanuel_Cyr.pdf" target="_blank" rel="noreferrer">{t.cv} <span>↗</span></a></div><div className="approach-row"><span className="approach-label">{t.approach}</span><span className="approach-text">{t.approachBody}</span></div></div>
         <div className="about-visual" aria-hidden="true"><div className="about-visual-ring ring-a" /><div className="about-visual-ring ring-b" /><div className="about-cross cross-a" /><div className="about-cross cross-b" /><span>ITERATE<br />WITH INTENT</span></div>
       </section>
 
       <footer className="contact-section section-wrap" id="contact">
-        <div className="contact-topline"><span className="eyebrow">04 / {t.availability}</span><span className="contact-index">2026—∞</span></div>
+        <div className="contact-topline"><span className="eyebrow">03 / {t.availability}</span><span className="contact-index">2026—∞</span></div>
         <div className="contact-grid"><h2>{t.contactTitle.split("\n").map((line) => <span key={line}>{line}</span>)}</h2><div className="contact-copy"><p>{t.contactBody}</p><a className="contact-cta" href="mailto:emmanuel.cyr159@gmail.com"><span>{t.contactCta}</span><span className="contact-arrow">↗</span></a></div></div>
         <div className="footer-bottom"><span>{t.footer}</span><div className="footer-links"><a href="mailto:emmanuel.cyr159@gmail.com">Email</a><a href="https://www.linkedin.com/in/emmanuelcyr/" target="_blank" rel="noreferrer">{t.linkedin}</a><a href="/CV_Emmanuel_Cyr.pdf" target="_blank" rel="noreferrer">{t.cv}</a><a href="#reel">{t.backToTop}</a></div></div>
       </footer>
