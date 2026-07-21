@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useMemo, useRef, useState } from "react";
 import { useLanguage } from "./language";
 
 type Engine = "Unreal Engine 5" | "Figma";
@@ -268,9 +268,8 @@ const copy = {
     heroTitle: "Emmanuel Cyr",
     heroBody: "Tech Design, UX design and Systems",
     heroCta: "Explore the work",
-    reelLabel: "Demo reel / 01:18",
     reelPlay: "Play demo reel",
-    reelPause: "Pause reel",
+    reelPause: "Stop demo reel",
     selectedKicker: "Selected work / 04 projects",
     selectedTitle: "Different worlds.\nSame obsession.",
     selectedBody:
@@ -310,9 +309,8 @@ const copy = {
     heroTitle: "Emmanuel Cyr",
     heroBody: "Design technique, design UX et systèmes",
     heroCta: "Voir les projets",
-    reelLabel: "Demo reel / 01:18",
     reelPlay: "Lancer le demo reel",
-    reelPause: "Mettre en pause",
+    reelPause: "Arrêter le demo reel",
     selectedKicker: "Projets choisis / 04 projets",
     selectedTitle: "Des mondes différents.\nLa même obsession.",
     selectedBody:
@@ -354,12 +352,25 @@ const filterGroups = {
   engine: ["Unreal Engine 5", "Figma"],
 };
 
+const reelVideoId = "h56nN-xFdR0";
+const reelEmbedUrl = `https://www.youtube.com/embed/${reelVideoId}?autoplay=1&mute=1&controls=0&disablekb=1&fs=0&iv_load_policy=3&loop=1&playlist=${reelVideoId}&playsinline=1&rel=0&enablejsapi=1`;
+
 export default function Home() {
   const [language, setLanguage] = useLanguage();
   const [activeContributions, setActiveContributions] = useState<string[]>([]);
   const [activeEngines, setActiveEngines] = useState<string[]>([]);
-  const [isPlaying, setIsPlaying] = useState(false);
+  const [isPlaying, setIsPlaying] = useState(true);
+  const reelPlayerRef = useRef<HTMLIFrameElement>(null);
   const t = copy[language];
+
+  const toggleReel = () => {
+    const nextIsPlaying = !isPlaying;
+    reelPlayerRef.current?.contentWindow?.postMessage(
+      JSON.stringify({ event: "command", func: nextIsPlaying ? "playVideo" : "stopVideo", args: [] }),
+      "https://www.youtube.com",
+    );
+    setIsPlaying(nextIsPlaying);
+  };
 
   const filteredProjects = useMemo(() => {
     return projects.filter((project) => {
@@ -411,13 +422,19 @@ export default function Home() {
 
         <div className="reel-column">
           <div className="reel-frame">
-            <div className="reel-meta"><span>{t.reelLabel}</span><span className="reel-live"><i /> {isPlaying ? "PLAYING" : "LOOP"}</span></div>
-            <div className={`reel-visual ${isPlaying ? "is-playing" : ""}`}>
-              <div className="reel-orbit orbit-one" /><div className="reel-orbit orbit-two" /><div className="reel-grid" />
-              <div className="reel-slice slice-one" /><div className="reel-slice slice-two" /><div className="reel-slice slice-three" />
-              <div className="reel-word">PLAY<br /><span>THE</span><br />SYSTEM</div>
-              <div className="reel-corner corner-top">A / 04</div><div className="reel-corner corner-bottom">FEELING<br />IS A RULE</div>
-              <button className="reel-play" type="button" onClick={() => setIsPlaying((current) => !current)} aria-label={isPlaying ? t.reelPause : t.reelPlay}>
+            <div className="reel-visual">
+              <iframe
+                ref={reelPlayerRef}
+                className="reel-video"
+                src={reelEmbedUrl}
+                title="Emmanuel Cyr demo reel"
+                frameBorder="0"
+                allow="autoplay; encrypted-media"
+                aria-hidden="true"
+                tabIndex={-1}
+              />
+              <div className="reel-video-shade" aria-hidden="true" />
+              <button className="reel-play" type="button" onClick={toggleReel} aria-label={isPlaying ? t.reelPause : t.reelPlay}>
                 <span className="play-icon">{isPlaying ? "Ⅱ" : "▶"}</span><span>{isPlaying ? t.reelPause : t.reelPlay}</span>
               </button>
             </div>
