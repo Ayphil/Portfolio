@@ -14,7 +14,7 @@ export type ProjectPageSection = {
 export type ProjectPageContent = {
   number: string;
   slug: string;
-  title: string;
+  title: { en: string; fr: string };
   subtitle: { en: string; fr: string };
   year: string;
   engine: string;
@@ -32,7 +32,7 @@ export const projectPages: ProjectPageContent[] = [
   {
     number: "01",
     slug: "super-maiden-riot",
-    title: "Super Maiden Riot",
+    title: { en: "Super Maiden Riot", fr: "Super Maiden Riot" },
     subtitle: { en: "Co-op platformer / 10 weeks", fr: "Jeu de plateformes coop / 10 semaines" },
     year: "2025",
     engine: "Unreal Engine 5",
@@ -86,7 +86,7 @@ export const projectPages: ProjectPageContent[] = [
   {
     number: "02",
     slug: "think-outside-the-disk",
-    title: "Think Outside the Disk",
+    title: { en: "Think Outside the Disk", fr: "Think Outside the Disk" },
     subtitle: { en: "Perspective-shifting prototype / 72 hours", fr: "Prototype à changement de perspective / 72 heures" },
     year: "2025",
     engine: "Unreal Engine 5",
@@ -135,7 +135,7 @@ export const projectPages: ProjectPageContent[] = [
   {
     number: "03",
     slug: "drylite",
-    title: "Drylite",
+    title: { en: "Drylite", fr: "Drylite" },
     subtitle: { en: "Weapon systems prototype / in progress", fr: "Prototype de systèmes d'armes / en cours" },
     year: "2026",
     engine: "Unreal Engine 5",
@@ -193,7 +193,7 @@ export const projectPages: ProjectPageContent[] = [
   {
     number: "04",
     slug: "graphic-design-projects",
-    title: "Projets de design graphique",
+    title: { en: "Graphic Design Projects", fr: "Projets de design graphique" },
     subtitle: { en: "UX and communication design", fr: "Design UX et communication" },
     year: "2026",
     engine: "Figma",

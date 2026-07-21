@@ -20,7 +20,7 @@ type DetailSection = {
 type Project = {
   number: string;
   slug: string;
-  title: string;
+  title: { en: string; fr: string };
   subtitle: { en: string; fr: string };
   year: string;
   engine: Engine;
@@ -37,7 +37,7 @@ const projects: Project[] = [
   {
     number: "01",
     slug: "super-maiden-riot",
-    title: "Super Maiden Riot",
+    title: { en: "Super Maiden Riot", fr: "Super Maiden Riot" },
     subtitle: { en: "Co-op platformer / 10 weeks", fr: "Jeu de plateformes coop / 10 semaines" },
     year: "2025",
     engine: "Unreal Engine 5",
@@ -104,7 +104,7 @@ const projects: Project[] = [
   {
     number: "02",
     slug: "think-outside-the-disk",
-    title: "Think Outside the Disk",
+    title: { en: "Think Outside the Disk", fr: "Think Outside the Disk" },
     subtitle: { en: "Perspective-shifting prototype / 72 hours", fr: "Prototype à changement de perspective / 72 heures" },
     year: "2025",
     engine: "Unreal Engine 5",
@@ -157,7 +157,7 @@ const projects: Project[] = [
   {
     number: "03",
     slug: "drylite",
-    title: "Drylite",
+    title: { en: "Drylite", fr: "Drylite" },
     subtitle: { en: "Weapon systems prototype / in progress", fr: "Prototype de systèmes d'armes / en cours" },
     year: "2026",
     engine: "Unreal Engine 5",
@@ -219,7 +219,7 @@ const projects: Project[] = [
   {
     number: "04",
     slug: "graphic-design-projects",
-    title: "Projets de design graphique",
+    title: { en: "Graphic Design Projects", fr: "Projets de design graphique" },
     subtitle: { en: "UX and communication design", fr: "Design UX et communication" },
     year: "2026",
     engine: "Figma",
@@ -271,7 +271,7 @@ const copy = {
     reelPlay: "Play demo reel",
     reelPause: "Stop demo reel",
     selectedKicker: "Selected work / 04 projects",
-    selectedTitle: "Different worlds.\nSame obsession.",
+    selectedTitle: "Different worlds.\nSame drive.",
     selectedBody:
       "I work across UX, systems, and technical design to make ambitious ideas feel inevitable in the hands of a player.",
     filterBy: "Filter by",
@@ -282,7 +282,7 @@ const copy = {
     projects: "projects",
     all: "All work",
     aboutKicker: "A little context",
-    aboutTitle: "Good design leaves\nroom for discovery.",
+    aboutTitle: "About me.",
     aboutBody:
       "I'm Emmanuel, a bilingual game design student based in Montréal. I move between player research, paper prototypes, systems tuning, and the technical conversations that get ideas into a playable shape. Outside of games, I spend time canot-camping, hiking, running, and camping.",
     background: "Background",
@@ -312,7 +312,7 @@ const copy = {
     reelPlay: "Lancer le demo reel",
     reelPause: "Arrêter le demo reel",
     selectedKicker: "Projets choisis / 04 projets",
-    selectedTitle: "Des mondes différents.\nLa même obsession.",
+    selectedTitle: "Des mondes différents.\nLa même motivation.",
     selectedBody:
       "Je travaille en UX, systèmes et design technique pour rendre les idées ambitieuses évidentes entre les mains du joueur.",
     filterBy: "Filtrer par",
@@ -323,7 +323,7 @@ const copy = {
     projects: "projets",
     all: "Tous les projets",
     aboutKicker: "Un peu de contexte",
-    aboutTitle: "Le bon design laisse\nplace à la découverte.",
+    aboutTitle: "À propos de moi.",
     aboutBody:
       "Je m'appelle Emmanuel et j'étudie le design de jeux vidéo à l'UQAT. Je navigue entre la recherche joueur, les prototypes papier, l'équilibrage des systèmes et les conversations techniques qui donnent une forme jouable aux idées. En dehors des jeux, j'aime le canot-camping, la randonnée, la course et le camping.",
     background: "Parcours",
@@ -373,6 +373,9 @@ export default function Home() {
       video.volume = 0;
       video.play().then(() => setIsPlaying(true)).catch(() => setIsPlaying(false));
     };
+    const handleEnded = () => setIsPlaying(false);
+
+    video.addEventListener("ended", handleEnded);
 
     if (video.readyState >= HTMLMediaElement.HAVE_CURRENT_DATA) {
       startPlayback();
@@ -380,7 +383,10 @@ export default function Home() {
       video.addEventListener("canplay", startPlayback, { once: true });
     }
 
-    return () => video.removeEventListener("canplay", startPlayback);
+    return () => {
+      video.removeEventListener("canplay", startPlayback);
+      video.removeEventListener("ended", handleEnded);
+    };
   }, []);
 
   const toggleReel = () => {
@@ -394,6 +400,7 @@ export default function Home() {
       return;
     }
 
+    if (video.ended) video.currentTime = 0;
     video.muted = true;
     video.volume = 0;
     video.play().then(() => setIsPlaying(true)).catch(() => setIsPlaying(false));
@@ -422,7 +429,6 @@ export default function Home() {
       <div className="intro-window">
       <header className="site-header">
         <a className="brand" href="#reel" aria-label="Back to top">
-          <span className="brand-mark">g<span>d</span></span>
           <span className="brand-text">game design<br />portfolio</span>
         </a>
         <nav className="main-nav" aria-label="Primary navigation">
@@ -433,7 +439,6 @@ export default function Home() {
           <a href="/CV_Emmanuel_Cyr.pdf" target="_blank" rel="noreferrer">{t.nav.cv}</a>
         </nav>
         <div className="header-tools">
-          <span className="availability-dot" aria-hidden="true" />
           <button className="language-toggle" type="button" onClick={() => setLanguage((current) => current === "en" ? "fr" : "en")} aria-label="Switch language">
             <span className={language === "en" ? "is-active" : ""}>EN</span><span className="language-divider">/</span><span className={language === "fr" ? "is-active" : ""}>FR</span>
           </button>
@@ -458,7 +463,6 @@ export default function Home() {
                 title="Emmanuel Cyr demo reel"
                 autoPlay
                 muted
-                loop
                 playsInline
                 preload="auto"
                 aria-hidden="true"
@@ -491,11 +495,11 @@ export default function Home() {
 
         <div className="project-grid">
           {filteredProjects.map((project) => (
-            <article className="project-card" key={project.title} id={`project-${project.slug}`}>
-              <a href={`/projects/${project.slug}`} className="project-visual-link" aria-label={`${project.title} project details`}>
+            <article className="project-card" key={project.slug} id={`project-${project.slug}`}>
+              <a href={`/projects/${project.slug}`} className="project-visual-link" aria-label={`${project.title[language]} project details`}>
                 <div className={`project-visual project-${project.tone}`}><div className="project-no">{project.number}</div><div className="project-mark">{project.mark}</div><div className="project-visual-detail">{project.engine} / {project.year}</div><span className="project-open">↗</span></div>
               </a>
-              <div className="project-info"><div><p className="project-kicker">{project.subtitle[language]}</p><a className="project-title-link" href={`/projects/${project.slug}`}><h3>{project.title}</h3></a></div><span className="project-year">{project.year}</span></div>
+              <div className="project-info"><div><p className="project-kicker">{project.subtitle[language]}</p><a className="project-title-link" href={`/projects/${project.slug}`}><h3>{project.title[language]}</h3></a></div><span className="project-year">{project.year}</span></div>
               <p className="project-description">{project.description[language]}</p>
               <div className="project-tags">{project.contributions.map((contribution) => <span key={contribution}>{contribution}</span>)}<span className="engine-tag">{project.engine}</span></div>
               <div className="project-facts">{project.facts[language].map((fact) => <span key={fact}>{fact}</span>)}</div>

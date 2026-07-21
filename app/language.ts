@@ -28,7 +28,7 @@ function subscribeToLanguage(callback: () => void) {
 }
 
 export function useLanguage() {
-  const language = useSyncExternalStore(subscribeToLanguage, getStoredLanguage, () => "en");
+  const language = useSyncExternalStore<Language>(subscribeToLanguage, getStoredLanguage, () => "en");
   const setLanguage = useCallback<Dispatch<SetStateAction<Language>>>((nextLanguage) => {
     const next = typeof nextLanguage === "function" ? nextLanguage(getStoredLanguage()) : nextLanguage;
     try {

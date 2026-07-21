@@ -57,7 +57,6 @@ export default function ProjectCaseStudy({ project }: { project: ProjectPageCont
     <main className="case-study-shell">
       <header className="case-study-header">
         <Link className="brand" href="/#reel" aria-label="Back to portfolio home">
-          <span className="brand-mark">g<span>d</span></span>
           <span className="brand-text">game design<br />portfolio</span>
         </Link>
         <nav className="case-study-nav" aria-label={t.menu}>
@@ -71,17 +70,17 @@ export default function ProjectCaseStudy({ project }: { project: ProjectPageCont
       </header>
 
       <article className="case-study-content">
-        <div className="case-study-breadcrumb"><Link href="/#work">{t.back}</Link><span>↗</span><span>{project.number} / {project.title}</span></div>
+        <div className="case-study-breadcrumb"><Link href="/#work">{t.back}</Link><span>↗</span><span>{project.number} / {project.title[language]}</span></div>
 
         <section className="case-study-hero" aria-labelledby="case-study-title">
           <div className="case-study-hero-copy">
             <p className="eyebrow"><span>{project.number}</span>{t.project}</p>
             <p className="case-study-kicker">{project.subtitle[language]}</p>
-            <h1 id="case-study-title">{project.title}</h1>
+            <h1 id="case-study-title">{project.title[language]}</h1>
             <p className="case-study-intro">{project.intro[language]}</p>
             {project.link && <a className="case-study-cta" href={project.link} target="_blank" rel="noreferrer"><span>{t.visit}</span><span>↗</span></a>}
           </div>
-          <div className={`case-study-art project-${project.tone}`} aria-label={`${project.title} visual placeholder`} role="img">
+          <div className={`case-study-art project-${project.tone}`} aria-label={`${project.title[language]} visual placeholder`} role="img">
             <span className="case-study-art-index">{project.number} / {project.year}</span>
             <span className="case-study-art-mark">{project.mark}</span>
             <span className="case-study-art-caption">{project.engine}<br />{project.status[language]}</span>

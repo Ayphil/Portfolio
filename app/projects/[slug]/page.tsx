@@ -18,7 +18,7 @@ export async function generateMetadata({ params }: ProjectRouteProps): Promise<M
   const project = getProjectPage(slug);
 
   return {
-    title: project ? `${project.title} — Ayphil 75` : "Project — Ayphil 75",
+    title: project ? `${project.title.en} — Ayphil 75` : "Project — Ayphil 75",
     description: project?.intro.en ?? "Project case study from Ayphil 75's game design portfolio.",
   };
 }
