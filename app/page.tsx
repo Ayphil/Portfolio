@@ -4,6 +4,7 @@ import { useEffect, useMemo, useRef, useState } from "react";
 import { useLanguage } from "./language";
 
 type Engine = "Unreal Engine 5" | "Figma";
+type Contribution = "UX" | "Systems" | "Tech design" | "Solo dev";
 
 type MediaPlaceholder = {
   label: string;
@@ -24,7 +25,7 @@ type Project = {
   subtitle: { en: string; fr: string };
   year: string;
   engine: Engine;
-  contributions: string[];
+  contributions: Contribution[];
   tone: string;
   mark: string;
   description: { en: string; fr: string };
@@ -108,7 +109,7 @@ const projects: Project[] = [
     subtitle: { en: "Perspective-shifting prototype / 72 hours", fr: "Prototype à changement de perspective / 72 heures" },
     year: "2025",
     engine: "Unreal Engine 5",
-    contributions: ["Tech design", "Programming"],
+    contributions: ["Tech design"],
     tone: "disk",
     mark: "TOD",
     description: {
@@ -161,7 +162,7 @@ const projects: Project[] = [
     subtitle: { en: "Weapon systems prototype / in progress", fr: "Prototype de systèmes d'armes / en cours" },
     year: "2026",
     engine: "Unreal Engine 5",
-    contributions: ["Systems", "Tech design", "Programming"],
+    contributions: ["Systems", "Tech design"],
     tone: "drylite",
     mark: "DRY",
     description: {
@@ -276,6 +277,7 @@ const copy = {
       "I work across UX, systems, and technical design to make ambitious ideas feel inevitable in the hands of a player.",
     filterBy: "Filter by",
     contribution: "Contribution",
+    contributionLabels: { UX: "UX", Systems: "Systems", "Tech design": "Tech design", "Solo dev": "Solo dev" },
     engine: "Tool / engine",
     clear: "Clear all",
     showing: "Showing",
@@ -312,11 +314,12 @@ const copy = {
     reelPlay: "Lancer le demo reel",
     reelPause: "Arrêter le demo reel",
     selectedKicker: "Projets choisis / 04 projets",
-    selectedTitle: "Des mondes différents.\nLa même motivation.",
+    selectedTitle: "Différents mondes,\nLa même passion.",
     selectedBody:
       "Je travaille en UX, systèmes et design technique pour rendre les idées ambitieuses évidentes entre les mains du joueur.",
     filterBy: "Filtrer par",
     contribution: "Contribution",
+    contributionLabels: { UX: "UX", Systems: "Systèmes", "Tech design": "Design technique", "Solo dev": "Développement solo" },
     engine: "Outil / moteur",
     clear: "Tout effacer",
     showing: "Afficher",
@@ -348,14 +351,14 @@ const copy = {
 };
 
 const filterGroups = {
-  contribution: ["UX", "Systems", "Tech design", "Programming"],
-  engine: ["Unreal Engine 5", "Figma"],
+  contribution: ["UX", "Systems", "Tech design", "Solo dev"] as Contribution[],
+  engine: ["Unreal Engine 5", "Figma"] as Engine[],
 };
 
 export default function Home() {
   const [language, setLanguage] = useLanguage();
-  const [activeContributions, setActiveContributions] = useState<string[]>([]);
-  const [activeEngines, setActiveEngines] = useState<string[]>([]);
+  const [activeContributions, setActiveContributions] = useState<Contribution[]>([]);
+  const [activeEngines, setActiveEngines] = useState<Engine[]>([]);
   const [isPlaying, setIsPlaying] = useState(true);
   const reelPlayerRef = useRef<HTMLVideoElement>(null);
   const t = copy[language];
@@ -414,9 +417,12 @@ export default function Home() {
     });
   }, [activeContributions, activeEngines]);
 
-  const toggleFilter = (filter: string, group: "contribution" | "engine") => {
-    const setter = group === "contribution" ? setActiveContributions : setActiveEngines;
-    setter((current) => current.includes(filter) ? current.filter((item) => item !== filter) : [...current, filter]);
+  const toggleContributionFilter = (filter: Contribution) => {
+    setActiveContributions((current) => current.includes(filter) ? current.filter((item) => item !== filter) : [...current, filter]);
+  };
+
+  const toggleEngineFilter = (filter: Engine) => {
+    setActiveEngines((current) => current.includes(filter) ? current.filter((item) => item !== filter) : [...current, filter]);
   };
 
   const clearFilters = () => {
@@ -487,8 +493,8 @@ export default function Home() {
         <div className="filter-panel" aria-label={t.filterBy}>
           <div className="filter-summary"><span className="filter-label">{t.filterBy}</span><span className="filter-count">{String(filteredProjects.length).padStart(2, "0")} / 04</span></div>
           <div className="filter-groups">
-            <div className="filter-group"><span className="filter-group-title">{t.contribution}</span><div className="filter-options">{filterGroups.contribution.map((filter) => <button type="button" key={filter} className={activeContributions.includes(filter) ? "filter-chip is-selected" : "filter-chip"} onClick={() => toggleFilter(filter, "contribution")} aria-pressed={activeContributions.includes(filter)}>{filter}</button>)}</div></div>
-            <div className="filter-group"><span className="filter-group-title">{t.engine}</span><div className="filter-options">{filterGroups.engine.map((filter) => <button type="button" key={filter} className={activeEngines.includes(filter) ? "filter-chip is-selected" : "filter-chip"} onClick={() => toggleFilter(filter, "engine")} aria-pressed={activeEngines.includes(filter)}>{filter}</button>)}</div></div>
+            <div className="filter-group"><span className="filter-group-title">{t.contribution}</span><div className="filter-options">{filterGroups.contribution.map((filter) => <button type="button" key={filter} className={activeContributions.includes(filter) ? "filter-chip is-selected" : "filter-chip"} onClick={() => toggleContributionFilter(filter)} aria-pressed={activeContributions.includes(filter)}>{t.contributionLabels[filter]}</button>)}</div></div>
+            <div className="filter-group"><span className="filter-group-title">{t.engine}</span><div className="filter-options">{filterGroups.engine.map((filter) => <button type="button" key={filter} className={activeEngines.includes(filter) ? "filter-chip is-selected" : "filter-chip"} onClick={() => toggleEngineFilter(filter)} aria-pressed={activeEngines.includes(filter)}>{filter}</button>)}</div></div>
           </div>
           <button className="clear-filters" type="button" onClick={clearFilters}><span>{t.clear}</span><span>×</span></button>
         </div>
@@ -501,7 +507,7 @@ export default function Home() {
               </a>
               <div className="project-info"><div><p className="project-kicker">{project.subtitle[language]}</p><a className="project-title-link" href={`/projects/${project.slug}`}><h3>{project.title[language]}</h3></a></div><span className="project-year">{project.year}</span></div>
               <p className="project-description">{project.description[language]}</p>
-              <div className="project-tags">{project.contributions.map((contribution) => <span key={contribution}>{contribution}</span>)}<span className="engine-tag">{project.engine}</span></div>
+              <div className="project-tags">{project.contributions.map((contribution) => <span key={contribution}>{t.contributionLabels[contribution]}</span>)}<span className="engine-tag">{project.engine}</span></div>
               <div className="project-facts">{project.facts[language].map((fact) => <span key={fact}>{fact}</span>)}</div>
             </article>
           ))}
