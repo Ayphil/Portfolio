@@ -352,24 +352,26 @@ const filterGroups = {
   engine: ["Unreal Engine 5", "Figma"],
 };
 
-const reelVideoId = "h56nN-xFdR0";
-const reelEmbedUrl = `https://www.youtube.com/embed/${reelVideoId}?autoplay=1&mute=1&controls=0&disablekb=1&fs=0&iv_load_policy=3&loop=1&playlist=${reelVideoId}&playsinline=1&rel=0&enablejsapi=1`;
-
 export default function Home() {
   const [language, setLanguage] = useLanguage();
   const [activeContributions, setActiveContributions] = useState<string[]>([]);
   const [activeEngines, setActiveEngines] = useState<string[]>([]);
   const [isPlaying, setIsPlaying] = useState(true);
-  const reelPlayerRef = useRef<HTMLIFrameElement>(null);
+  const reelPlayerRef = useRef<HTMLVideoElement>(null);
   const t = copy[language];
 
   const toggleReel = () => {
-    const nextIsPlaying = !isPlaying;
-    reelPlayerRef.current?.contentWindow?.postMessage(
-      JSON.stringify({ event: "command", func: nextIsPlaying ? "playVideo" : "stopVideo", args: [] }),
-      "https://www.youtube.com",
-    );
-    setIsPlaying(nextIsPlaying);
+    const video = reelPlayerRef.current;
+    if (!video) return;
+
+    if (isPlaying) {
+      video.pause();
+      video.currentTime = 0;
+      setIsPlaying(false);
+      return;
+    }
+
+    video.play().then(() => setIsPlaying(true)).catch(() => setIsPlaying(false));
   };
 
   const filteredProjects = useMemo(() => {
@@ -423,14 +425,16 @@ export default function Home() {
         <div className="reel-column">
           <div className="reel-frame">
             <div className="reel-visual">
-              <iframe
+              <video
                 ref={reelPlayerRef}
                 className="reel-video"
-                src={reelEmbedUrl}
+                src="/demo-reel.mp4"
                 title="Emmanuel Cyr demo reel"
-                frameBorder="0"
-                allow="autoplay; encrypted-media"
-                referrerPolicy="strict-origin-when-cross-origin"
+                autoPlay
+                muted
+                loop
+                playsInline
+                preload="auto"
                 aria-hidden="true"
                 tabIndex={-1}
               />
