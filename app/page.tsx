@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { useLanguage } from "./language";
 
 type Engine = "Unreal Engine 5" | "Figma";
@@ -360,17 +360,42 @@ export default function Home() {
   const reelPlayerRef = useRef<HTMLVideoElement>(null);
   const t = copy[language];
 
+  useEffect(() => {
+    const video = reelPlayerRef.current;
+    if (!video) return;
+
+    video.muted = true;
+    video.defaultMuted = true;
+    video.volume = 0;
+
+    const startPlayback = () => {
+      video.muted = true;
+      video.volume = 0;
+      video.play().then(() => setIsPlaying(true)).catch(() => setIsPlaying(false));
+    };
+
+    if (video.readyState >= HTMLMediaElement.HAVE_CURRENT_DATA) {
+      startPlayback();
+    } else {
+      video.addEventListener("canplay", startPlayback, { once: true });
+    }
+
+    return () => video.removeEventListener("canplay", startPlayback);
+  }, []);
+
   const toggleReel = () => {
     const video = reelPlayerRef.current;
     if (!video) return;
 
-    if (isPlaying) {
+    if (!video.paused) {
       video.pause();
       video.currentTime = 0;
       setIsPlaying(false);
       return;
     }
 
+    video.muted = true;
+    video.volume = 0;
     video.play().then(() => setIsPlaying(true)).catch(() => setIsPlaying(false));
   };
 
@@ -429,6 +454,7 @@ export default function Home() {
                 ref={reelPlayerRef}
                 className="reel-video"
                 src="/demo-reel.mp4"
+                poster="/demo-reel-poster.jpg"
                 title="Emmanuel Cyr demo reel"
                 autoPlay
                 muted
