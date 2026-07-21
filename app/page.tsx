@@ -402,6 +402,7 @@ export default function Home() {
 
   return (
     <main className="site-shell">
+      <div className="intro-window">
       <header className="site-header">
         <a className="brand" href="#reel" aria-label="Back to top">
           <span className="brand-mark">g<span>d</span></span>
@@ -423,6 +424,10 @@ export default function Home() {
       </header>
 
       <section className="hero-section" id="reel" aria-labelledby="hero-title">
+        <a className="hero-scroll-cue" href="#work" aria-label="Scroll to selected work">
+          <span>Scroll to explore</span>
+          <span aria-hidden="true">↓</span>
+        </a>
         <div className="hero-copy">
           <p className="eyebrow"><span>01</span>{t.kicker}</p>
           <h1 id="hero-title">{t.heroTitle.split("\n").map((line) => <span key={line}>{line}</span>)}</h1>
@@ -448,6 +453,7 @@ export default function Home() {
           <p className="reel-note">{t.reelNote}<span>↖</span></p>
         </div>
       </section>
+      </div>
 
       <section className="work-section section-wrap" id="work" aria-labelledby="work-title">
         <div className="section-intro">
