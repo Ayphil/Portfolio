@@ -5,6 +5,7 @@ export const metadata: Metadata = {
   title: "Emmanuel Cyr — Game design portfolio",
   description:
     "Emmanuel Cyr's bilingual portfolio of game design, UX, systems, and technical design work.",
+  referrer: "strict-origin-when-cross-origin",
   icons: {
     icon: "/favicon.svg",
     shortcut: "/favicon.svg",

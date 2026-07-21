@@ -430,6 +430,7 @@ export default function Home() {
                 title="Emmanuel Cyr demo reel"
                 frameBorder="0"
                 allow="autoplay; encrypted-media"
+                referrerPolicy="strict-origin-when-cross-origin"
                 aria-hidden="true"
                 tabIndex={-1}
               />
