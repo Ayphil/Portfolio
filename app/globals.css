@@ -74,7 +74,7 @@ button { cursor: pointer; }
 .language-divider { color: #b2ac9f; margin: 0 5px; }
 
 .hero-section, .section-wrap { margin: 0 auto; max-width: 1540px; padding-left: 42px; padding-right: 42px; }
-.hero-section { display: block; height: 100%; max-width: none; min-height: 0; padding: 0; position: relative; }
+.hero-section { display: block; height: 100%; margin: 0; max-width: none; min-height: 0; padding: 0; position: relative; width: 100%; }
 .hero-copy { left: 50%; max-width: 720px; padding: 0 24px; position: absolute; text-align: center; top: 50%; transform: translate(-50%, -50%); width: min(90vw, 720px); z-index: 3; }
 .hero-copy h1 { color: var(--paper); margin-left: auto; margin-right: auto; text-shadow: 0 3px 25px rgba(0, 0, 0, .32); }
 .hero-copy .hero-body { color: #c8c2b7; font-size: clamp(11px, 1.25vw, 16px); font-weight: 700; letter-spacing: .12em; line-height: 1.45; margin-left: auto; margin-right: auto; max-width: 560px; text-transform: uppercase; }
