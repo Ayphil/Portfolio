@@ -23,6 +23,7 @@ body {
   font-size: 15px;
   line-height: 1.45;
   text-rendering: optimizeLegibility;
+  zoom: 1.1;
 }
 button, a { font: inherit; }
 a { color: inherit; text-decoration: none; }
@@ -45,22 +46,6 @@ button { cursor: pointer; }
   padding: 28px 42px;
 }
 .brand { align-items: center; display: flex; gap: 11px; min-width: 170px; }
-.brand-mark {
-  align-items: baseline;
-  background: var(--ink);
-  border-radius: 50%;
-  color: var(--acid);
-  display: inline-flex;
-  font-family: var(--display);
-  font-size: 24px;
-  font-weight: 800;
-  height: 42px;
-  justify-content: center;
-  letter-spacing: -0.16em;
-  padding-right: 4px;
-  width: 42px;
-}
-.brand-mark span { color: var(--paper); }
 .brand-text { font-size: 10px; font-weight: 700; letter-spacing: .09em; line-height: 1.1; text-transform: uppercase; }
 .main-nav { display: flex; gap: 34px; margin-left: 60px; }
 .main-nav a, .footer-links a { font-size: 11px; font-weight: 700; letter-spacing: .04em; text-transform: uppercase; }
@@ -68,7 +53,6 @@ button { cursor: pointer; }
 .main-nav a::after { background: var(--orange); bottom: -7px; content: ""; height: 2px; left: 0; position: absolute; transform: scaleX(0); transform-origin: left; transition: transform .25s ease; width: 100%; }
 .main-nav a:hover::after { transform: scaleX(1); }
 .header-tools { align-items: center; display: flex; gap: 18px; min-width: 170px; justify-content: flex-end; }
-.availability-dot { background: var(--orange); border-radius: 50%; box-shadow: 0 0 0 4px rgba(240, 97, 59, .14); height: 8px; width: 8px; }
 .language-toggle { background: transparent; border: 0; color: var(--muted); font-size: 11px; font-weight: 800; letter-spacing: .08em; padding: 6px 0; }
 .language-toggle .is-active { color: var(--acid); }
 .language-divider { color: #b2ac9f; margin: 0 5px; }
@@ -325,9 +309,7 @@ h2 { font-size: clamp(51px, 7vw, 103px); font-weight: 800; margin-bottom: 0; }
 @media (max-width: 620px) {
   .site-header { padding-bottom: 16px; padding-top: 16px; }
   .brand { min-width: auto; }
-  .brand-text { display: none; }
   .header-tools { min-width: auto; }
-  .availability-dot { display: none; }
   .main-nav { display: none; }
   .hero-section { height: 100%; min-height: 0; padding: 0; }
   h1 { font-size: clamp(58px, 16vw, 90px); }
@@ -362,7 +344,7 @@ h2 { font-size: clamp(51px, 7vw, 103px); font-weight: 800; margin-bottom: 0; }
 
 @media (max-width: 620px) {
   .case-study-header { padding-bottom: 16px; padding-top: 16px; }
-  .case-study-header .brand-text { display: none; }
+  .case-study-header .brand { min-width: auto; }
   .case-study-nav { gap: 14px; margin-right: 18px; }
   .case-study-nav a:last-child { display: none; }
   .case-study-content { padding-bottom: 90px; padding-top: 30px; }
