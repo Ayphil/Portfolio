@@ -95,6 +95,7 @@ h1 span:nth-child(2) { color: var(--orange); }
 .reel-visual { background: #23221f; flex: 1; height: 100%; min-height: 0; overflow: hidden; position: relative; }
 .reel-video { background: #23221f; border: 0; height: 100%; left: 0; object-fit: cover; object-position: center; pointer-events: none; position: absolute; top: 0; transform: none; width: 100%; z-index: 0; }
 .reel-video-shade { background: linear-gradient(90deg, rgba(23, 21, 19, .64), rgba(23, 21, 19, .18) 46%, rgba(23, 21, 19, .48)), linear-gradient(0deg, rgba(23, 21, 19, .44), transparent 35%, rgba(23, 21, 19, .2)); inset: 0; pointer-events: none; position: absolute; z-index: 1; }
+.reel-visual::after { background: repeating-linear-gradient(0deg, transparent 0 10px, rgba(255, 255, 255, .012) 11px 12px); content: ""; inset: 0; pointer-events: none; position: absolute; z-index: 1; }
 .reel-play { align-items: center; background: var(--paper); border: 0; border-radius: 50%; bottom: clamp(24px, 5vw, 72px); color: var(--ink); display: flex; flex-direction: column; font-size: 9px; font-weight: 800; gap: 7px; height: 96px; justify-content: center; letter-spacing: .04em; position: absolute; right: clamp(24px, 5vw, 72px); text-transform: uppercase; transition: background .25s ease, transform .25s ease; width: 96px; z-index: 2; }
 .reel-play:hover { background: var(--acid); transform: scale(1.06) rotate(-4deg); }
 .play-icon { font-size: 20px; line-height: 1; }
