@@ -58,12 +58,12 @@ export default function ProjectCaseStudy({ project }: { project: ProjectPageCont
   return (
     <main className="case-study-shell">
       <header className="case-study-header">
-        <Link className="brand" href="/#reel" aria-label="Back to portfolio home">
+        <a className="brand" href={withBasePath("/#reel")} aria-label="Back to portfolio home">
           <span className="brand-text">game design<br />portfolio</span>
-        </Link>
+        </a>
         <nav className="case-study-nav" aria-label={t.menu}>
-          <Link href="/#work">{t.back}</Link>
-          <Link href="/#contact">Contact</Link>
+          <a href={withBasePath("/#work")}>{t.back}</a>
+          <a href={withBasePath("/#contact")}>Contact</a>
           <a href={withBasePath("/CV_Emmanuel_Cyr.pdf")} target="_blank" rel="noreferrer">{t.cv}</a>
         </nav>
         <button className="language-toggle" type="button" onClick={() => setLanguage((current) => current === "en" ? "fr" : "en")} aria-label="Switch language">
@@ -72,7 +72,7 @@ export default function ProjectCaseStudy({ project }: { project: ProjectPageCont
       </header>
 
       <article className="case-study-content">
-        <div className="case-study-breadcrumb"><Link href="/#work">{t.back}</Link><span>↗</span><span>{project.number} / {project.title[language]}</span></div>
+        <div className="case-study-breadcrumb"><a href={withBasePath("/#work")}>{t.back}</a><span>↗</span><span>{project.number} / {project.title[language]}</span></div>
 
         <section className="case-study-hero" aria-labelledby="case-study-title">
           <div className="case-study-hero-copy">
@@ -106,7 +106,7 @@ export default function ProjectCaseStudy({ project }: { project: ProjectPageCont
 
       <nav className="case-study-next-nav" aria-label="Project navigation">
         <Link href={`/projects/${previous}`}><span>{t.previous}</span><strong>↙</strong></Link>
-        <Link href="/#work" className="case-study-index-link">01 — 04<br />{t.back}</Link>
+        <a href={withBasePath("/#work")} className="case-study-index-link">01 — 04<br />{t.back}</a>
         <Link href={`/projects/${next}`}><span>{t.next}</span><strong>↗</strong></Link>
       </nav>
     </main>
