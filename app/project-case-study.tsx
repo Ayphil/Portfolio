@@ -36,6 +36,8 @@ const copy = {
   },
 };
 
+const withBasePath = (path: string) => `/Portfolio${path}`;
+
 function CaseStudyMedia({ media, label }: { media: ProjectMedia; label: string }) {
   return (
     <div className={`case-study-media media-${media.kind}`} role="img" aria-label={`${label}: ${media.label}`}>
@@ -62,7 +64,7 @@ export default function ProjectCaseStudy({ project }: { project: ProjectPageCont
         <nav className="case-study-nav" aria-label={t.menu}>
           <Link href="/#work">{t.back}</Link>
           <Link href="/#contact">Contact</Link>
-          <a href="/CV_Emmanuel_Cyr.pdf" target="_blank" rel="noreferrer">{t.cv}</a>
+          <a href={withBasePath("/CV_Emmanuel_Cyr.pdf")} target="_blank" rel="noreferrer">{t.cv}</a>
         </nav>
         <button className="language-toggle" type="button" onClick={() => setLanguage((current) => current === "en" ? "fr" : "en")} aria-label="Switch language">
           <span className={language === "en" ? "is-active" : ""}>EN</span><span className="language-divider">/</span><span className={language === "fr" ? "is-active" : ""}>FR</span>

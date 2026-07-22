@@ -355,6 +355,8 @@ const filterGroups = {
   engine: ["Unreal Engine 5", "Figma"] as Engine[],
 };
 
+const withBasePath = (path: string) => `/Portfolio${path}`;
+
 export default function Home() {
   const [language, setLanguage] = useLanguage();
   const [activeContributions, setActiveContributions] = useState<Contribution[]>([]);
@@ -442,7 +444,7 @@ export default function Home() {
           <a href="#work">{t.nav.work}</a>
           <a href="#about">{t.nav.about}</a>
           <a href="#contact">{t.nav.contact}</a>
-          <a href="/CV_Emmanuel_Cyr.pdf" target="_blank" rel="noreferrer">{t.nav.cv}</a>
+          <a href={withBasePath("/CV_Emmanuel_Cyr.pdf")} target="_blank" rel="noreferrer">{t.nav.cv}</a>
         </nav>
         <div className="header-tools">
           <button className="language-toggle" type="button" onClick={() => setLanguage((current) => current === "en" ? "fr" : "en")} aria-label="Switch language">
@@ -464,8 +466,8 @@ export default function Home() {
               <video
                 ref={reelPlayerRef}
                 className="reel-video"
-                src="/demo-reel.mp4"
-                poster="/demo-reel-poster.jpg"
+                src={withBasePath("/demo-reel.mp4")}
+                poster={withBasePath("/demo-reel-poster.jpg")}
                 title="Emmanuel Cyr demo reel"
                 autoPlay
                 muted
@@ -502,10 +504,10 @@ export default function Home() {
         <div className="project-grid">
           {filteredProjects.map((project) => (
             <article className="project-card" key={project.slug} id={`project-${project.slug}`}>
-              <a href={`/projects/${project.slug}`} className="project-visual-link" aria-label={`${project.title[language]} project details`}>
+              <a href={withBasePath(`/projects/${project.slug}`)} className="project-visual-link" aria-label={`${project.title[language]} project details`}>
                 <div className={`project-visual project-${project.tone}`}><div className="project-no">{project.number}</div><div className="project-mark">{project.mark}</div><div className="project-visual-detail">{project.engine} / {project.year}</div><span className="project-open">↗</span></div>
               </a>
-              <div className="project-info"><div><p className="project-kicker">{project.subtitle[language]}</p><a className="project-title-link" href={`/projects/${project.slug}`}><h3>{project.title[language]}</h3></a></div><span className="project-year">{project.year}</span></div>
+              <div className="project-info"><div><p className="project-kicker">{project.subtitle[language]}</p><a className="project-title-link" href={withBasePath(`/projects/${project.slug}`)}><h3>{project.title[language]}</h3></a></div><span className="project-year">{project.year}</span></div>
               <p className="project-description">{project.description[language]}</p>
               <div className="project-tags">{project.contributions.map((contribution) => <span key={contribution}>{t.contributionLabels[contribution]}</span>)}<span className="engine-tag">{project.engine}</span></div>
               <div className="project-facts">{project.facts[language].map((fact) => <span key={fact}>{fact}</span>)}</div>
@@ -517,14 +519,14 @@ export default function Home() {
 
       <section className="about-section section-wrap" id="about" aria-labelledby="about-title">
         <div className="about-stamp"><span>02</span><span>ABOUT<br />THE<br />PRACTICE</span></div>
-        <div className="about-copy"><p className="eyebrow">{t.aboutKicker}</p><h2 id="about-title">{t.aboutTitle.split("\n").map((line) => <span key={line}>{line}</span>)}</h2><p className="about-body">{t.aboutBody}</p><div className="about-facts" aria-label={t.background}>{t.backgroundItems.map((item) => <div className="about-fact" key={item.label}><span>{item.label}</span><strong>{item.value}</strong></div>)}</div><div className="about-links"><a href="https://store.steampowered.com/app/3661570/Node_RPG/" target="_blank" rel="noreferrer">Node RPG / Steam <span>↗</span></a><a href="https://www.linkedin.com/in/emmanuelcyr/" target="_blank" rel="noreferrer">{t.linkedin} <span>↗</span></a><a href="/CV_Emmanuel_Cyr.pdf" target="_blank" rel="noreferrer">{t.cv} <span>↗</span></a></div><div className="approach-row"><span className="approach-label">{t.approach}</span><span className="approach-text">{t.approachBody}</span></div></div>
+        <div className="about-copy"><p className="eyebrow">{t.aboutKicker}</p><h2 id="about-title">{t.aboutTitle.split("\n").map((line) => <span key={line}>{line}</span>)}</h2><p className="about-body">{t.aboutBody}</p><div className="about-facts" aria-label={t.background}>{t.backgroundItems.map((item) => <div className="about-fact" key={item.label}><span>{item.label}</span><strong>{item.value}</strong></div>)}</div><div className="about-links"><a href="https://store.steampowered.com/app/3661570/Node_RPG/" target="_blank" rel="noreferrer">Node RPG / Steam <span>↗</span></a><a href="https://www.linkedin.com/in/emmanuelcyr/" target="_blank" rel="noreferrer">{t.linkedin} <span>↗</span></a><a href={withBasePath("/CV_Emmanuel_Cyr.pdf")} target="_blank" rel="noreferrer">{t.cv} <span>↗</span></a></div><div className="approach-row"><span className="approach-label">{t.approach}</span><span className="approach-text">{t.approachBody}</span></div></div>
         <div className="about-visual" aria-hidden="true"><div className="about-visual-ring ring-a" /><div className="about-visual-ring ring-b" /><div className="about-cross cross-a" /><div className="about-cross cross-b" /><span>ITERATE<br />WITH INTENT</span></div>
       </section>
 
       <footer className="contact-section section-wrap" id="contact">
         <div className="contact-topline"><span className="eyebrow">03 / {t.availability}</span><span className="contact-index">2026—∞</span></div>
         <div className="contact-grid"><h2>{t.contactTitle.split("\n").map((line) => <span key={line}>{line}</span>)}</h2><div className="contact-copy"><p>{t.contactBody}</p><a className="contact-cta" href="mailto:emmanuel.cyr159@gmail.com"><span>{t.contactCta}</span><span className="contact-arrow">↗</span></a></div></div>
-        <div className="footer-bottom"><span>{t.footer}</span><div className="footer-links"><a href="mailto:emmanuel.cyr159@gmail.com">Email</a><a href="https://www.linkedin.com/in/emmanuelcyr/" target="_blank" rel="noreferrer">{t.linkedin}</a><a href="/CV_Emmanuel_Cyr.pdf" target="_blank" rel="noreferrer">{t.cv}</a><a href="#reel">{t.backToTop}</a></div></div>
+        <div className="footer-bottom"><span>{t.footer}</span><div className="footer-links"><a href="mailto:emmanuel.cyr159@gmail.com">Email</a><a href="https://www.linkedin.com/in/emmanuelcyr/" target="_blank" rel="noreferrer">{t.linkedin}</a><a href={withBasePath("/CV_Emmanuel_Cyr.pdf")} target="_blank" rel="noreferrer">{t.cv}</a><a href="#reel">{t.backToTop}</a></div></div>
       </footer>
     </main>
   );
