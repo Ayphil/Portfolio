@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useMemo, useRef, useState } from "react";
+import type { MouseEvent as ReactMouseEvent } from "react";
 import { useLanguage } from "./language";
 
 type Engine = "Unreal Engine 5" | "Figma";
@@ -432,18 +433,33 @@ export default function Home() {
     setActiveEngines([]);
   };
 
+  const handleSectionLink = (event: ReactMouseEvent<HTMLAnchorElement>) => {
+    const href = event.currentTarget.getAttribute("href");
+    if (!href?.startsWith("#")) return;
+
+    const target = document.getElementById(href.slice(1));
+    if (!target) return;
+
+    event.preventDefault();
+    window.history.pushState(null, "", href);
+    window.scrollTo({
+      top: target.getBoundingClientRect().top + window.scrollY,
+      behavior: "auto",
+    });
+  };
+
   return (
     <main className="site-shell">
       <div className="intro-window">
       <header className="site-header">
-        <a className="brand" href="#reel" aria-label="Back to top">
+        <a className="brand" href="#reel" onClick={handleSectionLink} aria-label="Back to top">
           <span className="brand-text">game design<br />portfolio</span>
         </a>
         <nav className="main-nav" aria-label="Primary navigation">
-          <a href="#reel">{t.nav.reel}</a>
-          <a href="#work">{t.nav.work}</a>
-          <a href="#about">{t.nav.about}</a>
-          <a href="#contact">{t.nav.contact}</a>
+          <a href="#reel" onClick={handleSectionLink}>{t.nav.reel}</a>
+          <a href="#work" onClick={handleSectionLink}>{t.nav.work}</a>
+          <a href="#about" onClick={handleSectionLink}>{t.nav.about}</a>
+          <a href="#contact" onClick={handleSectionLink}>{t.nav.contact}</a>
           <a href={withBasePath("/CV_Emmanuel_Cyr.pdf")} target="_blank" rel="noreferrer">{t.nav.cv}</a>
         </nav>
         <div className="header-tools">
@@ -457,7 +473,7 @@ export default function Home() {
         <div className="hero-copy">
           <h1 id="hero-title">{t.heroTitle.split("\n").map((line) => <span key={line}>{line}</span>)}</h1>
           <p className="hero-body">{t.heroBody}</p>
-          <a className="text-link" href="#work"><span>{t.heroCta}</span><span className="link-arrow">↘</span></a>
+          <a className="text-link" href="#work" onClick={handleSectionLink}><span>{t.heroCta}</span><span className="link-arrow">↘</span></a>
         </div>
 
         <div className="reel-column">
@@ -526,7 +542,7 @@ export default function Home() {
       <footer className="contact-section section-wrap" id="contact">
         <div className="contact-topline"><span className="eyebrow">03 / {t.availability}</span><span className="contact-index">2026—∞</span></div>
         <div className="contact-grid"><h2>{t.contactTitle.split("\n").map((line) => <span key={line}>{line}</span>)}</h2><div className="contact-copy"><p>{t.contactBody}</p><a className="contact-cta" href="mailto:emmanuel.cyr159@gmail.com"><span>{t.contactCta}</span><span className="contact-arrow">↗</span></a></div></div>
-        <div className="footer-bottom"><span>{t.footer}</span><div className="footer-links"><a href="mailto:emmanuel.cyr159@gmail.com">Email</a><a href="https://www.linkedin.com/in/emmanuelcyr/" target="_blank" rel="noreferrer">{t.linkedin}</a><a href={withBasePath("/CV_Emmanuel_Cyr.pdf")} target="_blank" rel="noreferrer">{t.cv}</a><a href="#reel">{t.backToTop}</a></div></div>
+        <div className="footer-bottom"><span>{t.footer}</span><div className="footer-links"><a href="mailto:emmanuel.cyr159@gmail.com">Email</a><a href="https://www.linkedin.com/in/emmanuelcyr/" target="_blank" rel="noreferrer">{t.linkedin}</a><a href={withBasePath("/CV_Emmanuel_Cyr.pdf")} target="_blank" rel="noreferrer">{t.cv}</a><a href="#reel" onClick={handleSectionLink}>{t.backToTop}</a></div></div>
       </footer>
     </main>
   );
