@@ -486,6 +486,7 @@ export default function Home() {
                 poster={withBasePath("/demo-reel-poster.jpg")}
                 title="Emmanuel Cyr demo reel"
                 autoPlay
+                loop
                 muted
                 playsInline
                 preload="auto"
