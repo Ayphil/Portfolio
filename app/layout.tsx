@@ -7,8 +7,8 @@ export const metadata: Metadata = {
     "Emmanuel Cyr's bilingual portfolio of game design, UX, systems, and technical design work.",
   referrer: "strict-origin-when-cross-origin",
   icons: {
-    icon: "/favicon.svg",
-    shortcut: "/favicon.svg",
+    icon: "/Portfolio/favicon.svg",
+    shortcut: "/Portfolio/favicon.svg",
   },
 };
 
