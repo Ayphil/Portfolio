@@ -372,6 +372,7 @@ export default function Home() {
 
     video.muted = true;
     video.defaultMuted = true;
+    video.loop = true;
     video.volume = 0;
 
     const startPlayback = () => {
@@ -379,7 +380,10 @@ export default function Home() {
       video.volume = 0;
       video.play().then(() => setIsPlaying(true)).catch(() => setIsPlaying(false));
     };
-    const handleEnded = () => setIsPlaying(false);
+    const handleEnded = () => {
+      video.currentTime = 0;
+      startPlayback();
+    };
 
     video.addEventListener("ended", handleEnded);
 
