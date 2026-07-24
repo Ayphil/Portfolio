@@ -17,9 +17,12 @@ export type ProjectMedia = {
 export type ProjectSectionBlock =
   | { type: "text"; en: string; fr: string }
   | { type: "list"; en: string[]; fr: string[] }
+  | { type: "linklist"; items: { en: string; fr: string; href: string }[] }
+  | { type: "link"; en: string; fr: string; href: string }
   | { type: "media"; caption: { en: string; fr: string }; media: ProjectMedia[] };
 
 export type ProjectPageSection = {
+  id?: string;
   eyebrow: { en: string; fr: string };
   title: { en: string; fr: string };
   body?: { en: string; fr: string };
@@ -269,6 +272,7 @@ export const projectPages: ProjectPageContent[] = [
     link: "https://store.steampowered.com/app/3661570/Minimal_RPG/",
     sections: [
       {
+        id: "contributions",
         eyebrow: { en: "01", fr: "01" },
         title: { en: "Contributions", fr: "Contributions" },
         blocks: [
@@ -283,9 +287,13 @@ export const projectPages: ProjectPageContent[] = [
             fr: "Les aspects dont je suis le plus fier sont les suivants :",
           },
           {
-            type: "list",
-            en: ["The development tools I built to speed up production.", "The progression system and its balancing.", "The user interface (UI).", "The Steam publishing process."],
-            fr: ["Les outils de développement que j'ai créés pour accélérer la production.", "Le système de progression et son équilibrage.", "L'interface utilisateur (UI).", "Le processus de publication sur Steam."],
+            type: "linklist",
+            items: [
+              { en: "The development tools I built to speed up production.", fr: "Les outils de développement que j'ai créés pour accélérer la production.", href: "#programming" },
+              { en: "The progression system and its balancing.", fr: "Le système de progression et son équilibrage.", href: "#design-progression" },
+              { en: "The user interface (UI).", fr: "L'interface utilisateur (UI).", href: "#user-interface" },
+              { en: "The Steam publishing process.", fr: "Le processus de publication sur Steam.", href: "#steam-publishing" },
+            ],
           },
           {
             type: "text",
@@ -295,6 +303,7 @@ export const projectPages: ProjectPageContent[] = [
         ],
       },
       {
+        id: "programming",
         eyebrow: { en: "02", fr: "02" },
         title: { en: "Programming", fr: "Programmation" },
         blocks: [
@@ -345,6 +354,7 @@ export const projectPages: ProjectPageContent[] = [
         ],
       },
       {
+        id: "design-progression",
         eyebrow: { en: "03", fr: "03" },
         title: { en: "Game Design & Progression", fr: "Design et progression" },
         blocks: [
@@ -385,6 +395,7 @@ export const projectPages: ProjectPageContent[] = [
         ],
       },
       {
+        id: "user-interface",
         eyebrow: { en: "04", fr: "04" },
         title: { en: "User Interface", fr: "Interface utilisateur" },
         blocks: [
@@ -409,6 +420,7 @@ export const projectPages: ProjectPageContent[] = [
         ],
       },
       {
+        id: "steam-publishing",
         eyebrow: { en: "05", fr: "05" },
         title: { en: "Steam Publishing", fr: "Publication sur Steam" },
         blocks: [
@@ -426,6 +438,12 @@ export const projectPages: ProjectPageContent[] = [
             type: "list",
             en: ["Promotional capsules and marketing artwork.", "The gameplay trailer.", "The Steam store page description.", "The Steam page setup and publishing."],
             fr: ["Les capsules et visuels promotionnels.", "La bande-annonce (trailer).", "La rédaction de la description de la page Steam.", "La configuration et la mise en ligne de la page Steam."],
+          },
+          {
+            type: "link",
+            en: "View Steam page",
+            fr: "Voir la page Steam",
+            href: "https://store.steampowered.com/app/3661570/Minimal_RPG/",
           },
         ],
       },
