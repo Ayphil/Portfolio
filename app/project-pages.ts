@@ -3,15 +3,29 @@ export type ProjectMedia = {
   kind: "video" | "image" | "blueprint";
   /** Relative paths are served from this site; absolute URLs can point to R2, Stream, or another CDN. */
   src?: string;
+  /** Optional click-through asset for a higher-resolution or original version. */
+  fullSrc?: string;
   poster?: string;
 };
+
+/**
+ * Ordered content blocks for a section. Use `blocks` when a section needs
+ * paragraphs, lists, and captioned media interleaved in a specific reading
+ * order (tagline → media). Sections that only need one paragraph + optional
+ * bullets + a trailing media grid can keep using body/bullets/media instead.
+ */
+export type ProjectSectionBlock =
+  | { type: "text"; en: string; fr: string }
+  | { type: "list"; en: string[]; fr: string[] }
+  | { type: "media"; caption: { en: string; fr: string }; media: ProjectMedia[] };
 
 export type ProjectPageSection = {
   eyebrow: { en: string; fr: string };
   title: { en: string; fr: string };
-  body: { en: string; fr: string };
+  body?: { en: string; fr: string };
   bullets?: { en: string[]; fr: string[] };
   media?: ProjectMedia[];
+  blocks?: ProjectSectionBlock[];
 };
 
 export type ProjectPageContent = {
@@ -245,8 +259,8 @@ export const projectPages: ProjectPageContent[] = [
     tone: "minimalrpg",
     mark: "MRP",
     intro: {
-      en: "A solo project inspired by Nodebuster, extended with RPG-style progression and mechanics. I built the entire game and most of its art — from custom production tools all the way to the Steam launch.",
-      fr: "Un projet solo inspiré de Nodebuster, enrichi d'une progression et de mécaniques de type RPG. J'ai développé l'ensemble du jeu et la majorité de son art — des outils de production maison jusqu'au lancement sur Steam.",
+      en: "A solo project inspired by Nodebuster, extended with RPG-style progression and mechanics. I built the entire game and most of its art, from custom production tools all the way to the Steam launch.",
+      fr: "Un projet solo inspiré de Nodebuster, enrichi d'une progression et de mécaniques de type RPG. J'ai développé l'ensemble du jeu et la majorité de son art, des outils de production maison jusqu'au lancement sur Steam.",
     },
     facts: {
       en: ["Solo developer", "15 months of development", "Demo available on Steam", "Planned release Q1 2027"],
@@ -255,44 +269,165 @@ export const projectPages: ProjectPageContent[] = [
     link: "https://store.steampowered.com/app/3661570/Minimal_RPG/",
     sections: [
       {
-        eyebrow: { en: "01 / Programming", fr: "01 / Programmation" },
-        title: { en: "Three systems doing the heavy lifting", fr: "Trois systèmes qui portent le jeu" },
-        body: {
-          en: "Three systems stand out. The enemy behavior system looks simple on the surface but is modular, so a wide variety of enemies grows from the same core behaviors. The upgrade system is built entirely on ScriptableObjects, backed by custom editor tools that make creating and modifying upgrades much faster. And the player statistics system centralizes and feeds nearly every mechanic in the game.",
-          fr: "Trois systèmes se démarquent. Le système de comportements des ennemis paraît simple en surface, mais il est modulaire : une grande variété d'ennemis découle des mêmes comportements de base. Le système d'améliorations repose entièrement sur des ScriptableObjects, soutenu par des outils d'éditeur maison qui accélèrent grandement leur création et leur modification. Enfin, le système de statistiques du joueur centralise et alimente presque toutes les mécaniques du jeu.",
-        },
-        bullets: {
-          en: ["Enemy behaviors — modular building blocks for many enemy types", "Upgrades — ScriptableObject-driven with custom editor tools", "Player stats — a central hub feeding the game's mechanics"],
-          fr: ["Comportements des ennemis — des blocs modulaires pour de nombreux types", "Améliorations — pilotées par ScriptableObjects avec des outils d'éditeur", "Statistiques du joueur — un cœur central qui alimente les mécaniques"],
-        },
-        media: [{ label: "Upgrade editor", kind: "image" }, { label: "Enemy types", kind: "video" }, { label: "Player stats system", kind: "image" }],
+        eyebrow: { en: "01", fr: "01" },
+        title: { en: "Contributions", fr: "Contributions" },
+        blocks: [
+          {
+            type: "text",
+            en: "I developed this project entirely on my own. The goal was to create a game inspired by Nodebuster, while adding RPG-inspired progression and mechanics.",
+            fr: "J'ai réalisé ce projet entièrement seul. L'objectif était de créer un jeu inspiré de Nodebuster, tout en y ajoutant une progression et des mécaniques inspirées des RPG.",
+          },
+          {
+            type: "text",
+            en: "The aspects I'm most proud of are:",
+            fr: "Les aspects dont je suis le plus fier sont les suivants :",
+          },
+          {
+            type: "list",
+            en: ["The development tools I built to speed up production.", "The progression system and its balancing.", "The user interface (UI).", "The Steam publishing process."],
+            fr: ["Les outils de développement que j'ai créés pour accélérer la production.", "Le système de progression et son équilibrage.", "L'interface utilisateur (UI).", "Le processus de publication sur Steam."],
+          },
+          {
+            type: "text",
+            en: "Beyond that, I programmed the entire game and created most of the art assets, with the exception of a few UI decorations.",
+            fr: "En plus de cela, j'ai développé l'ensemble du jeu et réalisé la majorité des éléments artistiques, à l'exception de quelques ornements de l'interface.",
+          },
+        ],
       },
       {
-        eyebrow: { en: "02 / Design & progression", fr: "02 / Design et progression" },
-        title: { en: "Documented systems, tuned by hand", fr: "Des systèmes documentés, équilibrés à la main" },
-        body: {
-          en: "I designed the whole game in Milanote, giving every major system its own documentation to make iteration easier. The upgrade system had a dedicated page per class listing every upgrade and its progression, and I balanced each class across different stages of the game using Excel spreadsheets.",
-          fr: "J'ai conçu l'intégralité du jeu sur Milanote, en donnant à chaque système majeur sa propre documentation pour faciliter les itérations. Le système d'améliorations disposait d'une page par classe répertoriant chaque amélioration et sa progression, et j'ai équilibré chaque classe à différents moments de la progression à l'aide de feuilles Excel.",
-        },
-        media: [{ label: "Milanote — systems overview", kind: "image" }, { label: "Milanote — class upgrades", kind: "image" }, { label: "Excel balancing sheet", kind: "image" }],
+        eyebrow: { en: "02", fr: "02" },
+        title: { en: "Programming", fr: "Programmation" },
+        blocks: [
+          {
+            type: "text",
+            en: "Among all the systems in the project, four stand out the most:",
+            fr: "Parmi tous les systèmes du projet, quatre se démarquent particulièrement :",
+          },
+          {
+            type: "list",
+            en: [
+              "The enemy behavior system. Although it appears simple on the surface, it was designed to be modular, allowing a wide variety of enemies to be created from the same core behaviors.",
+              "The upgrade system, built entirely around ScriptableObjects. I also developed several custom editor tools to make creating and modifying upgrades much faster.",
+              "The player statistics system, which serves as the foundation for many of the game's mechanics.",
+              "More broadly, my extensive use of ScriptableObjects to build flexible, reusable, and easily maintainable systems.",
+            ],
+            fr: [
+              "Le système de comportements des ennemis. Bien qu'il paraisse simple en surface, il est conçu de manière modulaire et permet de créer une grande variété d'ennemis à partir des mêmes bases.",
+              "Le système d'améliorations, entièrement basé sur des ScriptableObjects. J'ai également développé plusieurs outils d'éditeur afin de simplifier leur création et leur modification.",
+              "Le système de statistiques du joueur, qui centralise et alimente l'ensemble des mécaniques du jeu.",
+              "De manière plus générale, mon utilisation des ScriptableObjects afin de créer des systèmes flexibles, réutilisables et faciles à maintenir.",
+            ],
+          },
+          {
+            type: "media",
+            caption: {
+              en: "Screenshot of the upgrade editor.",
+              fr: "Capture de l'éditeur des améliorations.",
+            },
+            media: [{ label: "Upgrade editor", kind: "image", src: "/media/minimal-rpg/upgrade-scriptable-object-preview.webp", fullSrc: "/media/minimal-rpg/upgrade-scriptable-object-full.webp" }],
+          },
+          {
+            type: "media",
+            caption: {
+              en: "Video showcasing different enemy behaviors (this scene is only intended as a showcase and is not an actual level): a wyvern egg, a charging boar, a bird that shoots projectiles at the player, and a slime that splits into multiple smaller slimes.",
+              fr: "Vidéo présentant différents comportements d'ennemis (cette scène sert uniquement de démonstration et ne représente pas un véritable niveau) : un œuf de wyverne, un sanglier qui rue, un oiseau qui tire des projectiles sur le joueur et un slime qui se divise en plusieurs slimes.",
+            },
+            media: [{ label: "Enemy behaviors (not real level, for showcase)", kind: "video", src: "/media/minimal-rpg/enemy-types-preview.webm", fullSrc: "/media/minimal-rpg/enemy-types-full.mp4" }],
+          },
+          {
+            type: "media",
+            caption: {
+              en: "Videos showcasing different systems built using ScriptableObjects.",
+              fr: "Vidéos présentant différents systèmes utilisant des ScriptableObjects.",
+            },
+            media: [{ label: "ScriptableObject systems", kind: "video", src: "/media/minimal-rpg/scriptable-objects-preview.webm", fullSrc: "/media/minimal-rpg/scriptable-objects-full.mp4" }],
+          },
+        ],
       },
       {
-        eyebrow: { en: "03 / User interface", fr: "03 / Interface utilisateur" },
-        title: { en: "Guiding the eye with hierarchy", fr: "Guider le regard par la hiérarchie" },
-        body: {
-          en: "Most of the interface was designed in Figma, with the icons created in Inkscape. For each screen I leaned on visual-hierarchy principles to guide the player's attention naturally toward the information that matters most.",
-          fr: "La majorité de l'interface a été conçue dans Figma, et les icônes créées dans Inkscape. Pour chaque écran, je me suis appuyé sur les principes de hiérarchie visuelle afin de guider naturellement l'attention du joueur vers les informations les plus importantes.",
-        },
-        media: [{ label: "Main menu", kind: "image" }, { label: "Upgrade screen", kind: "image" }, { label: "In-game HUD", kind: "image" }],
+        eyebrow: { en: "03", fr: "03" },
+        title: { en: "Game Design & Progression", fr: "Design et progression" },
+        blocks: [
+          {
+            type: "text",
+            en: "I designed the entire game using Milanote, a tool similar to Miro. Every major system had its own documentation, making iteration much easier.",
+            fr: "J'ai conçu l'intégralité du design du jeu sur Milanote, un outil similaire à Miro. Chaque système possédait sa propre documentation afin de faciliter les itérations.",
+          },
+          {
+            type: "text",
+            en: "The upgrade system, in particular, had dedicated pages for each class, listing every available upgrade and its progression.",
+            fr: "Le système d'améliorations, en particulier, disposait d'une page dédiée pour chacune des classes, répertoriant l'ensemble des améliorations disponibles ainsi que leur progression.",
+          },
+          {
+            type: "media",
+            caption: {
+              en: "Screenshots of Milanote pages.",
+              fr: "Captures de pages Milanote.",
+            },
+            media: [
+              { label: "Class pages", kind: "image", src: "/media/minimal-rpg/milanote-classes-preview.webp", fullSrc: "/media/minimal-rpg/milanote-classes-full.webp" },
+              { label: "Enemy lab", kind: "image", src: "/media/minimal-rpg/milanote-enemy-lab-preview.webp", fullSrc: "/media/minimal-rpg/milanote-enemy-lab-full.webp" },
+            ],
+          },
+          {
+            type: "text",
+            en: "I also used Excel spreadsheets to balance each class throughout different stages of the game's progression.",
+            fr: "J'ai également utilisé une feuille Excel afin d'équilibrer chaque classe à différents moments de la progression.",
+          },
+          {
+            type: "media",
+            caption: {
+              en: "Screenshot of the balancing spreadsheet.",
+              fr: "Capture de la feuille Excel.",
+            },
+            media: [{ label: "Balancing spreadsheet", kind: "image", src: "/media/minimal-rpg/excel-balancing-preview.webp", fullSrc: "/media/minimal-rpg/excel-balancing-full.webp" }],
+          },
+        ],
       },
       {
-        eyebrow: { en: "04 / Steam publishing", fr: "04 / Publication sur Steam" },
-        title: { en: "Taking it all the way to a store page", fr: "Aller jusqu'à la page de vente" },
-        body: {
-          en: "Publishing the game on Steam — currently as a demo — was a valuable learning experience. I created the capsules and promotional artwork, produced the gameplay trailer, wrote the store description, and configured and published the Steam page myself.",
-          fr: "Publier le jeu sur Steam — pour l'instant sous forme de démo — a été une expérience très formatrice. J'ai réalisé les capsules et visuels promotionnels, produit la bande-annonce, rédigé la description et configuré puis mis en ligne la page Steam moi-même.",
-        },
-        media: [{ label: "Steam capsule", kind: "image" }, { label: "Gameplay trailer", kind: "video" }, { label: "Steam store page", kind: "image" }],
+        eyebrow: { en: "04", fr: "04" },
+        title: { en: "User Interface", fr: "Interface utilisateur" },
+        blocks: [
+          {
+            type: "text",
+            en: "Most of the interface was designed in Figma, while the icons were created in Inkscape.",
+            fr: "J'ai conçu la majorité de l'interface dans Figma, puis créé les icônes dans Inkscape.",
+          },
+          {
+            type: "text",
+            en: "When designing each screen, I relied on visual hierarchy principles to naturally guide the player's attention toward the most important information.",
+            fr: "Lors de la conception des différents écrans, je me suis appuyé sur les principes de hiérarchie visuelle afin de guider naturellement le regard du joueur et de mettre en avant les informations importantes.",
+          },
+          {
+            type: "media",
+            caption: {
+              en: "Screenshots of various in-game screens.",
+              fr: "Captures de différents écrans du jeu.",
+            },
+            media: [{ label: "Class selection", kind: "image", src: "/media/minimal-rpg/class-selection-preview.webp", fullSrc: "/media/minimal-rpg/class-selection-full.webp" }],
+          },
+        ],
+      },
+      {
+        eyebrow: { en: "05", fr: "05" },
+        title: { en: "Steam Publishing", fr: "Publication sur Steam" },
+        blocks: [
+          {
+            type: "text",
+            en: "Publishing the game on Steam (currently as a demo) has been a valuable learning experience.",
+            fr: "Publier le jeu sur Steam (pour le moment sous forme de démo) a été une excellente expérience.",
+          },
+          {
+            type: "text",
+            en: "As part of the process, I created:",
+            fr: "J'ai notamment réalisé :",
+          },
+          {
+            type: "list",
+            en: ["Promotional capsules and marketing artwork.", "The gameplay trailer.", "The Steam store page description.", "The Steam page setup and publishing."],
+            fr: ["Les capsules et visuels promotionnels.", "La bande-annonce (trailer).", "La rédaction de la description de la page Steam.", "La configuration et la mise en ligne de la page Steam."],
+          },
+        ],
       },
     ],
   },
