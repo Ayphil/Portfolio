@@ -288,6 +288,15 @@ h2 { font-size: clamp(calc(51px * var(--ui-scale)), 7vw, calc(103px * var(--ui-s
 .case-study-media-open { background: rgba(23, 21, 19, .84); border: calc(1px * var(--ui-scale)) solid rgba(214, 255, 69, .62); bottom: calc(10px * var(--ui-scale)); padding: calc(7px * var(--ui-scale)) calc(9px * var(--ui-scale)); position: absolute; right: calc(10px * var(--ui-scale)); z-index: 2; }
 .case-study-media-open:hover, .case-study-media-open:focus-visible { background: var(--acid); color: var(--ink); }
 .case-study-media-open-label { margin-left: auto; }
+button.case-study-media-open-label { background: none; border: 0; cursor: pointer; letter-spacing: inherit; padding: 0; }
+button.case-study-media-open-label:hover, button.case-study-media-open-label:focus-visible { color: var(--paper); }
+.case-study-media.media-video.has-media { cursor: default; }
+.case-study-media-play { align-items: center; background: rgba(23, 21, 19, .74); border: calc(1px * var(--ui-scale)) solid rgba(214, 255, 69, .62); border-radius: 50%; color: var(--acid); cursor: pointer; display: flex; height: calc(60px * var(--ui-scale)); justify-content: center; left: 50%; padding: 0; position: absolute; top: 50%; transform: translate(-50%, -50%); transition: opacity .25s ease, background .2s ease, color .2s ease, transform .2s ease; width: calc(60px * var(--ui-scale)); z-index: 3; }
+.case-study-media-play span { font-size: calc(20px * var(--ui-scale)); line-height: 1; padding-left: calc(3px * var(--ui-scale)); }
+.case-study-media.is-playing .case-study-media-play span { padding-left: 0; }
+.case-study-media-play:hover, .case-study-media-play:focus-visible { background: var(--acid); color: var(--ink); transform: translate(-50%, -50%) scale(1.06); }
+.case-study-media.media-video.is-playing .case-study-media-play { opacity: 0; }
+.case-study-media.media-video.is-playing:hover .case-study-media-play, .case-study-media.media-video .case-study-media-play:focus-visible { opacity: 1; }
 .case-study-media.has-media figcaption { margin: 0; }
 .media-manager-shell { background: var(--paper); color: var(--ink); min-height: 100vh; padding: 0 calc(42px * var(--ui-scale)) calc(70px * var(--ui-scale)); }
 .media-manager-header { align-items: center; border-bottom: calc(1px * var(--ui-scale)) solid var(--line); display: flex; gap: calc(26px * var(--ui-scale)); justify-content: space-between; margin: 0 auto; max-width: calc(1540px * var(--ui-scale)); padding: calc(20px * var(--ui-scale)) 0; }

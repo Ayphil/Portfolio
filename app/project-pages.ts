@@ -1,5 +1,5 @@
 export type ProjectMedia = {
-  label: string;
+  label: string | { en: string; fr: string };
   kind: "video" | "image" | "blueprint";
   /** Relative paths are served from this site; absolute URLs can point to R2, Stream, or another CDN. */
   src?: string;
@@ -333,7 +333,7 @@ export const projectPages: ProjectPageContent[] = [
               en: "Screenshot of the upgrade editor.",
               fr: "Capture de l'éditeur des améliorations.",
             },
-            media: [{ label: "Upgrade editor", kind: "image", src: "/media/minimal-rpg/upgrade-scriptable-object-preview.webp", fullSrc: "/media/minimal-rpg/upgrade-scriptable-object-full.webp" }],
+            media: [{ label: { en: "Upgrade editor", fr: "Éditeur d'améliorations" }, kind: "image", src: "/media/minimal-rpg/upgrade-scriptable-object-preview.webp", fullSrc: "/media/minimal-rpg/upgrade-scriptable-object-full.webp" }],
           },
           {
             type: "media",
@@ -341,7 +341,7 @@ export const projectPages: ProjectPageContent[] = [
               en: "Video showcasing different enemy behaviors (this scene is only intended as a showcase and is not an actual level): a wyvern egg, a charging boar, a bird that shoots projectiles at the player, and a slime that splits into multiple smaller slimes.",
               fr: "Vidéo présentant différents comportements d'ennemis (cette scène sert uniquement de démonstration et ne représente pas un véritable niveau) : un œuf de wyverne, un sanglier qui rue, un oiseau qui tire des projectiles sur le joueur et un slime qui se divise en plusieurs slimes.",
             },
-            media: [{ label: "Enemy behaviors (not real level, for showcase)", kind: "video", src: "/media/minimal-rpg/enemy-types-preview.webm", fullSrc: "/media/minimal-rpg/enemy-types-full.mp4" }],
+            media: [{ label: { en: "Enemy behaviors (not real level, for showcase)", fr: "Comportements d'ennemis (démonstration, pas un vrai niveau)" }, kind: "video", src: "/media/minimal-rpg/enemy-types-preview.webm", fullSrc: "/media/minimal-rpg/enemy-types-full.mp4" }],
           },
           {
             type: "media",
@@ -349,7 +349,7 @@ export const projectPages: ProjectPageContent[] = [
               en: "Videos showcasing different systems built using ScriptableObjects.",
               fr: "Vidéos présentant différents systèmes utilisant des ScriptableObjects.",
             },
-            media: [{ label: "ScriptableObject systems", kind: "video", src: "/media/minimal-rpg/scriptable-objects-preview.webm", fullSrc: "/media/minimal-rpg/scriptable-objects-full.mp4" }],
+            media: [{ label: { en: "ScriptableObject systems", fr: "Systèmes ScriptableObject" }, kind: "video", src: "/media/minimal-rpg/scriptable-objects-preview.webm", fullSrc: "/media/minimal-rpg/scriptable-objects-full.mp4" }],
           },
         ],
       },
@@ -375,8 +375,8 @@ export const projectPages: ProjectPageContent[] = [
               fr: "Captures de pages Milanote.",
             },
             media: [
-              { label: "Class pages", kind: "image", src: "/media/minimal-rpg/milanote-classes-preview.webp", fullSrc: "/media/minimal-rpg/milanote-classes-full.webp" },
-              { label: "Enemy lab", kind: "image", src: "/media/minimal-rpg/milanote-enemy-lab-preview.webp", fullSrc: "/media/minimal-rpg/milanote-enemy-lab-full.webp" },
+              { label: { en: "Class pages", fr: "Pages des classes" }, kind: "image", src: "/media/minimal-rpg/milanote-classes-preview.webp", fullSrc: "/media/minimal-rpg/milanote-classes-full.webp" },
+              { label: { en: "Enemy lab", fr: "Laboratoire d'ennemis" }, kind: "image", src: "/media/minimal-rpg/milanote-enemy-lab-preview.webp", fullSrc: "/media/minimal-rpg/milanote-enemy-lab-full.webp" },
             ],
           },
           {
@@ -390,7 +390,7 @@ export const projectPages: ProjectPageContent[] = [
               en: "Screenshot of the balancing spreadsheet.",
               fr: "Capture de la feuille Excel.",
             },
-            media: [{ label: "Balancing spreadsheet", kind: "image", src: "/media/minimal-rpg/excel-balancing-preview.webp", fullSrc: "/media/minimal-rpg/excel-balancing-full.webp" }],
+            media: [{ label: { en: "Balancing spreadsheet", fr: "Feuille d'équilibrage" }, kind: "image", src: "/media/minimal-rpg/excel-balancing-preview.webp", fullSrc: "/media/minimal-rpg/excel-balancing-full.webp" }],
           },
         ],
       },
@@ -415,7 +415,7 @@ export const projectPages: ProjectPageContent[] = [
               en: "Screenshots of various in-game screens.",
               fr: "Captures de différents écrans du jeu.",
             },
-            media: [{ label: "Class selection", kind: "image", src: "/media/minimal-rpg/class-selection-preview.webp", fullSrc: "/media/minimal-rpg/class-selection-full.webp" }],
+            media: [{ label: { en: "Class selection", fr: "Sélection de classe" }, kind: "image", src: "/media/minimal-rpg/class-selection-preview.webp", fullSrc: "/media/minimal-rpg/class-selection-full.webp" }],
           },
         ],
       },
