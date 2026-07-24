@@ -3,6 +3,8 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import type { MouseEvent as ReactMouseEvent } from "react";
 import { useLanguage } from "./language";
+import { getProjectPage } from "./project-pages";
+import type { ProjectMedia } from "./project-pages";
 
 type Engine = "Unreal Engine 5" | "Unity" | "Figma";
 type Contribution = "UX" | "Systems" | "Tech design" | "Solo dev";
@@ -416,6 +418,131 @@ const filterGroups = {
 
 const withBasePath = (path: string) => `/Portfolio${path}`;
 
+const isRemoteMedia = (path: string) => /^https?:\/\//i.test(path);
+const resolveMediaUrl = (path: string) => (isRemoteMedia(path) ? path : withBasePath(path.startsWith("/") ? path : `/${path}`));
+
+type HoverMediaItem = { src: string; poster?: string; kind: "video" | "image" };
+
+/** Collect the real (src-backed) preview media for a project, in reading order, for the hover reel. */
+function collectHoverMedia(slug: string): HoverMediaItem[] {
+  const page = getProjectPage(slug);
+  if (!page) return [];
+
+  const items: HoverMediaItem[] = [];
+  const pushMedia = (media?: ProjectMedia[]) => {
+    media?.forEach((entry) => {
+      if (!entry.src) return;
+      items.push({
+        src: resolveMediaUrl(entry.src),
+        poster: entry.poster ? resolveMediaUrl(entry.poster) : undefined,
+        kind: entry.kind === "video" ? "video" : "image",
+      });
+    });
+  };
+
+  page.sections.forEach((section) => {
+    pushMedia(section.media);
+    section.blocks?.forEach((block) => {
+      if (block.type === "media") pushMedia(block.media);
+    });
+  });
+
+  return items;
+}
+
+function ProjectHoverReel({ items, active }: { items: HoverMediaItem[]; active: boolean }) {
+  const [index, setIndex] = useState(0);
+  const videoRefs = useRef<(HTMLVideoElement | null)[]>([]);
+
+  // Restart from the first slide whenever the hover ends so the next hover is fresh.
+  useEffect(() => {
+    if (!active) setIndex(0);
+  }, [active]);
+
+  // Auto-advance through the media while hovered (respects reduced-motion).
+  useEffect(() => {
+    if (!active || items.length <= 1) return;
+    if (typeof window !== "undefined" && window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+
+    const id = window.setInterval(() => {
+      setIndex((current) => (current + 1) % items.length);
+    }, 2400);
+    return () => window.clearInterval(id);
+  }, [active, items.length]);
+
+  // Only the visible slide's video should play.
+  useEffect(() => {
+    videoRefs.current.forEach((video, slide) => {
+      if (!video) return;
+      if (active && slide === index) {
+        video.currentTime = 0;
+        video.play().catch(() => {});
+      } else {
+        video.pause();
+      }
+    });
+  }, [active, index]);
+
+  return (
+    <div className={active ? "project-reel is-active" : "project-reel"} aria-hidden="true">
+      <div className="project-reel-track" style={{ transform: `translateX(-${index * 100}%)` }}>
+        {items.map((item, slide) => (
+          <div className="project-reel-slide" key={item.src}>
+            {item.kind === "video" ? (
+              <video
+                ref={(el) => {
+                  videoRefs.current[slide] = el;
+                }}
+                src={item.src}
+                poster={item.poster}
+                muted
+                loop
+                playsInline
+                preload="metadata"
+                tabIndex={-1}
+              />
+            ) : (
+              <img src={item.src} alt="" loading="lazy" />
+            )}
+          </div>
+        ))}
+      </div>
+      {items.length > 1 && (
+        <div className="project-reel-dots">
+          {items.map((item, slide) => (
+            <span key={item.src} className={slide === index ? "is-on" : ""} />
+          ))}
+        </div>
+      )}
+    </div>
+  );
+}
+
+function ProjectVisual({ project, language }: { project: Project; language: "en" | "fr" }) {
+  const items = useMemo(() => collectHoverMedia(project.slug), [project.slug]);
+  const [active, setActive] = useState(false);
+
+  return (
+    <a
+      href={withBasePath(`/projects/${project.slug}`)}
+      className="project-visual-link"
+      aria-label={`${project.title[language]} project details`}
+      onMouseEnter={() => setActive(true)}
+      onMouseLeave={() => setActive(false)}
+      onFocus={() => setActive(true)}
+      onBlur={() => setActive(false)}
+    >
+      <div className={`project-visual project-${project.tone}`}>
+        <div className="project-no">{project.number}</div>
+        <div className="project-mark">{project.mark}</div>
+        <div className="project-visual-detail">{project.engine} / {project.year}</div>
+        {items.length > 0 && <ProjectHoverReel items={items} active={active} />}
+        <span className="project-open">↗</span>
+      </div>
+    </a>
+  );
+}
+
 export default function Home() {
   const [language, setLanguage] = useLanguage();
   const [activeContributions, setActiveContributions] = useState<Contribution[]>([]);
@@ -583,9 +710,7 @@ export default function Home() {
         <div className="project-grid">
           {filteredProjects.map((project) => (
             <article className="project-card" key={project.slug} id={`project-${project.slug}`}>
-              <a href={withBasePath(`/projects/${project.slug}`)} className="project-visual-link" aria-label={`${project.title[language]} project details`}>
-                <div className={`project-visual project-${project.tone}`}><div className="project-no">{project.number}</div><div className="project-mark">{project.mark}</div><div className="project-visual-detail">{project.engine} / {project.year}</div><span className="project-open">↗</span></div>
-              </a>
+              <ProjectVisual project={project} language={language} />
               <div className="project-info"><div><p className="project-kicker">{project.subtitle[language]}</p><a className="project-title-link" href={withBasePath(`/projects/${project.slug}`)}><h3>{project.title[language]}</h3></a></div><span className="project-year">{project.year}</span></div>
               <p className="project-description">{project.description[language]}</p>
               <div className="project-tags">{project.contributions.map((contribution) => <span key={contribution}>{t.contributionLabels[contribution]}</span>)}<span className="engine-tag">{project.engine}</span></div>
