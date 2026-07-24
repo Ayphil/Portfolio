@@ -10,11 +10,11 @@ const serverEntry = join(root, "dist", "server", "index.js");
 const basePath = "/Portfolio";
 const routes = [
   "/",
-  "/projects/super-maiden-riot/",
-  "/projects/think-outside-the-disk/",
-  "/projects/drylite/",
-  "/projects/graphic-design-projects/",
-  "/projects/minimal-rpg/",
+  "/projects/super-maiden-riot",
+  "/projects/think-outside-the-disk",
+  "/projects/drylite",
+  "/projects/graphic-design-projects",
+  "/projects/minimal-rpg",
 ];
 
 async function copyFile(source, target) {
@@ -82,7 +82,12 @@ async function renderRoute(worker, route) {
 
 await rm(join(root, "assets"), { recursive: true, force: true });
 await rm(join(root, "projects"), { recursive: true, force: true });
+await rm(join(root, "media"), { recursive: true, force: true });
 await copyDirectory(join(clientDir, "assets"), join(root, "assets"));
+
+const clientMediaDir = join(clientDir, "media");
+const hasMedia = await stat(clientMediaDir).then(() => true).catch(() => false);
+if (hasMedia) await copyDirectory(clientMediaDir, join(root, "media"));
 
 for (const entry of await readdir(clientDir, { withFileTypes: true })) {
   if (entry.isFile() && entry.name !== "404.html" && entry.name !== "_headers" && entry.name !== ".assetsignore") {
