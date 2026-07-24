@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { useCallback, useEffect, useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import type { MouseEvent as ReactMouseEvent } from "react";
 import type { ProjectMedia, ProjectPageContent, ProjectPageSection } from "./project-pages";
 import { projectPages } from "./project-pages";
@@ -18,6 +18,8 @@ const copy = {
     facts: "At a glance",
     media: "Media placeholder",
     openFull: "Open full size",
+    play: "Play video",
+    pause: "Pause video",
     close: "Close",
     visit: "Play / view project",
     next: "Next project",
@@ -34,6 +36,8 @@ const copy = {
     facts: "En bref",
     media: "Média à remplacer",
     openFull: "Ouvrir en grand",
+    play: "Lire la vidéo",
+    pause: "Mettre en pause",
     close: "Fermer",
     visit: "Jouer / voir le projet",
     next: "Projet suivant",
@@ -47,30 +51,64 @@ const withBasePath = (path: string) => `/Portfolio${path}`;
 const isRemoteMedia = (path: string) => /^https?:\/\//i.test(path);
 const resolveMediaUrl = (path: string) => isRemoteMedia(path) ? path : withBasePath(path.startsWith("/") ? path : `/${path}`);
 const forceMute = (event: { currentTarget: HTMLVideoElement }) => { event.currentTarget.muted = true; };
+const resolveMediaLabel = (label: ProjectMedia["label"], language: Language) => typeof label === "string" ? label : label[language];
+const mediaKey = (media: ProjectMedia) => media.src ?? resolveMediaLabel(media.label, "en");
 
-function CaseStudyMedia({ media, label, openFullLabel, onOpen }: { media: ProjectMedia; label: string; openFullLabel: string; onOpen: (media: ProjectMedia) => void }) {
-  const mediaLabel = `${label}: ${media.label}`;
+function CaseStudyVideo({ media, mediaLabel, displayLabel, openFullLabel, playLabel, pauseLabel, onOpen }: { media: ProjectMedia; mediaLabel: string; displayLabel: string; openFullLabel: string; playLabel: string; pauseLabel: string; onOpen: (media: ProjectMedia) => void }) {
+  const videoRef = useRef<HTMLVideoElement>(null);
+  const [playing, setPlaying] = useState(false);
+
+  const togglePlayback = () => {
+    const video = videoRef.current;
+    if (!video) return;
+    if (video.paused) {
+      video.muted = true;
+      video.play().catch(() => {});
+    } else {
+      video.pause();
+    }
+  };
+
+  return (
+    <div className={`case-study-media media-video has-media${playing ? " is-playing" : ""}`}>
+      <video
+        ref={videoRef}
+        className="case-study-media-video"
+        loop
+        muted
+        playsInline
+        preload="metadata"
+        poster={media.poster ? resolveMediaUrl(media.poster) : undefined}
+        onVolumeChange={forceMute}
+        onPlay={() => setPlaying(true)}
+        onPause={() => setPlaying(false)}
+        aria-label={mediaLabel}
+      >
+        <source src={resolveMediaUrl(media.src as string)} />
+      </video>
+      <button className="case-study-media-play" type="button" onClick={togglePlayback} aria-label={playing ? pauseLabel : playLabel}>
+        <span aria-hidden="true">{playing ? "❚❚" : "▶"}</span>
+      </button>
+      <div className="case-study-media-label"><span>{displayLabel}</span><button className="case-study-media-open-label" type="button" onClick={() => onOpen(media)}>{openFullLabel} ⤢</button></div>
+    </div>
+  );
+}
+
+function CaseStudyMedia({ media, label, openFullLabel, playLabel, pauseLabel, language, onOpen }: { media: ProjectMedia; label: string; openFullLabel: string; playLabel: string; pauseLabel: string; language: Language; onOpen: (media: ProjectMedia) => void }) {
+  const displayLabel = resolveMediaLabel(media.label, language);
+  const mediaLabel = `${label}: ${displayLabel}`;
 
   if (media.src && media.kind === "video") {
-    return (
-      <div className="case-study-media media-video has-media">
-        <button className="case-study-media-link" type="button" onClick={() => onOpen(media)} aria-label={`${openFullLabel}: ${media.label}`}>
-          <video className="case-study-media-video" autoPlay loop muted playsInline preload="metadata" poster={media.poster ? resolveMediaUrl(media.poster) : undefined} onVolumeChange={forceMute} aria-label={mediaLabel}>
-            <source src={resolveMediaUrl(media.src)} />
-          </video>
-        </button>
-        <span className="case-study-media-label"><span>{media.label}</span><span className="case-study-media-open-label">{openFullLabel} ⤢</span></span>
-      </div>
-    );
+    return <CaseStudyVideo media={media} mediaLabel={mediaLabel} displayLabel={displayLabel} openFullLabel={openFullLabel} playLabel={playLabel} pauseLabel={pauseLabel} onOpen={onOpen} />;
   }
 
   if (media.src && media.kind === "image") {
     return (
       <figure className="case-study-media media-image has-media">
-        <button className="case-study-media-link" type="button" onClick={() => onOpen(media)} aria-label={`${openFullLabel}: ${media.label}`}>
-          <img className="case-study-media-image" src={resolveMediaUrl(media.src)} alt={media.label} loading="lazy" />
+        <button className="case-study-media-link" type="button" onClick={() => onOpen(media)} aria-label={`${openFullLabel}: ${displayLabel}`}>
+          <img className="case-study-media-image" src={resolveMediaUrl(media.src)} alt={displayLabel} loading="lazy" />
         </button>
-        <figcaption className="case-study-media-label"><span>{media.label}</span><span className="case-study-media-open-label">{openFullLabel} ⤢</span></figcaption>
+        <figcaption className="case-study-media-label"><span>{displayLabel}</span><span className="case-study-media-open-label">{openFullLabel} ⤢</span></figcaption>
       </figure>
     );
   }
@@ -78,13 +116,14 @@ function CaseStudyMedia({ media, label, openFullLabel, onOpen }: { media: Projec
   return (
     <div className={`case-study-media media-${media.kind}`} role="img" aria-label={mediaLabel}>
       <span className="case-study-media-type">{media.kind === "video" ? "▶" : media.kind === "blueprint" ? "BP" : "IMG"}</span>
-      <span className="case-study-media-label">{media.label}</span>
+      <span className="case-study-media-label">{displayLabel}</span>
       <span className="case-study-media-note">{label}</span>
     </div>
   );
 }
 
 function SectionBody({ section, language, t, onOpen, onAnchor }: { section: ProjectPageSection; language: Language; t: (typeof copy)[Language]; onOpen: (media: ProjectMedia) => void; onAnchor: (event: ReactMouseEvent<HTMLAnchorElement>) => void }) {
+  const renderMedia = (media: ProjectMedia) => <CaseStudyMedia key={mediaKey(media)} media={media} label={t.media} openFullLabel={t.openFull} playLabel={t.play} pauseLabel={t.pause} language={language} onOpen={onOpen} />;
   if (section.blocks) {
     return (
       <div className="case-study-section-body">
@@ -112,11 +151,11 @@ function SectionBody({ section, language, t, onOpen, onAnchor }: { section: Proj
             );
           }
           return (
-            <div className="case-study-media-block" key={block.media[0].label}>
+            <div className="case-study-media-block" key={mediaKey(block.media[0])}>
               <p className="case-study-media-caption">{block.caption[language]}</p>
               {block.media.length > 1
-                ? <div className="case-study-media-grid">{block.media.map((media) => <CaseStudyMedia key={media.label} media={media} label={t.media} openFullLabel={t.openFull} onOpen={onOpen} />)}</div>
-                : <CaseStudyMedia media={block.media[0]} label={t.media} openFullLabel={t.openFull} onOpen={onOpen} />}
+                ? <div className="case-study-media-grid">{block.media.map(renderMedia)}</div>
+                : renderMedia(block.media[0])}
             </div>
           );
         })}
@@ -128,7 +167,7 @@ function SectionBody({ section, language, t, onOpen, onAnchor }: { section: Proj
     <div className="case-study-section-body">
       {section.body && <p>{section.body[language]}</p>}
       {section.bullets && <ul>{section.bullets[language].map((bullet) => <li key={bullet}>{bullet}</li>)}</ul>}
-      {section.media && <div className="case-study-media-grid">{section.media.map((media) => <CaseStudyMedia key={media.label} media={media} label={t.media} openFullLabel={t.openFull} onOpen={onOpen} />)}</div>}
+      {section.media && <div className="case-study-media-grid">{section.media.map(renderMedia)}</div>}
     </div>
   );
 }
@@ -170,6 +209,7 @@ export default function ProjectCaseStudy({ project }: { project: ProjectPageCont
   }, []);
 
   const lightboxSrc = lightbox?.src ? resolveMediaUrl(lightbox.fullSrc ?? lightbox.src) : undefined;
+  const lightboxLabel = lightbox ? resolveMediaLabel(lightbox.label, language) : "";
 
   return (
     <main className="case-study-shell">
@@ -227,13 +267,13 @@ export default function ProjectCaseStudy({ project }: { project: ProjectPageCont
       </nav>
 
       {lightbox && (
-        <div className="media-lightbox" role="dialog" aria-modal="true" aria-label={lightbox.label} onClick={closeLightbox}>
+        <div className="media-lightbox" role="dialog" aria-modal="true" aria-label={lightboxLabel} onClick={closeLightbox}>
           <button className="media-lightbox-close" type="button" onClick={closeLightbox} aria-label={t.close}>×</button>
           <div className="media-lightbox-stage" onClick={(event) => event.stopPropagation()}>
             {lightbox.kind === "video"
               ? <video className="media-lightbox-media" src={lightboxSrc} autoPlay loop muted playsInline controls controlsList="nofullscreen nodownload noremoteplayback" disablePictureInPicture onVolumeChange={forceMute} />
-              : <img className="media-lightbox-media" src={lightboxSrc} alt={lightbox.label} />}
-            <span className="media-lightbox-caption">{lightbox.label}</span>
+              : <img className="media-lightbox-media" src={lightboxSrc} alt={lightboxLabel} />}
+            <span className="media-lightbox-caption">{lightboxLabel}</span>
           </div>
         </div>
       )}
