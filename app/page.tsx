@@ -1,9 +1,10 @@
 "use client";
 
 import { useEffect, useMemo, useRef, useState } from "react";
+import type { MouseEvent as ReactMouseEvent } from "react";
 import { useLanguage } from "./language";
 
-type Engine = "Unreal Engine 5" | "Figma";
+type Engine = "Unreal Engine 5" | "Unity" | "Figma";
 type Contribution = "UX" | "Systems" | "Tech design" | "Solo dev";
 
 type MediaPlaceholder = {
@@ -261,6 +262,64 @@ const projects: Project[] = [
       },
     ],
   },
+  {
+    number: "05",
+    slug: "minimal-rpg",
+    title: { en: "Minimal RPG", fr: "Minimal RPG" },
+    subtitle: { en: "Solo RPG / 15 months", fr: "RPG en solo / 15 mois" },
+    year: "2026",
+    engine: "Unity",
+    contributions: ["Solo dev", "Systems", "UX"],
+    tone: "minimalrpg",
+    mark: "MRP",
+    description: {
+      en: "A solo-developed game inspired by Nodebuster, adding RPG progression and mechanics — built end to end, from custom tools and systems to the UI and the Steam release.",
+      fr: "Un jeu développé en solo, inspiré de Nodebuster, enrichi d'une progression et de mécaniques de RPG — réalisé de bout en bout, des outils et systèmes maison jusqu'à l'UI et la publication sur Steam.",
+    },
+    facts: {
+      en: ["Solo project — 15 months", "Demo available on Steam", "Planned release Q1 2027"],
+      fr: ["Projet solo — 15 mois", "Démo disponible sur Steam", "Sortie prévue T1 2027"],
+    },
+    link: "https://store.steampowered.com/app/3661570/Minimal_RPG/",
+    sections: [
+      {
+        heading: { en: "Programming", fr: "Programmation" },
+        body: {
+          en: "Three systems stand out: a modular enemy behavior system that builds many enemy types from the same core behaviors, an upgrade system built entirely on ScriptableObjects with custom editor tools, and a player statistics system that centralizes and feeds nearly every mechanic in the game.",
+          fr: "Trois systèmes se démarquent : un système de comportements d'ennemis modulaire qui crée de nombreux types à partir des mêmes bases, un système d'améliorations entièrement basé sur des ScriptableObjects avec des outils d'éditeur maison, et un système de statistiques du joueur qui centralise et alimente presque toutes les mécaniques du jeu.",
+        },
+        bullets: {
+          en: ["Modular enemy behaviors", "ScriptableObject-driven upgrades with custom editor tools", "Central player statistics system"],
+          fr: ["Comportements d'ennemis modulaires", "Améliorations pilotées par ScriptableObjects avec outils d'éditeur", "Système central de statistiques du joueur"],
+        },
+        media: [{ label: "Upgrade editor", kind: "image" }, { label: "Enemy types", kind: "video" }, { label: "Player stats system", kind: "image" }],
+      },
+      {
+        heading: { en: "Design & progression", fr: "Design et progression" },
+        body: {
+          en: "I designed the whole game in Milanote, giving every major system its own documentation. The upgrade system had a dedicated page per class, and I balanced each class across different stages of the game using Excel spreadsheets.",
+          fr: "J'ai conçu l'intégralité du jeu sur Milanote, en donnant à chaque système majeur sa propre documentation. Le système d'améliorations disposait d'une page par classe, et j'ai équilibré chaque classe à différents moments de la progression à l'aide de feuilles Excel.",
+        },
+        media: [{ label: "Milanote — systems overview", kind: "image" }, { label: "Milanote — class upgrades", kind: "image" }, { label: "Excel balancing sheet", kind: "image" }],
+      },
+      {
+        heading: { en: "User interface", fr: "Interface utilisateur" },
+        body: {
+          en: "Most of the interface was designed in Figma, with the icons created in Inkscape. I relied on visual-hierarchy principles to guide the player's attention naturally toward the most important information.",
+          fr: "La majorité de l'interface a été conçue dans Figma, et les icônes créées dans Inkscape. Je me suis appuyé sur les principes de hiérarchie visuelle afin de guider naturellement l'attention du joueur vers les informations les plus importantes.",
+        },
+        media: [{ label: "Main menu", kind: "image" }, { label: "Upgrade screen", kind: "image" }, { label: "In-game HUD", kind: "image" }],
+      },
+      {
+        heading: { en: "Steam publishing", fr: "Publication sur Steam" },
+        body: {
+          en: "Publishing the game on Steam — currently as a demo — was a valuable learning experience. I created the capsules and promotional artwork, produced the gameplay trailer, wrote the store description, and configured and published the Steam page myself.",
+          fr: "Publier le jeu sur Steam — pour l'instant sous forme de démo — a été une expérience très formatrice. J'ai réalisé les capsules et visuels promotionnels, produit la bande-annonce, rédigé la description et configuré puis mis en ligne la page Steam moi-même.",
+        },
+        media: [{ label: "Steam capsule", kind: "image" }, { label: "Gameplay trailer", kind: "video" }, { label: "Steam store page", kind: "image" }],
+      },
+    ],
+  },
 ];
 
 const copy = {
@@ -271,7 +330,7 @@ const copy = {
     heroCta: "Explore the work",
     reelPlay: "Play demo reel",
     reelPause: "Stop demo reel",
-    selectedKicker: "Selected work / 04 projects",
+    selectedKicker: "Selected work / 05 projects",
     selectedTitle: "Different worlds.\nSame drive.",
     selectedBody:
       "I work across UX, systems, and technical design to make ambitious ideas feel inevitable in the hands of a player.",
@@ -313,7 +372,7 @@ const copy = {
     heroCta: "Voir les projets",
     reelPlay: "Lancer le demo reel",
     reelPause: "Arrêter le demo reel",
-    selectedKicker: "Projets choisis / 04 projets",
+    selectedKicker: "Projets choisis / 05 projets",
     selectedTitle: "Différents mondes,\nLa même passion.",
     selectedBody:
       "Je travaille en UX, systèmes et design technique pour rendre les idées ambitieuses évidentes entre les mains du joueur.",
@@ -352,8 +411,10 @@ const copy = {
 
 const filterGroups = {
   contribution: ["UX", "Systems", "Tech design", "Solo dev"] as Contribution[],
-  engine: ["Unreal Engine 5", "Figma"] as Engine[],
+  engine: ["Unreal Engine 5", "Unity", "Figma"] as Engine[],
 };
+
+const withBasePath = (path: string) => `/Portfolio${path}`;
 
 export default function Home() {
   const [language, setLanguage] = useLanguage();
@@ -369,6 +430,7 @@ export default function Home() {
 
     video.muted = true;
     video.defaultMuted = true;
+    video.loop = true;
     video.volume = 0;
 
     const startPlayback = () => {
@@ -376,7 +438,10 @@ export default function Home() {
       video.volume = 0;
       video.play().then(() => setIsPlaying(true)).catch(() => setIsPlaying(false));
     };
-    const handleEnded = () => setIsPlaying(false);
+    const handleEnded = () => {
+      video.currentTime = 0;
+      startPlayback();
+    };
 
     video.addEventListener("ended", handleEnded);
 
@@ -430,19 +495,34 @@ export default function Home() {
     setActiveEngines([]);
   };
 
+  const handleSectionLink = (event: ReactMouseEvent<HTMLAnchorElement>) => {
+    const href = event.currentTarget.getAttribute("href");
+    if (!href?.startsWith("#")) return;
+
+    const target = document.getElementById(href.slice(1));
+    if (!target) return;
+
+    event.preventDefault();
+    window.history.pushState(null, "", href);
+    window.scrollTo({
+      top: target.getBoundingClientRect().top + window.scrollY,
+      behavior: "auto",
+    });
+  };
+
   return (
     <main className="site-shell">
       <div className="intro-window">
       <header className="site-header">
-        <a className="brand" href="#reel" aria-label="Back to top">
+        <a className="brand" href="#reel" onClick={handleSectionLink} aria-label="Back to top">
           <span className="brand-text">game design<br />portfolio</span>
         </a>
         <nav className="main-nav" aria-label="Primary navigation">
-          <a href="#reel">{t.nav.reel}</a>
-          <a href="#work">{t.nav.work}</a>
-          <a href="#about">{t.nav.about}</a>
-          <a href="#contact">{t.nav.contact}</a>
-          <a href="/CV_Emmanuel_Cyr.pdf" target="_blank" rel="noreferrer">{t.nav.cv}</a>
+          <a href="#reel" onClick={handleSectionLink}>{t.nav.reel}</a>
+          <a href="#work" onClick={handleSectionLink}>{t.nav.work}</a>
+          <a href="#about" onClick={handleSectionLink}>{t.nav.about}</a>
+          <a href="#contact" onClick={handleSectionLink}>{t.nav.contact}</a>
+          <a href={withBasePath("/CV_Emmanuel_Cyr.pdf")} target="_blank" rel="noreferrer">{t.nav.cv}</a>
         </nav>
         <div className="header-tools">
           <button className="language-toggle" type="button" onClick={() => setLanguage((current) => current === "en" ? "fr" : "en")} aria-label="Switch language">
@@ -455,7 +535,7 @@ export default function Home() {
         <div className="hero-copy">
           <h1 id="hero-title">{t.heroTitle.split("\n").map((line) => <span key={line}>{line}</span>)}</h1>
           <p className="hero-body">{t.heroBody}</p>
-          <a className="text-link" href="#work"><span>{t.heroCta}</span><span className="link-arrow">↘</span></a>
+          <a className="text-link" href="#work" onClick={handleSectionLink}><span>{t.heroCta}</span><span className="link-arrow">↘</span></a>
         </div>
 
         <div className="reel-column">
@@ -464,10 +544,11 @@ export default function Home() {
               <video
                 ref={reelPlayerRef}
                 className="reel-video"
-                src="/demo-reel.mp4"
-                poster="/demo-reel-poster.jpg"
+                src={withBasePath("/demo-reel.mp4")}
+                poster={withBasePath("/demo-reel-poster.jpg")}
                 title="Emmanuel Cyr demo reel"
                 autoPlay
+                loop
                 muted
                 playsInline
                 preload="auto"
@@ -491,7 +572,7 @@ export default function Home() {
         </div>
 
         <div className="filter-panel" aria-label={t.filterBy}>
-          <div className="filter-summary"><span className="filter-label">{t.filterBy}</span><span className="filter-count">{String(filteredProjects.length).padStart(2, "0")} / 04</span></div>
+          <div className="filter-summary"><span className="filter-label">{t.filterBy}</span><span className="filter-count">{String(filteredProjects.length).padStart(2, "0")} / {String(projects.length).padStart(2, "0")}</span></div>
           <div className="filter-groups">
             <div className="filter-group"><span className="filter-group-title">{t.contribution}</span><div className="filter-options">{filterGroups.contribution.map((filter) => <button type="button" key={filter} className={activeContributions.includes(filter) ? "filter-chip is-selected" : "filter-chip"} onClick={() => toggleContributionFilter(filter)} aria-pressed={activeContributions.includes(filter)}>{t.contributionLabels[filter]}</button>)}</div></div>
             <div className="filter-group"><span className="filter-group-title">{t.engine}</span><div className="filter-options">{filterGroups.engine.map((filter) => <button type="button" key={filter} className={activeEngines.includes(filter) ? "filter-chip is-selected" : "filter-chip"} onClick={() => toggleEngineFilter(filter)} aria-pressed={activeEngines.includes(filter)}>{filter}</button>)}</div></div>
@@ -502,10 +583,10 @@ export default function Home() {
         <div className="project-grid">
           {filteredProjects.map((project) => (
             <article className="project-card" key={project.slug} id={`project-${project.slug}`}>
-              <a href={`/projects/${project.slug}`} className="project-visual-link" aria-label={`${project.title[language]} project details`}>
+              <a href={withBasePath(`/projects/${project.slug}`)} className="project-visual-link" aria-label={`${project.title[language]} project details`}>
                 <div className={`project-visual project-${project.tone}`}><div className="project-no">{project.number}</div><div className="project-mark">{project.mark}</div><div className="project-visual-detail">{project.engine} / {project.year}</div><span className="project-open">↗</span></div>
               </a>
-              <div className="project-info"><div><p className="project-kicker">{project.subtitle[language]}</p><a className="project-title-link" href={`/projects/${project.slug}`}><h3>{project.title[language]}</h3></a></div><span className="project-year">{project.year}</span></div>
+              <div className="project-info"><div><p className="project-kicker">{project.subtitle[language]}</p><a className="project-title-link" href={withBasePath(`/projects/${project.slug}`)}><h3>{project.title[language]}</h3></a></div><span className="project-year">{project.year}</span></div>
               <p className="project-description">{project.description[language]}</p>
               <div className="project-tags">{project.contributions.map((contribution) => <span key={contribution}>{t.contributionLabels[contribution]}</span>)}<span className="engine-tag">{project.engine}</span></div>
               <div className="project-facts">{project.facts[language].map((fact) => <span key={fact}>{fact}</span>)}</div>
@@ -517,14 +598,14 @@ export default function Home() {
 
       <section className="about-section section-wrap" id="about" aria-labelledby="about-title">
         <div className="about-stamp"><span>02</span><span>ABOUT<br />THE<br />PRACTICE</span></div>
-        <div className="about-copy"><p className="eyebrow">{t.aboutKicker}</p><h2 id="about-title">{t.aboutTitle.split("\n").map((line) => <span key={line}>{line}</span>)}</h2><p className="about-body">{t.aboutBody}</p><div className="about-facts" aria-label={t.background}>{t.backgroundItems.map((item) => <div className="about-fact" key={item.label}><span>{item.label}</span><strong>{item.value}</strong></div>)}</div><div className="about-links"><a href="https://store.steampowered.com/app/3661570/Node_RPG/" target="_blank" rel="noreferrer">Node RPG / Steam <span>↗</span></a><a href="https://www.linkedin.com/in/emmanuelcyr/" target="_blank" rel="noreferrer">{t.linkedin} <span>↗</span></a><a href="/CV_Emmanuel_Cyr.pdf" target="_blank" rel="noreferrer">{t.cv} <span>↗</span></a></div><div className="approach-row"><span className="approach-label">{t.approach}</span><span className="approach-text">{t.approachBody}</span></div></div>
+        <div className="about-copy"><p className="eyebrow">{t.aboutKicker}</p><h2 id="about-title">{t.aboutTitle.split("\n").map((line) => <span key={line}>{line}</span>)}</h2><p className="about-body">{t.aboutBody}</p><div className="about-facts" aria-label={t.background}>{t.backgroundItems.map((item) => <div className="about-fact" key={item.label}><span>{item.label}</span><strong>{item.value}</strong></div>)}</div><div className="about-links"><a href="https://store.steampowered.com/app/3661570/Node_RPG/" target="_blank" rel="noreferrer">Node RPG / Steam <span>↗</span></a><a href="https://www.linkedin.com/in/emmanuelcyr/" target="_blank" rel="noreferrer">{t.linkedin} <span>↗</span></a><a href={withBasePath("/CV_Emmanuel_Cyr.pdf")} target="_blank" rel="noreferrer">{t.cv} <span>↗</span></a></div><div className="approach-row"><span className="approach-label">{t.approach}</span><span className="approach-text">{t.approachBody}</span></div></div>
         <div className="about-visual" aria-hidden="true"><div className="about-visual-ring ring-a" /><div className="about-visual-ring ring-b" /><div className="about-cross cross-a" /><div className="about-cross cross-b" /><span>ITERATE<br />WITH INTENT</span></div>
       </section>
 
       <footer className="contact-section section-wrap" id="contact">
         <div className="contact-topline"><span className="eyebrow">03 / {t.availability}</span><span className="contact-index">2026—∞</span></div>
         <div className="contact-grid"><h2>{t.contactTitle.split("\n").map((line) => <span key={line}>{line}</span>)}</h2><div className="contact-copy"><p>{t.contactBody}</p><a className="contact-cta" href="mailto:emmanuel.cyr159@gmail.com"><span>{t.contactCta}</span><span className="contact-arrow">↗</span></a></div></div>
-        <div className="footer-bottom"><span>{t.footer}</span><div className="footer-links"><a href="mailto:emmanuel.cyr159@gmail.com">Email</a><a href="https://www.linkedin.com/in/emmanuelcyr/" target="_blank" rel="noreferrer">{t.linkedin}</a><a href="/CV_Emmanuel_Cyr.pdf" target="_blank" rel="noreferrer">{t.cv}</a><a href="#reel">{t.backToTop}</a></div></div>
+        <div className="footer-bottom"><span>{t.footer}</span><div className="footer-links"><a href="mailto:emmanuel.cyr159@gmail.com">Email</a><a href="https://www.linkedin.com/in/emmanuelcyr/" target="_blank" rel="noreferrer">{t.linkedin}</a><a href={withBasePath("/CV_Emmanuel_Cyr.pdf")} target="_blank" rel="noreferrer">{t.cv}</a><a href="#reel" onClick={handleSectionLink}>{t.backToTop}</a></div></div>
       </footer>
     </main>
   );

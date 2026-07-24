@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { useMemo } from "react";
 import type { ProjectMedia, ProjectPageContent } from "./project-pages";
+import { projectPages } from "./project-pages";
 import { useLanguage } from "./language";
 
 const copy = {
@@ -36,9 +37,35 @@ const copy = {
   },
 };
 
+const withBasePath = (path: string) => `/Portfolio${path}`;
+const isRemoteMedia = (path: string) => /^https?:\/\//i.test(path);
+const resolveMediaUrl = (path: string) => isRemoteMedia(path) ? path : withBasePath(path.startsWith("/") ? path : `/${path}`);
+
 function CaseStudyMedia({ media, label }: { media: ProjectMedia; label: string }) {
+  const mediaLabel = `${label}: ${media.label}`;
+
+  if (media.src && media.kind === "video") {
+    return (
+      <div className="case-study-media media-video has-media">
+        <video className="case-study-media-video" controls preload="metadata" poster={media.poster ? resolveMediaUrl(media.poster) : undefined} aria-label={mediaLabel}>
+          <source src={resolveMediaUrl(media.src)} />
+        </video>
+        <span className="case-study-media-label">{media.label}</span>
+      </div>
+    );
+  }
+
+  if (media.src && media.kind === "image") {
+    return (
+      <figure className="case-study-media media-image has-media">
+        <img className="case-study-media-image" src={resolveMediaUrl(media.src)} alt={media.label} loading="lazy" />
+        <figcaption className="case-study-media-label">{media.label}</figcaption>
+      </figure>
+    );
+  }
+
   return (
-    <div className={`case-study-media media-${media.kind}`} role="img" aria-label={`${label}: ${media.label}`}>
+    <div className={`case-study-media media-${media.kind}`} role="img" aria-label={mediaLabel}>
       <span className="case-study-media-type">{media.kind === "video" ? "▶" : media.kind === "blueprint" ? "BP" : "IMG"}</span>
       <span className="case-study-media-label">{media.label}</span>
       <span className="case-study-media-note">{label}</span>
@@ -49,20 +76,22 @@ function CaseStudyMedia({ media, label }: { media: ProjectMedia; label: string }
 export default function ProjectCaseStudy({ project }: { project: ProjectPageContent }) {
   const [language, setLanguage] = useLanguage();
   const t = copy[language];
-  const currentIndex = useMemo(() => project.number === "01" ? 0 : project.number === "02" ? 1 : project.number === "03" ? 2 : 3, [project.number]);
-  const previous = ["super-maiden-riot", "think-outside-the-disk", "drylite", "graphic-design-projects"][(currentIndex + 3) % 4];
-  const next = ["super-maiden-riot", "think-outside-the-disk", "drylite", "graphic-design-projects"][(currentIndex + 1) % 4];
+  const order = useMemo(() => projectPages.map((entry) => entry.slug), []);
+  const currentIndex = useMemo(() => Math.max(0, order.indexOf(project.slug)), [order, project.slug]);
+  const previous = order[(currentIndex + order.length - 1) % order.length];
+  const next = order[(currentIndex + 1) % order.length];
+  const indexLabel = `01 — ${String(order.length).padStart(2, "0")}`;
 
   return (
     <main className="case-study-shell">
       <header className="case-study-header">
-        <Link className="brand" href="/#reel" aria-label="Back to portfolio home">
+        <a className="brand" href={withBasePath("/#reel")} aria-label="Back to portfolio home">
           <span className="brand-text">game design<br />portfolio</span>
-        </Link>
+        </a>
         <nav className="case-study-nav" aria-label={t.menu}>
-          <Link href="/#work">{t.back}</Link>
-          <Link href="/#contact">Contact</Link>
-          <a href="/CV_Emmanuel_Cyr.pdf" target="_blank" rel="noreferrer">{t.cv}</a>
+          <a href={withBasePath("/#work")}>{t.back}</a>
+          <a href={withBasePath("/#contact")}>Contact</a>
+          <a href={withBasePath("/CV_Emmanuel_Cyr.pdf")} target="_blank" rel="noreferrer">{t.cv}</a>
         </nav>
         <button className="language-toggle" type="button" onClick={() => setLanguage((current) => current === "en" ? "fr" : "en")} aria-label="Switch language">
           <span className={language === "en" ? "is-active" : ""}>EN</span><span className="language-divider">/</span><span className={language === "fr" ? "is-active" : ""}>FR</span>
@@ -70,7 +99,7 @@ export default function ProjectCaseStudy({ project }: { project: ProjectPageCont
       </header>
 
       <article className="case-study-content">
-        <div className="case-study-breadcrumb"><Link href="/#work">{t.back}</Link><span>↗</span><span>{project.number} / {project.title[language]}</span></div>
+        <div className="case-study-breadcrumb"><a href={withBasePath("/#work")}>{t.back}</a><span>↗</span><span>{project.number} / {project.title[language]}</span></div>
 
         <section className="case-study-hero" aria-labelledby="case-study-title">
           <div className="case-study-hero-copy">
@@ -104,7 +133,7 @@ export default function ProjectCaseStudy({ project }: { project: ProjectPageCont
 
       <nav className="case-study-next-nav" aria-label="Project navigation">
         <Link href={`/projects/${previous}`}><span>{t.previous}</span><strong>↙</strong></Link>
-        <Link href="/#work" className="case-study-index-link">01 — 04<br />{t.back}</Link>
+        <a href={withBasePath("/#work")} className="case-study-index-link">{indexLabel}<br />{t.back}</a>
         <Link href={`/projects/${next}`}><span>{t.next}</span><strong>↗</strong></Link>
       </nav>
     </main>
