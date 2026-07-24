@@ -114,6 +114,15 @@ h2 { font-size: clamp(calc(51px * var(--ui-scale)), 7vw, calc(103px * var(--ui-s
 .project-visual-detail { bottom: calc(26px * var(--ui-scale)); color: var(--paper); font-family: monospace; font-size: calc(9px * var(--ui-scale)); left: calc(26px * var(--ui-scale)); letter-spacing: .06em; position: absolute; z-index: 1; }
 .project-open { border: calc(1px * var(--ui-scale)) solid var(--paper); border-radius: 50%; color: var(--paper); font-size: calc(22px * var(--ui-scale)); height: calc(38px * var(--ui-scale)); line-height: calc(32px * var(--ui-scale)); position: absolute; right: calc(26px * var(--ui-scale)); text-align: center; top: calc(21px * var(--ui-scale)); transition: background .2s ease, color .2s ease; width: calc(38px * var(--ui-scale)); z-index: 1; }
 .project-visual-link:hover .project-open { background: var(--acid); border-color: var(--acid); color: var(--ink); }
+.project-reel { inset: 0; opacity: 0; pointer-events: none; position: absolute; transition: opacity .45s ease; z-index: 2; }
+.project-reel.is-active { opacity: 1; }
+.project-reel-track { display: flex; height: 100%; transition: transform .7s cubic-bezier(.65, 0, .35, 1); width: 100%; }
+.project-reel-slide { flex: 0 0 100%; height: 100%; width: 100%; }
+.project-reel-slide img, .project-reel-slide video { background: #14110d; display: block; height: 100%; object-fit: cover; width: 100%; }
+.project-reel-dots { bottom: calc(16px * var(--ui-scale)); display: flex; gap: calc(6px * var(--ui-scale)); left: 50%; position: absolute; transform: translateX(-50%); z-index: 3; }
+.project-reel-dots span { background: rgba(241, 237, 228, .4); border-radius: 999px; height: calc(4px * var(--ui-scale)); transition: background .3s ease, width .3s ease; width: calc(4px * var(--ui-scale)); }
+.project-reel-dots span.is-on { background: var(--acid); width: calc(16px * var(--ui-scale)); }
+@media (prefers-reduced-motion: reduce) { .project-reel-track { transition: none; } }
 .project-signal { background: linear-gradient(137deg, #0f1518, #172f35 52%, #ef633c 52.3%, #d6ff45 90%); }
 .project-signal::before { background-image: linear-gradient(90deg, transparent 48%, rgba(214, 255, 69, .8) 48.3%, rgba(214, 255, 69, .8) 49%, transparent 49.2%), linear-gradient(transparent 48%, rgba(214, 255, 69, .8) 48.3%, rgba(214, 255, 69, .8) 49%, transparent 49.2%); background-size: calc(33px * var(--ui-scale)) calc(33px * var(--ui-scale)); content: ""; inset: 0 0 0 42%; opacity: .65; position: absolute; transform: skewX(-24deg); }
 .project-tide { background: radial-gradient(circle at 75% 25%, #f1ae37 0 5%, transparent 5.5%), linear-gradient(145deg, #253d5c 0 35%, #4f79a0 35.5% 51%, #102537 51.5%); }
