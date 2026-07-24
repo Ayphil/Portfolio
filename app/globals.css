@@ -225,7 +225,8 @@ h2 { font-size: clamp(calc(51px * var(--ui-scale)), 7vw, calc(103px * var(--ui-s
 .case-study-section-heading .eyebrow { margin-bottom: calc(26px * var(--ui-scale)); }
 .case-study-section-body { padding-top: calc(6px * var(--ui-scale)); }
 .case-study-section-body > p { color: var(--muted); font-size: calc(16px * var(--ui-scale)); line-height: 1.65; margin-bottom: calc(23px * var(--ui-scale)); max-width: calc(670px * var(--ui-scale)); }
-.case-study-section-body ul { color: var(--muted); font-size: calc(14px * var(--ui-scale)); line-height: 1.5; margin: 0 0 calc(28px * var(--ui-scale)); padding-left: calc(19px * var(--ui-scale)); }
+.case-study-section-body ul { color: var(--muted); font-size: calc(14px * var(--ui-scale)); line-height: 1.5; list-style: disc outside; margin: 0 0 calc(28px * var(--ui-scale)); padding-left: calc(20px * var(--ui-scale)); }
+.case-study-section-body li { list-style: disc outside; }
 .case-study-section-body li + li { margin-top: calc(8px * var(--ui-scale)); }
 .case-study-media-grid { display: grid; gap: calc(12px * var(--ui-scale)); grid-template-columns: repeat(2, minmax(0, 1fr)); margin-top: calc(34px * var(--ui-scale)); }
 .case-study-media-block { margin: 0 0 calc(34px * var(--ui-scale)); max-width: calc(670px * var(--ui-scale)); }

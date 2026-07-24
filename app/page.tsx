@@ -273,8 +273,8 @@ const projects: Project[] = [
     tone: "minimalrpg",
     mark: "MRP",
     description: {
-      en: "A solo-developed game inspired by Nodebuster, adding RPG progression and mechanics — built end to end, from custom tools and systems to the UI and the Steam release.",
-      fr: "Un jeu développé en solo, inspiré de Nodebuster, enrichi d'une progression et de mécaniques de RPG — réalisé de bout en bout, des outils et systèmes maison jusqu'à l'UI et la publication sur Steam.",
+      en: "A solo project inspired by Nodebuster, extended with RPG-style progression and mechanics. I built the entire game and most of its art, from custom production tools all the way to the Steam launch.",
+      fr: "Un projet solo inspiré de Nodebuster, enrichi d'une progression et de mécaniques de type RPG. J'ai développé l'ensemble du jeu et la majorité de son art, des outils de production maison jusqu'au lancement sur Steam.",
     },
     facts: {
       en: ["Solo project — 15 months", "Demo available on Steam", "Planned release Q1 2027"],
