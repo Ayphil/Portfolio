@@ -1,6 +1,9 @@
 export type ProjectMedia = {
   label: string;
   kind: "video" | "image" | "blueprint";
+  /** Relative paths are served from this site; absolute URLs can point to R2, Stream, or another CDN. */
+  src?: string;
+  poster?: string;
 };
 
 export type ProjectPageSection = {
@@ -227,6 +230,69 @@ export const projectPages: ProjectPageContent[] = [
           fr: "J'ai réalisé une feuille de vente pour un jeu de société avec une hiérarchie claire et un rythme visuel concis, afin de communiquer rapidement et efficacement la valeur du jeu.",
         },
         media: [{ label: "Sell sheet", kind: "image" }],
+      },
+    ],
+  },
+  {
+    number: "05",
+    slug: "minimal-rpg",
+    title: { en: "Minimal RPG", fr: "Minimal RPG" },
+    subtitle: { en: "Solo RPG / 15 months", fr: "RPG en solo / 15 mois" },
+    year: "2026",
+    engine: "Unity",
+    role: { en: "Solo developer — design, programming, art, publishing", fr: "Développeur solo — design, programmation, art, publication" },
+    status: { en: "Demo on Steam", fr: "Démo sur Steam" },
+    tone: "minimalrpg",
+    mark: "MRP",
+    intro: {
+      en: "A solo project inspired by Nodebuster, extended with RPG-style progression and mechanics. I built the entire game and most of its art — from custom production tools all the way to the Steam launch.",
+      fr: "Un projet solo inspiré de Nodebuster, enrichi d'une progression et de mécaniques de type RPG. J'ai développé l'ensemble du jeu et la majorité de son art — des outils de production maison jusqu'au lancement sur Steam.",
+    },
+    facts: {
+      en: ["Solo developer", "15 months of development", "Demo available on Steam", "Planned release Q1 2027"],
+      fr: ["Développeur solo", "15 mois de développement", "Démo disponible sur Steam", "Sortie prévue T1 2027"],
+    },
+    link: "https://store.steampowered.com/app/3661570/Minimal_RPG/",
+    sections: [
+      {
+        eyebrow: { en: "01 / Programming", fr: "01 / Programmation" },
+        title: { en: "Three systems doing the heavy lifting", fr: "Trois systèmes qui portent le jeu" },
+        body: {
+          en: "Three systems stand out. The enemy behavior system looks simple on the surface but is modular, so a wide variety of enemies grows from the same core behaviors. The upgrade system is built entirely on ScriptableObjects, backed by custom editor tools that make creating and modifying upgrades much faster. And the player statistics system centralizes and feeds nearly every mechanic in the game.",
+          fr: "Trois systèmes se démarquent. Le système de comportements des ennemis paraît simple en surface, mais il est modulaire : une grande variété d'ennemis découle des mêmes comportements de base. Le système d'améliorations repose entièrement sur des ScriptableObjects, soutenu par des outils d'éditeur maison qui accélèrent grandement leur création et leur modification. Enfin, le système de statistiques du joueur centralise et alimente presque toutes les mécaniques du jeu.",
+        },
+        bullets: {
+          en: ["Enemy behaviors — modular building blocks for many enemy types", "Upgrades — ScriptableObject-driven with custom editor tools", "Player stats — a central hub feeding the game's mechanics"],
+          fr: ["Comportements des ennemis — des blocs modulaires pour de nombreux types", "Améliorations — pilotées par ScriptableObjects avec des outils d'éditeur", "Statistiques du joueur — un cœur central qui alimente les mécaniques"],
+        },
+        media: [{ label: "Upgrade editor", kind: "image" }, { label: "Enemy types", kind: "video" }, { label: "Player stats system", kind: "image" }],
+      },
+      {
+        eyebrow: { en: "02 / Design & progression", fr: "02 / Design et progression" },
+        title: { en: "Documented systems, tuned by hand", fr: "Des systèmes documentés, équilibrés à la main" },
+        body: {
+          en: "I designed the whole game in Milanote, giving every major system its own documentation to make iteration easier. The upgrade system had a dedicated page per class listing every upgrade and its progression, and I balanced each class across different stages of the game using Excel spreadsheets.",
+          fr: "J'ai conçu l'intégralité du jeu sur Milanote, en donnant à chaque système majeur sa propre documentation pour faciliter les itérations. Le système d'améliorations disposait d'une page par classe répertoriant chaque amélioration et sa progression, et j'ai équilibré chaque classe à différents moments de la progression à l'aide de feuilles Excel.",
+        },
+        media: [{ label: "Milanote — systems overview", kind: "image" }, { label: "Milanote — class upgrades", kind: "image" }, { label: "Excel balancing sheet", kind: "image" }],
+      },
+      {
+        eyebrow: { en: "03 / User interface", fr: "03 / Interface utilisateur" },
+        title: { en: "Guiding the eye with hierarchy", fr: "Guider le regard par la hiérarchie" },
+        body: {
+          en: "Most of the interface was designed in Figma, with the icons created in Inkscape. For each screen I leaned on visual-hierarchy principles to guide the player's attention naturally toward the information that matters most.",
+          fr: "La majorité de l'interface a été conçue dans Figma, et les icônes créées dans Inkscape. Pour chaque écran, je me suis appuyé sur les principes de hiérarchie visuelle afin de guider naturellement l'attention du joueur vers les informations les plus importantes.",
+        },
+        media: [{ label: "Main menu", kind: "image" }, { label: "Upgrade screen", kind: "image" }, { label: "In-game HUD", kind: "image" }],
+      },
+      {
+        eyebrow: { en: "04 / Steam publishing", fr: "04 / Publication sur Steam" },
+        title: { en: "Taking it all the way to a store page", fr: "Aller jusqu'à la page de vente" },
+        body: {
+          en: "Publishing the game on Steam — currently as a demo — was a valuable learning experience. I created the capsules and promotional artwork, produced the gameplay trailer, wrote the store description, and configured and published the Steam page myself.",
+          fr: "Publier le jeu sur Steam — pour l'instant sous forme de démo — a été une expérience très formatrice. J'ai réalisé les capsules et visuels promotionnels, produit la bande-annonce, rédigé la description et configuré puis mis en ligne la page Steam moi-même.",
+        },
+        media: [{ label: "Steam capsule", kind: "image" }, { label: "Gameplay trailer", kind: "video" }, { label: "Steam store page", kind: "image" }],
       },
     ],
   },

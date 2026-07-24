@@ -14,6 +14,7 @@ const routes = [
   "/projects/think-outside-the-disk/",
   "/projects/drylite/",
   "/projects/graphic-design-projects/",
+  "/projects/minimal-rpg/",
 ];
 
 async function copyFile(source, target) {
