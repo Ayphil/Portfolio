@@ -46,6 +46,7 @@ const copy = {
 const withBasePath = (path: string) => `/Portfolio${path}`;
 const isRemoteMedia = (path: string) => /^https?:\/\//i.test(path);
 const resolveMediaUrl = (path: string) => isRemoteMedia(path) ? path : withBasePath(path.startsWith("/") ? path : `/${path}`);
+const forceMute = (event: { currentTarget: HTMLVideoElement }) => { event.currentTarget.muted = true; };
 
 function CaseStudyMedia({ media, label, openFullLabel, onOpen }: { media: ProjectMedia; label: string; openFullLabel: string; onOpen: (media: ProjectMedia) => void }) {
   const mediaLabel = `${label}: ${media.label}`;
@@ -53,11 +54,12 @@ function CaseStudyMedia({ media, label, openFullLabel, onOpen }: { media: Projec
   if (media.src && media.kind === "video") {
     return (
       <div className="case-study-media media-video has-media">
-        <video className="case-study-media-video" controls preload="metadata" poster={media.poster ? resolveMediaUrl(media.poster) : undefined} aria-label={mediaLabel}>
-          <source src={resolveMediaUrl(media.src)} />
-        </video>
-        <span className="case-study-media-label">{media.label}</span>
-        <button className="case-study-media-open" type="button" onClick={() => onOpen(media)} aria-label={`${openFullLabel}: ${media.label}`}>{openFullLabel} ⤢</button>
+        <button className="case-study-media-link" type="button" onClick={() => onOpen(media)} aria-label={`${openFullLabel}: ${media.label}`}>
+          <video className="case-study-media-video" autoPlay loop muted playsInline preload="metadata" poster={media.poster ? resolveMediaUrl(media.poster) : undefined} onVolumeChange={forceMute} aria-label={mediaLabel}>
+            <source src={resolveMediaUrl(media.src)} />
+          </video>
+        </button>
+        <span className="case-study-media-label"><span>{media.label}</span><span className="case-study-media-open-label">{openFullLabel} ⤢</span></span>
       </div>
     );
   }
@@ -229,7 +231,7 @@ export default function ProjectCaseStudy({ project }: { project: ProjectPageCont
           <button className="media-lightbox-close" type="button" onClick={closeLightbox} aria-label={t.close}>×</button>
           <div className="media-lightbox-stage" onClick={(event) => event.stopPropagation()}>
             {lightbox.kind === "video"
-              ? <video className="media-lightbox-media" src={lightboxSrc} controls autoPlay playsInline />
+              ? <video className="media-lightbox-media" src={lightboxSrc} autoPlay loop muted playsInline controls controlsList="nofullscreen nodownload noremoteplayback" disablePictureInPicture onVolumeChange={forceMute} />
               : <img className="media-lightbox-media" src={lightboxSrc} alt={lightbox.label} />}
             <span className="media-lightbox-caption">{lightbox.label}</span>
           </div>

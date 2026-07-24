@@ -344,6 +344,7 @@ const copy = {
     showing: "Showing",
     projects: "projects",
     all: "All work",
+    pageInProgress: "Page building in progress",
     aboutKicker: "A little context",
     aboutTitle: "About me.",
     aboutBody:
@@ -386,6 +387,7 @@ const copy = {
     showing: "Afficher",
     projects: "projets",
     all: "Tous les projets",
+    pageInProgress: "Page en construction",
     aboutKicker: "Un peu de contexte",
     aboutTitle: "À propos de moi.",
     aboutBody:
@@ -711,7 +713,7 @@ export default function Home() {
           {filteredProjects.map((project) => (
             <article className="project-card" key={project.slug} id={`project-${project.slug}`}>
               <ProjectVisual project={project} language={language} />
-              <div className="project-info"><div><p className="project-kicker">{project.subtitle[language]}</p><a className="project-title-link" href={withBasePath(`/projects/${project.slug}`)}><h3>{project.title[language]}</h3></a></div><span className="project-year">{project.year}</span></div>
+              <div className="project-info"><div><p className="project-kicker">{project.subtitle[language]}</p><a className="project-title-link" href={withBasePath(`/projects/${project.slug}`)}><h3>{project.title[language]}</h3></a>{project.slug !== "minimal-rpg" && <span className="project-progress">{t.pageInProgress}</span>}</div><span className="project-year">{project.year}</span></div>
               <p className="project-description">{project.description[language]}</p>
               <div className="project-tags">{project.contributions.map((contribution) => <span key={contribution}>{t.contributionLabels[contribution]}</span>)}<span className="engine-tag">{project.engine}</span></div>
               <div className="project-facts">{project.facts[language].map((fact) => <span key={fact}>{fact}</span>)}</div>
