@@ -141,6 +141,9 @@ h2 { font-size: clamp(calc(51px * var(--ui-scale)), 7vw, calc(103px * var(--ui-s
 .project-graphic { background: linear-gradient(135deg, #f6efe1 0 47%, #ee7045 47.3% 66%, #263c54 66.3%); }
 .project-graphic::before { border: calc(1px * var(--ui-scale)) solid rgba(23, 21, 19, .42); content: ""; height: 58%; left: 20%; position: absolute; top: 20%; transform: rotate(-8deg); width: 30%; }
 .project-graphic .project-mark { color: #16293b; }
+.project-minimalrpg { background: linear-gradient(135deg, #10141f, #26314e 52%, #7a9bff 52.4%); }
+.project-minimalrpg::before { background-image: radial-gradient(rgba(241, 237, 228, .55) calc(2px * var(--ui-scale)), transparent calc(2.6px * var(--ui-scale))); background-size: calc(28px * var(--ui-scale)) calc(28px * var(--ui-scale)); content: ""; inset: 0 0 0 48%; opacity: .55; position: absolute; }
+.project-minimalrpg .project-mark { color: var(--blue); }
 .project-info { align-items: start; display: flex; justify-content: space-between; padding-top: calc(20px * var(--ui-scale)); }
 .project-kicker { color: var(--muted); font-family: monospace; font-size: calc(10px * var(--ui-scale)); margin-bottom: calc(7px * var(--ui-scale)); text-transform: uppercase; }
 .project-info h3 { font-family: var(--display); font-size: clamp(calc(27px * var(--ui-scale)), 3vw, calc(42px * var(--ui-scale))); font-weight: 800; letter-spacing: -.07em; line-height: .9; margin: 0; text-transform: uppercase; }
@@ -207,6 +210,7 @@ h2 { font-size: clamp(calc(51px * var(--ui-scale)), 7vw, calc(103px * var(--ui-s
 .project-maiden .case-study-art-mark { color: #241722; }
 .project-drylite .case-study-art-mark { color: var(--acid); }
 .project-graphic .case-study-art-mark { color: #16293b; }
+.project-minimalrpg .case-study-art-mark { color: var(--blue); }
 .case-study-art-caption { bottom: calc(32px * var(--ui-scale)); color: var(--paper); font-family: monospace; font-size: calc(10px * var(--ui-scale)); left: calc(34px * var(--ui-scale)); letter-spacing: .07em; line-height: 1.5; position: absolute; text-transform: uppercase; z-index: 1; }
 .case-study-meta { border-bottom: calc(1px * var(--ui-scale)) solid var(--line); display: grid; gap: calc(30px * var(--ui-scale)); grid-template-columns: 1fr 1fr 1fr 1.7fr; padding: calc(30px * var(--ui-scale)) 0 calc(37px * var(--ui-scale)); }
 .case-study-meta-item, .case-study-facts { display: flex; flex-direction: column; gap: calc(8px * var(--ui-scale)); }
@@ -234,6 +238,12 @@ h2 { font-size: clamp(calc(51px * var(--ui-scale)), 7vw, calc(103px * var(--ui-s
 .case-study-media.media-video .case-study-media-type { color: var(--orange); }
 .case-study-media.media-image { background-color: #303f4a; }
 .case-study-media.media-blueprint { background-color: #27364a; background-image: linear-gradient(rgba(122, 155, 255, .25) calc(1px * var(--ui-scale)), transparent calc(1px * var(--ui-scale))), linear-gradient(90deg, rgba(122, 155, 255, .25) calc(1px * var(--ui-scale)), transparent calc(1px * var(--ui-scale))); background-size: calc(17px * var(--ui-scale)) calc(17px * var(--ui-scale)); }
+.case-study-media.has-media { align-items: stretch; display: block; padding: 0; }
+.case-study-media.has-media::after { display: none; }
+.case-study-media-image, .case-study-media-video { display: block; height: 100%; object-fit: cover; width: 100%; }
+.case-study-media-video { background: #171515; }
+.case-study-media.has-media .case-study-media-label { background: rgba(23, 21, 19, .82); bottom: 0; left: 0; margin: 0; max-width: none; padding: calc(10px * var(--ui-scale)) calc(12px * var(--ui-scale)); position: absolute; right: 0; }
+.case-study-media.has-media figcaption { margin: 0; }
 .case-study-next-nav { align-items: stretch; background: var(--orange); display: grid; grid-template-columns: 1fr auto 1fr; margin: 0 auto; max-width: calc(1540px * var(--ui-scale)); }
 .case-study-next-nav a { display: flex; flex-direction: column; font-size: calc(11px * var(--ui-scale)); font-weight: 800; justify-content: space-between; letter-spacing: .08em; min-height: calc(156px * var(--ui-scale)); padding: calc(25px * var(--ui-scale)) calc(42px * var(--ui-scale)); text-transform: uppercase; }
 .case-study-next-nav a:first-child { border-right: calc(1px * var(--ui-scale)) solid rgba(23, 21, 19, .25); }
