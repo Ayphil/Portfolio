@@ -10,11 +10,11 @@ const serverEntry = join(root, "dist", "server", "index.js");
 const basePath = "/Portfolio";
 const routes = [
   "/",
-  "/projects/super-maiden-riot/",
-  "/projects/think-outside-the-disk/",
-  "/projects/drylite/",
-  "/projects/graphic-design-projects/",
-  "/projects/minimal-rpg/",
+  "/projects/super-maiden-riot",
+  "/projects/think-outside-the-disk",
+  "/projects/drylite",
+  "/projects/graphic-design-projects",
+  "/projects/minimal-rpg",
 ];
 
 async function copyFile(source, target) {
