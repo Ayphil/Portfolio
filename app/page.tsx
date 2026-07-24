@@ -350,7 +350,7 @@ const copy = {
     backgroundItems: [
       { label: "Education", value: "B.A. in video game creation, design concentration — UQAT / 2025–present" },
       { label: "Web and content", value: "Webmaster assistant — Office of the Commissioner of Official Languages / May 2024–June 2025" },
-      { label: "Published work", value: "Node RPG — Steam / October 2024–present" },
+      { label: "Published work", value: "Minimal RPG — Steam / October 2024–present" },
       { label: "Recognition", value: "Ubisoft Game Lab — Best Game Design; three additional nominations / 2026" },
       { label: "Languages", value: "French first language / English bilingual" },
     ],
@@ -392,7 +392,7 @@ const copy = {
     backgroundItems: [
       { label: "Éducation", value: "Baccalauréat en création de jeux vidéo, concentration Design — UQAT / 2025–aujourd'hui" },
       { label: "Web et contenu", value: "Assistant au webmestre — Commissariat aux langues officielles / mai 2024–juin 2025" },
-      { label: "Projet publié", value: "Node RPG — Steam / octobre 2024–aujourd'hui" },
+      { label: "Projet publié", value: "Minimal RPG — Steam / octobre 2024–aujourd'hui" },
       { label: "Reconnaissance", value: "Ubisoft Game Lab — Meilleur Game Design; trois autres nominations / 2026" },
       { label: "Langues", value: "Français langue première / anglais bilingue" },
     ],
@@ -598,7 +598,7 @@ export default function Home() {
 
       <section className="about-section section-wrap" id="about" aria-labelledby="about-title">
         <div className="about-stamp"><span>02</span><span>ABOUT<br />THE<br />PRACTICE</span></div>
-        <div className="about-copy"><p className="eyebrow">{t.aboutKicker}</p><h2 id="about-title">{t.aboutTitle.split("\n").map((line) => <span key={line}>{line}</span>)}</h2><p className="about-body">{t.aboutBody}</p><div className="about-facts" aria-label={t.background}>{t.backgroundItems.map((item) => <div className="about-fact" key={item.label}><span>{item.label}</span><strong>{item.value}</strong></div>)}</div><div className="about-links"><a href="https://store.steampowered.com/app/3661570/Node_RPG/" target="_blank" rel="noreferrer">Node RPG / Steam <span>↗</span></a><a href="https://www.linkedin.com/in/emmanuelcyr/" target="_blank" rel="noreferrer">{t.linkedin} <span>↗</span></a><a href={withBasePath("/CV_Emmanuel_Cyr.pdf")} target="_blank" rel="noreferrer">{t.cv} <span>↗</span></a></div><div className="approach-row"><span className="approach-label">{t.approach}</span><span className="approach-text">{t.approachBody}</span></div></div>
+        <div className="about-copy"><p className="eyebrow">{t.aboutKicker}</p><h2 id="about-title">{t.aboutTitle.split("\n").map((line) => <span key={line}>{line}</span>)}</h2><p className="about-body">{t.aboutBody}</p><div className="about-facts" aria-label={t.background}>{t.backgroundItems.map((item) => <div className="about-fact" key={item.label}><span>{item.label}</span><strong>{item.value}</strong></div>)}</div><div className="about-links"><a href="https://store.steampowered.com/app/3661570/Minimal_RPG/" target="_blank" rel="noreferrer">Minimal RPG / Steam <span>↗</span></a><a href="https://www.linkedin.com/in/emmanuelcyr/" target="_blank" rel="noreferrer">{t.linkedin} <span>↗</span></a><a href={withBasePath("/CV_Emmanuel_Cyr.pdf")} target="_blank" rel="noreferrer">{t.cv} <span>↗</span></a></div><div className="approach-row"><span className="approach-label">{t.approach}</span><span className="approach-text">{t.approachBody}</span></div></div>
         <div className="about-visual" aria-hidden="true"><div className="about-visual-ring ring-a" /><div className="about-visual-ring ring-b" /><div className="about-cross cross-a" /><div className="about-cross cross-b" /><span>ITERATE<br />WITH INTENT</span></div>
       </section>
 
