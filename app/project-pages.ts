@@ -58,6 +58,7 @@ export type ProjectPageContent = {
   status: { en: string; fr: string };
   tone: string;
   mark: string;
+  cover?: ProjectMedia;
   intro: { en: string; fr: string };
   facts: { en: string[]; fr: string[] };
   link?: string;
@@ -76,6 +77,7 @@ export const projectPages: ProjectPageContent[] = [
     status: { en: "Released", fr: "Sorti" },
     tone: "maiden",
     mark: "SMR",
+    cover: imageAsset("Super Maiden Riot cover", "super-maiden-riot-cover"),
     intro: {
       en: "A symmetrical co-op platformer built around two princesses, a restricted three-button control scheme, and abilities that need to read instantly.",
       fr: "Un jeu de plateformes coopératif et symétrique autour de deux princesses, d'un schéma de contrôle limité à trois boutons et d'habiletés immédiatement lisibles.",
@@ -144,6 +146,7 @@ export const projectPages: ProjectPageContent[] = [
     status: { en: "Released", fr: "Sorti" },
     tone: "disk",
     mark: "TOD",
+    cover: imageAsset("Think Outside the Disk cover", "think-outside-disk-thumbnail"),
     intro: {
       en: "A 72-hour prototype where changing perspective changes movement, camera language, and the way the world is solved.",
       fr: "Un prototype réalisé en 72 heures où changer de perspective transforme le mouvement, la caméra et la façon de résoudre le monde.",
@@ -174,7 +177,6 @@ export const projectPages: ProjectPageContent[] = [
           fr: "L'environnement devait rendre le changement de perspective utile plutôt que simplement spectaculaire. J'ai implémenté les disques rotatifs, la bombe à retardement qui ouvre la prochaine porte et les plateformes mobiles qui donnent un rythme clair à chaque niveau.",
         },
         media: [
-          imageAsset("Project overview", "think-outside-disk-thumbnail"),
           videoAsset("Spinning disks", "think-outside-disk-climb-disk"),
           videoAsset("Timed bomb", "think-outside-disk-bomb"),
           videoAsset("Moving platforms", "think-outside-disk-moving-platform"),
@@ -317,6 +319,7 @@ export const projectPages: ProjectPageContent[] = [
     status: { en: "Demo on Steam", fr: "Démo sur Steam" },
     tone: "minimalrpg",
     mark: "MRP",
+    cover: imageAsset("Minimal RPG cover", "minimal-rpg-cover"),
     intro: {
       en: "A solo project inspired by Nodebuster, extended with RPG-style progression and mechanics. I built the entire game and most of its art, from custom production tools all the way to the Steam launch.",
       fr: "Un projet solo inspiré de Nodebuster, enrichi d'une progression et de mécaniques de type RPG. J'ai développé l'ensemble du jeu et la majorité de son art, des outils de production maison jusqu'au lancement sur Steam.",

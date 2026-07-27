@@ -522,6 +522,7 @@ function ProjectHoverReel({ items, active }: { items: HoverMediaItem[]; active: 
 
 function ProjectVisual({ project, language }: { project: Project; language: "en" | "fr" }) {
   const items = useMemo(() => collectHoverMedia(project.slug), [project.slug]);
+  const cover = getProjectPage(project.slug)?.cover;
   const [active, setActive] = useState(false);
 
   return (
@@ -534,7 +535,9 @@ function ProjectVisual({ project, language }: { project: Project; language: "en"
       onFocus={() => setActive(true)}
       onBlur={() => setActive(false)}
     >
-      <div className={`project-visual project-${project.tone}`}>
+      <div className={`project-visual project-${project.tone}${cover?.src ? " has-cover" : ""}`}>
+        {cover?.src && <img className="project-cover" src={resolveMediaUrl(cover.src)} alt="" loading="lazy" />}
+        {cover?.src && <span className="project-cover-shade" aria-hidden="true" />}
         <div className="project-no">{project.number}</div>
         <div className="project-mark">{project.mark}</div>
         <div className="project-visual-detail">{project.engine} / {project.year}</div>

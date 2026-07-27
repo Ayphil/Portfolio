@@ -109,6 +109,10 @@ h2 { font-size: clamp(calc(51px * var(--ui-scale)), 7vw, calc(103px * var(--ui-s
 .project-visual { aspect-ratio: 1.46 / 1; background: #25231f; overflow: hidden; position: relative; transition: transform .45s cubic-bezier(.2,.8,.2,1); }
 .project-visual-link:hover .project-visual { transform: translateY(calc(-7px * var(--ui-scale))) rotate(.6deg); }
 .project-visual::after { border: calc(1px * var(--ui-scale)) solid rgba(241, 237, 228, .35); content: ""; inset: calc(15px * var(--ui-scale)); pointer-events: none; position: absolute; }
+.project-cover, .project-cover-shade { inset: 0; position: absolute; }
+.project-cover { display: block; height: 100%; object-fit: cover; width: 100%; z-index: 0; }
+.project-cover-shade { background: linear-gradient(90deg, rgba(23, 21, 19, .5), rgba(23, 21, 19, .06) 58%, rgba(23, 21, 19, .32)); pointer-events: none; z-index: 0; }
+.project-visual.has-cover .project-mark { color: var(--paper); text-shadow: 0 calc(3px * var(--ui-scale)) calc(18px * var(--ui-scale)) rgba(0, 0, 0, .5); }
 .project-no { color: var(--paper); font-family: monospace; font-size: calc(11px * var(--ui-scale)); left: calc(26px * var(--ui-scale)); position: absolute; top: calc(25px * var(--ui-scale)); z-index: 1; }
 .project-mark { color: var(--paper); font-family: var(--display); font-size: clamp(calc(85px * var(--ui-scale)), 14vw, calc(205px * var(--ui-scale))); font-weight: 800; left: 8%; letter-spacing: -.15em; line-height: .8; opacity: .95; position: absolute; top: 33%; z-index: 1; }
 .project-visual-detail { bottom: calc(26px * var(--ui-scale)); color: var(--paper); font-family: monospace; font-size: calc(9px * var(--ui-scale)); left: calc(26px * var(--ui-scale)); letter-spacing: .06em; position: absolute; z-index: 1; }
