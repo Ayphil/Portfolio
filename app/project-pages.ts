@@ -8,6 +8,22 @@ export type ProjectMedia = {
   poster?: string;
 };
 
+const projectMediaPath = (filename: string) => `/media/minimal-rpg/${filename}`;
+
+const imageAsset = (label: string, stem: string): ProjectMedia => ({
+  label,
+  kind: "image",
+  src: projectMediaPath(`${stem}-preview.webp`),
+  fullSrc: projectMediaPath(`${stem}-full.webp`),
+});
+
+const videoAsset = (label: string, stem: string): ProjectMedia => ({
+  label,
+  kind: "video",
+  src: projectMediaPath(`${stem}-preview.webm`),
+  fullSrc: projectMediaPath(`${stem}-full.mp4`),
+});
+
 /**
  * Ordered content blocks for a section. Use `blocks` when a section needs
  * paragraphs, lists, and captioned media interleaved in a specific reading
@@ -81,7 +97,12 @@ export const projectPages: ProjectPageContent[] = [
           en: ["Princess 1: punch, dash, and partner interaction", "Princess 2: hair bounce, block breaking, and partner interaction"],
           fr: ["Princesse 1 : coup de poing, ruée et interaction avec sa partenaire", "Princesse 2 : rebond sur les cheveux, bris de blocs et interaction avec sa partenaire"],
         },
-        media: [{ label: "Punch / Blueprint", kind: "blueprint" }, { label: "Dash / Blueprint", kind: "blueprint" }, { label: "Princess interactions", kind: "video" }],
+        media: [
+          videoAsset("Princess 1 — punch", "smr-p1-punch"),
+          videoAsset("Princess 1 — dash", "smr-p1-dash"),
+          videoAsset("Princess 2 — block break", "smr-p2-break"),
+          videoAsset("Princess 2 — jump", "smr-p2-jump"),
+        ],
       },
       {
         eyebrow: { en: "02 / Interface", fr: "02 / Interface" },
@@ -90,7 +111,12 @@ export const projectPages: ProjectPageContent[] = [
           en: "With only A, B, and the D-pad available, every prompt and menu transition had to carry its weight. I designed the HUD, the unique pause menus, the main-menu flow, and the supporting Figma wireframes.",
           fr: "Avec seulement A, B et la croix directionnelle, chaque invite et chaque transition de menu devait être utile. J'ai conçu le HUD, les menus de pause propres à chaque princesse, le flow du menu principal et les maquettes Figma associées.",
         },
-        media: [{ label: "HUD", kind: "video" }, { label: "Princess pause menus", kind: "video" }, { label: "Main menu flow", kind: "video" }, { label: "Figma wireframes", kind: "image" }],
+        media: [
+          { label: "HUD", kind: "video" },
+          videoAsset("Princess pause menus", "smr-pause-menu"),
+          videoAsset("Main menu flow", "smr-main-menu"),
+          { label: "Figma wireframes", kind: "image" },
+        ],
       },
       {
         eyebrow: { en: "03 / Supporting systems", fr: "03 / Systèmes complémentaires" },
@@ -99,7 +125,11 @@ export const projectPages: ProjectPageContent[] = [
           en: "I integrated most of the princess animations and built the score, level-transition, and character-specific subtitle systems. I also observed playtests to understand which interactions felt natural before committing them to Blueprints.",
           fr: "J'ai intégré la majorité des animations des princesses et développé les systèmes de score, de transition entre les niveaux et de sous-titres propres à chaque personnage. J'ai aussi observé des tests de jeu pour comprendre quelles interactions semblaient naturelles avant de les fixer dans les Blueprints.",
         },
-        media: [{ label: "Animation transitions", kind: "video" }, { label: "Princess 2 Animation Blueprint", kind: "blueprint" }, { label: "Score system", kind: "video" }],
+        media: [
+          videoAsset("Princess 1 — partner interaction", "smr-p1-push"),
+          videoAsset("Princess 2 — hair bounce", "smr-p2-tramp"),
+          videoAsset("Character-specific subtitles", "smr-subtitles"),
+        ],
       },
     ],
   },
@@ -131,7 +161,10 @@ export const projectPages: ProjectPageContent[] = [
           en: "I programmed the sequence that shifts the game from one perspective to another. That meant coordinating camera movement, changing the character's movement possibilities, and using sound and music as a second feedback channel.",
           fr: "J'ai programmé la séquence qui fait passer le jeu d'une perspective à une autre. Il fallait coordonner le mouvement de caméra, modifier les possibilités de mouvement du personnage et utiliser le son et la musique comme second canal de feedback.",
         },
-        media: [{ label: "Perspective-shift sequence", kind: "video" }],
+        media: [
+          videoAsset("Perspective-shift sequence", "think-outside-disk-perspective-switch"),
+          videoAsset("Full playthrough", "think-outside-disk-full-playthrough"),
+        ],
       },
       {
         eyebrow: { en: "02 / Environments", fr: "02 / Environnements" },
@@ -140,7 +173,12 @@ export const projectPages: ProjectPageContent[] = [
           en: "The environment had to make the perspective change useful rather than merely spectacular. I implemented spinning disks, the timed bomb that opens the next door, and moving platforms that establish a clear rhythm through each level.",
           fr: "L'environnement devait rendre le changement de perspective utile plutôt que simplement spectaculaire. J'ai implémenté les disques rotatifs, la bombe à retardement qui ouvre la prochaine porte et les plateformes mobiles qui donnent un rythme clair à chaque niveau.",
         },
-        media: [{ label: "Spinning disks", kind: "image" }, { label: "Timed bomb", kind: "image" }, { label: "Moving platforms", kind: "image" }],
+        media: [
+          imageAsset("Project overview", "think-outside-disk-thumbnail"),
+          videoAsset("Spinning disks", "think-outside-disk-climb-disk"),
+          videoAsset("Timed bomb", "think-outside-disk-bomb"),
+          videoAsset("Moving platforms", "think-outside-disk-moving-platform"),
+        ],
       },
       {
         eyebrow: { en: "03 / Short analysis", fr: "03 / Courte analyse" },
@@ -179,7 +217,11 @@ export const projectPages: ProjectPageContent[] = [
           en: "I built configurable firearms in Blueprints with true projectiles rather than hitscan. The weapons are data-driven so tuning an existing rifle or adding a new one does not require rebuilding the system around it.",
           fr: "J'ai créé des fusils configurables dans les Blueprints avec de vrais projectiles plutôt que des hitscans. Les armes sont pilotées par les données afin de faciliter l'équilibrage d'un fusil existant ou l'ajout d'une nouvelle arme sans reconstruire le système.",
         },
-        media: [{ label: "Main firearm Blueprint", kind: "blueprint" }, { label: "Two contrasting weapons", kind: "image" }],
+        media: [
+          imageAsset("Main firearm Blueprint", "drylite-gun-blueprint"),
+          imageAsset("Weapon statistics", "drylite-gun-stats"),
+          videoAsset("AK and Deagle test", "drylite-ak-deagle-test"),
+        ],
       },
       {
         eyebrow: { en: "02 / Inventory", fr: "02 / Inventaire" },
@@ -188,7 +230,11 @@ export const projectPages: ProjectPageContent[] = [
           en: "The HUD sends a request to an inventory that owns the player's item list. I used the Gameplay Message Subsystem to keep widgets decoupled and Common UI to keep only one foreground interface active at a time.",
           fr: "Le HUD envoie une requête à un inventaire qui contient la liste des objets du joueur. J'ai utilisé le Gameplay Message Subsystem pour découpler les widgets et Common UI pour ne garder qu'une seule interface au premier plan.",
         },
-        media: [{ label: "HUD → inventory request", kind: "image" }, { label: "Complete inventory flow", kind: "image" }],
+        media: [
+          imageAsset("HUD → inventory request", "drylite-message-sender"),
+          imageAsset("Inventory response", "drylite-message-receiver"),
+          videoAsset("Complete inventory flow", "drylite-inventory-showcase"),
+        ],
       },
       {
         eyebrow: { en: "03 / Enemy AI", fr: "03 / IA ennemie" },
@@ -197,7 +243,10 @@ export const projectPages: ProjectPageContent[] = [
           en: "The first enemy approaches the player, fires a laser at close range, pauses briefly, and resumes the chase. Behaviour Trees keep the current behaviour visible while leaving space for future tests.",
           fr: "Le premier ennemi s'approche du joueur, tire un laser à courte portée, attend brièvement puis reprend sa poursuite. Les Behaviour Trees rendent le comportement actuel lisible tout en laissant de la place aux tests futurs.",
         },
-        media: [{ label: "Enemy behavior", kind: "video" }, { label: "Enemy Behaviour Tree", kind: "blueprint" }],
+        media: [
+          videoAsset("Enemy behavior", "drylite-enemy-showcase"),
+          imageAsset("Enemy Behaviour Tree", "drylite-behaviour-tree"),
+        ],
       },
       {
         eyebrow: { en: "04 / Attachments", fr: "04 / Attaches" },
@@ -206,7 +255,7 @@ export const projectPages: ProjectPageContent[] = [
           en: "I helped design a system that turns enemy parts into memorable weapon attachments while preserving their original visual identity. One concept uses a mechanical hand to hold the rifle with an extra arm.",
           fr: "J'ai participé au design d'un système qui transforme des parties d'ennemis en attaches mémorables tout en conservant leur identité visuelle. Un concept utilise une main mécanique pour tenir le fusil avec un bras supplémentaire.",
         },
-        media: [{ label: "Attachment concepts", kind: "image" }, { label: "Mechanical hand concept", kind: "image" }],
+        media: [imageAsset("Attachment concepts", "drylite-attachments")],
       },
     ],
   },
@@ -237,7 +286,14 @@ export const projectPages: ProjectPageContent[] = [
           en: "For the Office of the Commissioner of Official Languages website, I redesigned the mobile header and navigation menu, then reworked a timeline navigation pattern to feel more engaging for a younger audience.",
           fr: "Pour le site du Commissariat aux langues officielles, j'ai refondu le header et le menu de navigation sur mobile, puis repensé une navigation de ligne du temps pour la rendre plus engageante auprès d'un public jeune.",
         },
-        media: [{ label: "Mobile header — before", kind: "image" }, { label: "Mobile header — after", kind: "image" }, { label: "Mobile navigation — before", kind: "image" }, { label: "Mobile navigation — after", kind: "image" }, { label: "Timeline navigation — before", kind: "image" }, { label: "Timeline navigation — after", kind: "image" }],
+        media: [
+          imageAsset("Mobile header — before", "graphic-clo-ocol-header-avant"),
+          imageAsset("Mobile header — after", "graphic-clo-ocol-header-apres"),
+          imageAsset("Mobile navigation — before", "graphic-clo-ocol-nav-avant"),
+          imageAsset("Mobile navigation — after", "graphic-clo-ocol-nav-apres"),
+          imageAsset("Timeline navigation — before", "graphic-clo-ocol-chrono-avant"),
+          imageAsset("Timeline navigation — after", "graphic-clo-ocol-chrono-apres"),
+        ],
       },
       {
         eyebrow: { en: "02 / Communication", fr: "02 / Communication" },
@@ -246,7 +302,7 @@ export const projectPages: ProjectPageContent[] = [
           en: "I created a board-game sell sheet with a clear hierarchy and a concise visual rhythm, designed to communicate the game's value quickly and effectively.",
           fr: "J'ai réalisé une feuille de vente pour un jeu de société avec une hiérarchie claire et un rythme visuel concis, afin de communiquer rapidement et efficacement la valeur du jeu.",
         },
-        media: [{ label: "Sell sheet", kind: "image" }],
+        media: [imageAsset("Sell sheet", "graphic-sell-sheet")],
       },
     ],
   },
