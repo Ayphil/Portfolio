@@ -366,15 +366,17 @@ button.case-study-media-open-label:hover, button.case-study-media-open-label:foc
 .approach-row { border-top: calc(1px * var(--ui-scale)) solid rgba(241, 237, 228, .22); display: grid; gap: calc(18px * var(--ui-scale)); grid-template-columns: calc(130px * var(--ui-scale)) 1fr; margin-top: calc(50px * var(--ui-scale)); padding-top: calc(17px * var(--ui-scale)); }
 .approach-label { color: var(--acid); font-size: calc(10px * var(--ui-scale)); font-weight: 800; letter-spacing: .08em; text-transform: uppercase; }
 .approach-text { color: var(--paper); font-family: var(--display); font-size: calc(19px * var(--ui-scale)); letter-spacing: -.03em; }
-.about-visual { aspect-ratio: 1; border: calc(1px * var(--ui-scale)) solid rgba(241, 237, 228, .2); min-width: 0; overflow: hidden; position: relative; }
-.about-visual::before { background: var(--orange); content: ""; height: 160%; left: 46%; position: absolute; top: -30%; transform: rotate(45deg); width: calc(10px * var(--ui-scale)); }
+.about-visual { aspect-ratio: 4 / 5; border: calc(1px * var(--ui-scale)) solid rgba(241, 237, 228, .2); min-width: 0; overflow: hidden; position: relative; }
+.about-portrait { display: block; height: 100%; object-fit: cover; width: 100%; }
+.about-visual-overlay { inset: 0; pointer-events: none; position: absolute; }
+.about-visual-overlay::before { background: var(--orange); content: ""; height: 160%; left: 46%; opacity: .72; position: absolute; top: -30%; transform: rotate(45deg); width: calc(8px * var(--ui-scale)); }
 .about-visual-ring { border: calc(1px * var(--ui-scale)) solid var(--acid); border-radius: 50%; position: absolute; }
 .ring-a { height: 65%; left: 20%; top: 15%; width: 65%; }
 .ring-b { border-color: var(--orange); height: 38%; left: 33%; top: 29%; width: 38%; }
 .about-cross { background: var(--paper); height: calc(9px * var(--ui-scale)); position: absolute; transform: rotate(-45deg); width: 39%; }
 .cross-a { left: -9%; top: 40%; }
 .cross-b { bottom: 28%; right: -9%; transform: rotate(-45deg); }
-.about-visual span { bottom: calc(14px * var(--ui-scale)); color: var(--paper); font-family: monospace; font-size: calc(9px * var(--ui-scale)); letter-spacing: .1em; line-height: 1.35; position: absolute; right: calc(16px * var(--ui-scale)); text-align: right; }
+.about-visual-overlay span { bottom: calc(14px * var(--ui-scale)); color: var(--paper); font-family: monospace; font-size: calc(9px * var(--ui-scale)); letter-spacing: .1em; line-height: 1.35; position: absolute; right: calc(16px * var(--ui-scale)); text-align: right; text-shadow: 0 1px 8px rgba(23, 21, 19, .75); }
 
 .contact-section { background: var(--orange); color: var(--ink); padding-bottom: calc(29px * var(--ui-scale)); padding-top: calc(42px * var(--ui-scale)); }
 .contact-topline, .footer-bottom { align-items: center; display: flex; justify-content: space-between; }
