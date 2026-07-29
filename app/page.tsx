@@ -698,10 +698,9 @@ export default function Home() {
       </section>
       </div>
 
-      <section className="work-section section-wrap" id="work" aria-labelledby="work-title">
+      <section className="work-section section-wrap" id="work" aria-label={t.all}>
         <div className="section-intro">
-          <p className="eyebrow"><span>01</span>{t.selectedKicker}</p>
-          <div className="work-heading-grid"><h2 id="work-title">{t.selectedTitle.split("\n").map((line) => <span key={line}>{line}</span>)}</h2><p>{t.selectedBody}</p></div>
+          <p className="eyebrow"><span>01</span></p>
         </div>
 
         <div className="filter-panel" aria-label={t.filterBy}>
@@ -732,7 +731,6 @@ export default function Home() {
         <div className="about-copy"><p className="eyebrow">{t.aboutKicker}</p><h2 id="about-title">{t.aboutTitle.split("\n").map((line) => <span key={line}>{line}</span>)}</h2><p className="about-body">{t.aboutBody}</p><div className="about-facts" aria-label={t.background}>{t.backgroundItems.map((item) => <div className="about-fact" key={item.label}><span>{item.label}</span><strong>{item.value}</strong></div>)}</div><div className="about-links"><a href="https://store.steampowered.com/app/3661570/Minimal_RPG/" target="_blank" rel="noreferrer">Minimal RPG / Steam <span>↗</span></a><a href="https://www.linkedin.com/in/emmanuelcyr/" target="_blank" rel="noreferrer">{t.linkedin} <span>↗</span></a><a href={withBasePath("/CV_Emmanuel_Cyr.pdf")} target="_blank" rel="noreferrer">{t.cv} <span>↗</span></a></div><div className="approach-row"><span className="approach-label">{t.approach}</span><span className="approach-text">{t.approachBody}</span></div></div>
         <div className="about-visual">
           <img className="about-portrait" src={withBasePath("/contact-headshot.jpg")} alt="Portrait of Emmanuel Cyr" />
-          <div className="about-visual-overlay" aria-hidden="true"><div className="about-visual-ring ring-a" /><div className="about-visual-ring ring-b" /><div className="about-cross cross-a" /><div className="about-cross cross-b" /><span>ITERATE<br />WITH INTENT</span></div>
         </div>
       </section>
 
