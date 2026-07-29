@@ -65,7 +65,7 @@ export type ProjectPageContent = {
   sections: ProjectPageSection[];
 };
 
-export const projectPages: ProjectPageContent[] = [
+const projectPageEntries: ProjectPageContent[] = [
   {
     number: "01",
     slug: "super-maiden-riot",
@@ -136,7 +136,7 @@ export const projectPages: ProjectPageContent[] = [
     ],
   },
   {
-    number: "02",
+    number: "03",
     slug: "think-outside-the-disk",
     title: { en: "Think Outside the Disk", fr: "Think Outside the Disk" },
     subtitle: { en: "Perspective-shifting prototype / 72 hours", fr: "Prototype à changement de perspective / 72 heures" },
@@ -193,7 +193,7 @@ export const projectPages: ProjectPageContent[] = [
     ],
   },
   {
-    number: "03",
+    number: "04",
     slug: "drylite",
     title: { en: "Drylite", fr: "Drylite" },
     subtitle: { en: "Weapon systems prototype / in progress", fr: "Prototype de systèmes d'armes / en cours" },
@@ -262,7 +262,7 @@ export const projectPages: ProjectPageContent[] = [
     ],
   },
   {
-    number: "04",
+    number: "05",
     slug: "graphic-design-projects",
     title: { en: "Graphic Design Projects", fr: "Projets de design graphique" },
     subtitle: { en: "UX and communication design", fr: "Design UX et communication" },
@@ -309,7 +309,7 @@ export const projectPages: ProjectPageContent[] = [
     ],
   },
   {
-    number: "05",
+    number: "02",
     slug: "minimal-rpg",
     title: { en: "Minimal RPG", fr: "Minimal RPG" },
     subtitle: { en: "Solo RPG / 15 months", fr: "RPG en solo / 15 mois" },
@@ -509,6 +509,19 @@ export const projectPages: ProjectPageContent[] = [
     ],
   },
 ];
+
+export const projectOrder = [
+  "super-maiden-riot",
+  "minimal-rpg",
+  "think-outside-the-disk",
+  "drylite",
+  "graphic-design-projects",
+] as const;
+
+export const projectPages: ProjectPageContent[] = projectOrder.flatMap((slug) => {
+  const project = projectPageEntries.find((entry) => entry.slug === slug);
+  return project ? [project] : [];
+});
 
 export function getProjectPage(slug: string) {
   return projectPages.find((project) => project.slug === slug);

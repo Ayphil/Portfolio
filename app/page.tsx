@@ -3,7 +3,7 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import type { MouseEvent as ReactMouseEvent } from "react";
 import { useLanguage } from "./language";
-import { getProjectPage } from "./project-pages";
+import { getProjectPage, projectOrder } from "./project-pages";
 import type { ProjectMedia } from "./project-pages";
 
 type Engine = "Unreal Engine 5" | "Unity" | "Figma";
@@ -106,7 +106,7 @@ const projects: Project[] = [
     ],
   },
   {
-    number: "02",
+    number: "03",
     slug: "think-outside-the-disk",
     title: { en: "Think Outside the Disk", fr: "Think Outside the Disk" },
     subtitle: { en: "Perspective-shifting prototype / 72 hours", fr: "Prototype à changement de perspective / 72 heures" },
@@ -159,7 +159,7 @@ const projects: Project[] = [
     ],
   },
   {
-    number: "03",
+    number: "04",
     slug: "drylite",
     title: { en: "Drylite", fr: "Drylite" },
     subtitle: { en: "Weapon systems prototype / in progress", fr: "Prototype de systèmes d'armes / en cours" },
@@ -221,7 +221,7 @@ const projects: Project[] = [
     ],
   },
   {
-    number: "04",
+    number: "05",
     slug: "graphic-design-projects",
     title: { en: "Graphic Design Projects", fr: "Projets de design graphique" },
     subtitle: { en: "UX and communication design", fr: "Design UX et communication" },
@@ -265,7 +265,7 @@ const projects: Project[] = [
     ],
   },
   {
-    number: "05",
+    number: "02",
     slug: "minimal-rpg",
     title: { en: "Minimal RPG", fr: "Minimal RPG" },
     subtitle: { en: "Solo RPG / 15 months", fr: "RPG en solo / 15 mois" },
@@ -418,6 +418,8 @@ const filterGroups = {
   engine: ["Unreal Engine 5", "Unity", "Figma"] as Engine[],
 };
 
+const projectOrderIndex = new Map<string, number>(projectOrder.map((slug, index) => [slug, index]));
+
 const withBasePath = (path: string) => `/Portfolio${path}`;
 
 const isRemoteMedia = (path: string) => /^https?:\/\//i.test(path);
@@ -427,6 +429,8 @@ type HoverMediaItem = { src: string; poster?: string; kind: "video" | "image" };
 
 /** Collect the real (src-backed) preview media for a project, in reading order, for the hover reel. */
 function collectHoverMedia(slug: string): HoverMediaItem[] {
+  if (slug === "drylite" || slug === "graphic-design-projects") return [];
+
   const page = getProjectPage(slug);
   if (!page) return [];
 
@@ -455,11 +459,6 @@ function collectHoverMedia(slug: string): HoverMediaItem[] {
 function ProjectHoverReel({ items, active }: { items: HoverMediaItem[]; active: boolean }) {
   const [index, setIndex] = useState(0);
   const videoRefs = useRef<(HTMLVideoElement | null)[]>([]);
-
-  // Restart from the first slide whenever the hover ends so the next hover is fresh.
-  useEffect(() => {
-    if (!active) setIndex(0);
-  }, [active]);
 
   // Auto-advance through the media while hovered (respects reduced-motion).
   useEffect(() => {
@@ -541,7 +540,7 @@ function ProjectVisual({ project, language }: { project: Project; language: "en"
         <div className="project-no">{project.number}</div>
         {!cover?.src && <div className="project-mark">{project.mark}</div>}
         <div className="project-visual-detail">{project.engine} / {project.year}</div>
-        {items.length > 0 && <ProjectHoverReel items={items} active={active} />}
+        {items.length > 0 && <ProjectHoverReel key={active ? "active" : "inactive"} items={items} active={active} />}
         <span className="project-open">↗</span>
       </div>
     </a>
@@ -607,11 +606,13 @@ export default function Home() {
   };
 
   const filteredProjects = useMemo(() => {
-    return projects.filter((project) => {
-      const contributionMatch = activeContributions.every((filter) => project.contributions.includes(filter));
-      const engineMatch = activeEngines.length === 0 || activeEngines.includes(project.engine);
-      return contributionMatch && engineMatch;
-    });
+    return projects
+      .filter((project) => {
+        const contributionMatch = activeContributions.every((filter) => project.contributions.includes(filter));
+        const engineMatch = activeEngines.length === 0 || activeEngines.includes(project.engine);
+        return contributionMatch && engineMatch;
+      })
+      .sort((a, b) => (projectOrderIndex.get(a.slug) ?? Number.POSITIVE_INFINITY) - (projectOrderIndex.get(b.slug) ?? Number.POSITIVE_INFINITY));
   }, [activeContributions, activeEngines]);
 
   const toggleContributionFilter = (filter: Contribution) => {

@@ -4,7 +4,7 @@ import Link from "next/link";
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import type { MouseEvent as ReactMouseEvent } from "react";
 import type { ProjectMedia, ProjectPageContent, ProjectPageSection } from "./project-pages";
-import { projectPages } from "./project-pages";
+import { projectOrder } from "./project-pages";
 import type { Language } from "./language";
 import { useLanguage } from "./language";
 
@@ -175,7 +175,7 @@ function SectionBody({ section, language, t, onOpen, onAnchor }: { section: Proj
 export default function ProjectCaseStudy({ project }: { project: ProjectPageContent }) {
   const [language, setLanguage] = useLanguage();
   const t = copy[language];
-  const order = useMemo(() => projectPages.map((entry) => entry.slug), []);
+  const order = useMemo(() => [...projectOrder], []);
   const currentIndex = useMemo(() => Math.max(0, order.indexOf(project.slug)), [order, project.slug]);
   const previous = order[(currentIndex + order.length - 1) % order.length];
   const next = order[(currentIndex + 1) % order.length];
