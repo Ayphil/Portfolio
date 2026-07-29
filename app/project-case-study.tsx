@@ -230,7 +230,7 @@ export default function ProjectCaseStudy({ project }: { project: ProjectPageCont
       <article className="case-study-content">
         <div className="case-study-breadcrumb"><a href={withBasePath("/#work")}>{t.back}</a><span>↗</span><span>{project.number} / {project.title[language]}</span></div>
 
-        <section className="case-study-hero" aria-labelledby="case-study-title">
+        <section className={`case-study-hero${project.cover?.src ? "" : " no-art"}`} aria-labelledby="case-study-title">
           <div className="case-study-hero-copy">
             <p className="eyebrow"><span>{project.number}</span>{t.project}</p>
             <p className="case-study-kicker">{project.subtitle[language]}</p>
@@ -238,11 +238,13 @@ export default function ProjectCaseStudy({ project }: { project: ProjectPageCont
             <p className="case-study-intro">{project.intro[language]}</p>
             {project.link && <a className="case-study-cta" href={project.link} target="_blank" rel="noreferrer"><span>{t.visit}</span><span>↗</span></a>}
           </div>
-          <div className={`case-study-art project-${project.tone}`} aria-label={`${project.title[language]} visual placeholder`} role="img">
-            <span className="case-study-art-index">{project.number} / {project.year}</span>
-            <span className="case-study-art-mark">{project.mark}</span>
-            <span className="case-study-art-caption">{project.engine}<br />{project.status[language]}</span>
-          </div>
+          {project.cover?.src && (
+            <div className={`case-study-art case-study-art-cover project-${project.tone}`} aria-label={`${project.title[language]} cover`} role="img">
+              <img className="case-study-cover" src={resolveMediaUrl(project.cover.src)} alt="" />
+              <span className="case-study-art-index">{project.number} / {project.year}</span>
+              <span className="case-study-art-caption">{project.engine}<br />{project.status[language]}</span>
+            </div>
+          )}
         </section>
 
         <section className="case-study-meta" aria-label={t.facts}>
