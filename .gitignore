@@ -40,3 +40,8 @@ next-env.d.ts
 /.wrangler/
 /outputs/
 /work/
+
+# local media tooling and deployment archives
+/.media-tools/
+/.media-work/
+/.site-deploy-*.tar.gz
