@@ -232,7 +232,6 @@ export default function ProjectCaseStudy({ project }: { project: ProjectPageCont
 
         <section className={`case-study-hero${project.cover?.src ? "" : " no-art"}`} aria-labelledby="case-study-title">
           <div className="case-study-hero-copy">
-            <p className="eyebrow"><span>{project.number}</span>{t.project}</p>
             <p className="case-study-kicker">{project.subtitle[language]}</p>
             <h1 id="case-study-title">{project.title[language]}</h1>
             <p className="case-study-intro">{project.intro[language]}</p>
