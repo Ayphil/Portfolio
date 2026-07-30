@@ -352,18 +352,17 @@ const copy = {
     background: "Background",
     backgroundItems: [
       { label: "Education", value: "B.A. in video game creation, design concentration — UQAT / 2025–present" },
-      { label: "Web and content", value: "Webmaster assistant — Office of the Commissioner of Official Languages / May 2024–June 2025" },
       { label: "Published work", value: "Minimal RPG — Steam / October 2024–present" },
       { label: "Recognition", value: "Ubisoft Game Lab — Best Game Design; three additional nominations / 2026" },
       { label: "Languages", value: "French first language / English bilingual" },
     ],
     approach: "My approach",
-    approachBody: "Observe → simplify → test → make it sing.",
+    approachBody: "Understand the problem → prototype → restart.",
     availability: "Available for select collaborations",
-    contactTitle: "Have a world\nin mind?",
-    contactBody: "Tell me what you're making. I'd love to hear the messy first version.",
+    contactTitle: "Wan to work with me?",
+    contactBody: "Tell me what you're making. I'd love to hear about it!",
     contactCta: "Start a conversation",
-    footer: "Game design, systems, and the good kind of impossible.",
+    footer: "Technical Game Design, UX and Systems.",
     linkedin: "LinkedIn",
     cv: "View CV",
     backToTop: "Back to top ↑",
@@ -395,18 +394,17 @@ const copy = {
     background: "Parcours",
     backgroundItems: [
       { label: "Éducation", value: "Baccalauréat en création de jeux vidéo, concentration Design — UQAT / 2025–aujourd'hui" },
-      { label: "Web et contenu", value: "Assistant au webmestre — Commissariat aux langues officielles / mai 2024–juin 2025" },
       { label: "Projet publié", value: "Minimal RPG — Steam / octobre 2024–aujourd'hui" },
       { label: "Reconnaissance", value: "Ubisoft Game Lab — Meilleur Game Design; trois autres nominations / 2026" },
       { label: "Langues", value: "Français langue première / anglais bilingue" },
     ],
     approach: "Ma méthode",
-    approachBody: "Observer → simplifier → tester → faire chanter.",
+    approachBody: "Comprendre le problème → prototyper → recommencer.",
     availability: "Disponible pour quelques collaborations",
-    contactTitle: "Un monde\nen tête?",
-    contactBody: "Parlez-moi de ce que vous créez. J'aimerais voir la première version, même brouillonne.",
+    contactTitle: "Envie de travailler avec moi?",
+    contactBody: "Parlez-moi de ce que vous créez. J'aimerais en entendre parler!",
     contactCta: "Ouvrir la conversation",
-    footer: "Game design, systèmes et impossibilités bien choisies.",
+    footer: "Design de jeux technique, UX et systèmes.",
     linkedin: "LinkedIn",
     cv: "Voir le CV",
     backToTop: "Retour en haut ↑",
@@ -700,7 +698,7 @@ export default function Home() {
 
       <section className="work-section section-wrap" id="work" aria-label={t.all}>
         <div className="section-intro">
-          <p className="eyebrow"><span>01</span></p>
+          <p className="eyebrow"><span>01 - {language === "en" ? "Projects" : "Projets"}</span></p>
         </div>
 
         <div className="filter-panel" aria-label={t.filterBy}>
@@ -716,7 +714,7 @@ export default function Home() {
           {filteredProjects.map((project) => (
             <article className="project-card" key={project.slug} id={`project-${project.slug}`}>
               <ProjectVisual project={project} language={language} />
-              <div className="project-info"><div><p className="project-kicker">{project.subtitle[language]}</p><a className="project-title-link" href={withBasePath(`/projects/${project.slug}`)}><h3>{project.title[language]}</h3></a>{project.slug !== "minimal-rpg" && <span className="project-progress">{t.pageInProgress}</span>}</div><span className="project-year">{project.year}</span></div>
+              <div className="project-info"><div><p className="project-kicker">{project.subtitle[language]}</p><a className="project-title-link" href={withBasePath(`/projects/${project.slug}`)}><h3>{project.title[language]}</h3></a>{project.slug === "super-maiden-riot" && <span className="project-progress">{t.pageInProgress}</span>}</div><span className="project-year">{project.year}</span></div>
               <p className="project-description">{project.description[language]}</p>
               <div className="project-tags">{project.contributions.map((contribution) => <span key={contribution}>{t.contributionLabels[contribution]}</span>)}<span className="engine-tag">{project.engine}</span></div>
               <div className="project-facts">{project.facts[language].map((fact) => <span key={fact}>{fact}</span>)}</div>

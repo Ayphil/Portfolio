@@ -61,7 +61,7 @@ button { cursor: pointer; }
 .hero-section { display: block; height: 100%; margin: 0; max-width: none; min-height: 0; padding: 0; position: relative; width: 100%; }
 .hero-copy { left: 50%; max-width: calc(720px * var(--ui-scale)); padding: 0 calc(24px * var(--ui-scale)); position: absolute; text-align: center; top: 50%; transform: translate(-50%, -50%); width: min(90vw, calc(720px * var(--ui-scale))); z-index: 3; }
 .hero-copy h1 { color: var(--paper); margin-left: auto; margin-right: auto; text-shadow: 0 calc(3px * var(--ui-scale)) calc(25px * var(--ui-scale)) rgba(0, 0, 0, .32); }
-.hero-copy h1 span { background: var(--ink); display: table; margin-left: auto; margin-right: auto; padding: .04em .13em .01em; position: relative; text-shadow: none; transform: rotate(-1.5deg); box-shadow: calc(4px * var(--ui-scale)) calc(4px * var(--ui-scale)) 0 var(--acid); }
+.hero-copy h1 span { background: var(--ink); display: table; margin-left: auto; margin-right: auto; padding: .04em .06em .01em; position: relative; text-shadow: none; transform: rotate(-1.5deg); box-shadow: calc(4px * var(--ui-scale)) calc(4px * var(--ui-scale)) 0 var(--acid); }
 .hero-copy .hero-body { background: rgba(23, 21, 19, .78); color: #c8c2b7; display: table; font-size: clamp(calc(11px * var(--ui-scale)), 1.25vw, calc(16px * var(--ui-scale))); font-weight: 700; letter-spacing: .12em; line-height: 1.45; margin-left: auto; margin-right: auto; max-width: calc(560px * var(--ui-scale)); padding: calc(8px * var(--ui-scale)) calc(12px * var(--ui-scale)); text-transform: uppercase; }
 .hero-copy .text-link { border-color: var(--paper); color: var(--paper); }
 .eyebrow { align-items: center; color: var(--muted); display: flex; font-size: calc(10px * var(--ui-scale)); font-weight: 800; gap: calc(15px * var(--ui-scale)); letter-spacing: .1em; margin: 0 0 calc(32px * var(--ui-scale)); text-transform: uppercase; }
@@ -87,7 +87,7 @@ h1 span:nth-child(2) { color: var(--orange); }
 
 .work-section { border-top: calc(1px * var(--ui-scale)) solid var(--line); margin-top: 0; padding-bottom: calc(160px * var(--ui-scale)); padding-top: calc(120px * var(--ui-scale)); }
 .section-intro { margin-bottom: calc(18px * var(--ui-scale)); }
-.section-intro .eyebrow { margin-bottom: 0; }
+.section-intro .eyebrow { margin-bottom: 0; margin-top:-85px;}
 h2 { font-size: clamp(calc(51px * var(--ui-scale)), 7vw, calc(103px * var(--ui-scale))); font-weight: 800; margin-bottom: 0; }
 .about-copy h2 span:nth-child(2) { color: var(--orange); }
 .filter-panel { align-items: stretch; border-bottom: calc(1px * var(--ui-scale)) solid var(--line); border-top: calc(1px * var(--ui-scale)) solid var(--line); display: grid; grid-template-columns: 1.1fr 3fr auto; margin-bottom: calc(39px * var(--ui-scale)); min-height: calc(87px * var(--ui-scale)); }
@@ -336,7 +336,8 @@ button.case-study-media-open-label:hover, button.case-study-media-open-label:foc
 .approach-row { border-top: calc(1px * var(--ui-scale)) solid rgba(241, 237, 228, .22); display: grid; gap: calc(18px * var(--ui-scale)); grid-template-columns: calc(130px * var(--ui-scale)) 1fr; margin-top: calc(50px * var(--ui-scale)); padding-top: calc(17px * var(--ui-scale)); }
 .approach-label { color: var(--acid); font-size: calc(10px * var(--ui-scale)); font-weight: 800; letter-spacing: .08em; text-transform: uppercase; }
 .approach-text { color: var(--paper); font-family: var(--display); font-size: calc(19px * var(--ui-scale)); letter-spacing: -.03em; }
-.about-visual { aspect-ratio: 4 / 5; border: calc(1px * var(--ui-scale)) solid rgba(241, 237, 228, .2); min-width: 0; overflow: hidden; position: relative; }
+.about-visual { aspect-ratio: 4 / 5; background: var(--ink); border: calc(2px * var(--ui-scale)) solid var(--paper); box-shadow: calc(9px * var(--ui-scale)) calc(9px * var(--ui-scale)) 0 var(--acid); min-width: 0; overflow: hidden; padding: calc(7px * var(--ui-scale)); position: relative; transform: rotate(1deg); }
+.about-visual::after { border: calc(1px * var(--ui-scale)) solid rgba(241, 237, 228, .48); content: ""; inset: calc(14px * var(--ui-scale)); pointer-events: none; position: absolute; }
 .about-portrait { display: block; height: 100%; object-fit: cover; width: 100%; }
 
 .contact-section { background: var(--orange); color: var(--ink); padding-bottom: calc(29px * var(--ui-scale)); padding-top: calc(42px * var(--ui-scale)); }
