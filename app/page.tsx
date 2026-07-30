@@ -53,8 +53,8 @@ const projects: Project[] = [
       fr: "Un jeu de plateformes coopératif et symétrique autour de deux princesses, de trois boutons et d'habiletés immédiatement lisibles.",
     },
     facts: {
-      en: ["Released October 2025", "Best Game Design — Ubisoft GameLab 2026", "Best Prototype nominee"],
-      fr: ["Sorti en octobre 2025", "Meilleur Game Design — GameLab d'Ubisoft 2026", "Nomination — Meilleur Prototype"],
+      en: ["Released October 2026", "Best Game Design — Ubisoft GameLab 2026", "Best Prototype nominee"],
+      fr: ["Sorti en octobre 2026", "Meilleur Game Design — GameLab d'Ubisoft 2026", "Nomination — Meilleur Prototype"],
     },
     link: "https://humble-goats.itch.io/super-maiden-riot",
     sections: [
@@ -725,7 +725,10 @@ export default function Home() {
       </section>
 
       <section className="about-section section-wrap" id="about" aria-labelledby="about-title">
-        <div className="about-stamp"><span>02</span><span>ABOUT<br />THE<br />PRACTICE</span></div>
+        <div className="about-stamp">
+          <span>02</span>
+          <span>{language === "en" ? <>ABOUT<br />THE<br />PRACTICE</> : <>À PROPOS<br />DE LA<br />PRATIQUE</>}</span>
+        </div>
         <div className="about-copy"><p className="eyebrow">{t.aboutKicker}</p><h2 id="about-title">{t.aboutTitle.split("\n").map((line) => <span key={line}>{line}</span>)}</h2><p className="about-body">{t.aboutBody}</p><div className="about-facts" aria-label={t.background}>{t.backgroundItems.map((item) => <div className="about-fact" key={item.label}><span>{item.label}</span><strong>{item.value}</strong></div>)}</div><div className="about-links"><a href="https://store.steampowered.com/app/3661570/Minimal_RPG/" target="_blank" rel="noreferrer">Minimal RPG / Steam <span>↗</span></a><a href="https://www.linkedin.com/in/emmanuelcyr/" target="_blank" rel="noreferrer">{t.linkedin} <span>↗</span></a><a href={withBasePath("/CV_Emmanuel_Cyr.pdf")} target="_blank" rel="noreferrer">{t.cv} <span>↗</span></a></div><div className="approach-row"><span className="approach-label">{t.approach}</span><span className="approach-text">{t.approachBody}</span></div></div>
         <div className="about-visual">
           <img className="about-portrait" src={withBasePath("/contact-headshot.jpg")} alt="Portrait of Emmanuel Cyr" />

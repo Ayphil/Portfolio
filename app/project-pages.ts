@@ -71,7 +71,7 @@ const projectPageEntries: ProjectPageContent[] = [
     slug: "super-maiden-riot",
     title: { en: "Super Maiden Riot", fr: "Super Maiden Riot" },
     subtitle: { en: "Co-op platformer / 10 weeks", fr: "Jeu de plateformes coop / 10 semaines" },
-    year: "2025",
+    year: "2026",
     engine: "Unreal Engine 5",
     role: { en: "Systems / Tech design / UX", fr: "Systèmes / Design technique / UX" },
     status: { en: "Released", fr: "Sorti" },
@@ -83,8 +83,8 @@ const projectPageEntries: ProjectPageContent[] = [
       fr: "Un jeu de plateformes coopératif et symétrique autour de deux princesses, d'un schéma de contrôle limité à trois boutons et d'habiletés immédiatement lisibles.",
     },
     facts: {
-      en: ["Released October 2025", "Best Game Design — Ubisoft GameLab 2026", "Best Prototype nominee"],
-      fr: ["Sorti en octobre 2025", "Meilleur Game Design — GameLab d'Ubisoft 2026", "Nomination — Meilleur Prototype"],
+      en: ["Released in April 2026", "Best Game Design — Ubisoft GameLab 2026", "Best Prototype nominee"],
+      fr: ["Sorti en avril 2026", "Meilleur Game Design — GameLab d'Ubisoft 2026", "Nomination — Meilleur Prototype"],
     },
     link: "https://humble-goats.itch.io/super-maiden-riot",
     sections: [
