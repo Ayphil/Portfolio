@@ -102,8 +102,10 @@ const projectPageEntries: ProjectPageContent[] = [
         media: [
           videoAsset("Princess 1 — punch", "smr-p1-punch"),
           videoAsset("Princess 1 — dash", "smr-p1-dash"),
+          videoAsset("Princess 1 — partner interaction", "smr-p1-interaction"),
           videoAsset("Princess 2 — block break", "smr-p2-break"),
-          videoAsset("Princess 2 — jump", "smr-p2-jump"),
+          videoAsset("Princess 2 — partner interaction", "smr-p2-interaction"),
+          videoAsset("Princess 2 — rebound", "smr-p2-rebound"),
         ],
       },
       {
@@ -114,23 +116,21 @@ const projectPageEntries: ProjectPageContent[] = [
           fr: "Avec seulement A, B et la croix directionnelle, chaque invite et chaque transition de menu devait être utile. J'ai conçu le HUD, les menus de pause propres à chaque princesse, le flow du menu principal et les maquettes Figma associées.",
         },
         media: [
-          { label: "HUD", kind: "video" },
           videoAsset("Princess pause menus", "smr-pause-menu"),
-          videoAsset("Main menu flow", "smr-main-menu"),
-          { label: "Figma wireframes", kind: "image" },
+          videoAsset("Main menu flow", "smr-menu-flow"),
         ],
       },
       {
-        eyebrow: { en: "03 / Supporting systems", fr: "03 / Systèmes complémentaires" },
-        title: { en: "Making the moment feel good", fr: "Rendre le moment agréable" },
+        eyebrow: { en: "03 / Other mechanics", fr: "03 / Autres mécaniques" },
+        title: { en: "Animation and supporting systems", fr: "Animation et systèmes complémentaires" },
         body: {
           en: "I integrated most of the princess animations and built the score, level-transition, and character-specific subtitle systems. I also observed playtests to understand which interactions felt natural before committing them to Blueprints.",
           fr: "J'ai intégré la majorité des animations des princesses et développé les systèmes de score, de transition entre les niveaux et de sous-titres propres à chaque personnage. J'ai aussi observé des tests de jeu pour comprendre quelles interactions semblaient naturelles avant de les fixer dans les Blueprints.",
         },
         media: [
-          videoAsset("Princess 1 — partner interaction", "smr-p1-push"),
-          videoAsset("Princess 2 — hair bounce", "smr-p2-tramp"),
-          videoAsset("Character-specific subtitles", "smr-subtitles"),
+          imageAsset("Princess 1 Animation Blueprint", "smr-p1-animation-blueprint"),
+          imageAsset("Princess 2 Animation Blueprint", "smr-p2-animation-blueprint"),
+          videoAsset("Character-specific subtitles", "smr-subtitle"),
         ],
       },
     ],
