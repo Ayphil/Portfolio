@@ -33,6 +33,7 @@ test("renders the portfolio homepage", async () => {
   assert.match(html, /<title>Emmanuel Cyr — Game design portfolio<\/title>/i);
   assert.match(html, /Selected work/i);
   assert.match(html, /Emmanuel Cyr/i);
+  assert.doesNotMatch(html, /class="filter-panel"/i);
   assert.doesNotMatch(html, /private admin|account surface/i);
 });
 
@@ -48,6 +49,12 @@ test("renders every public project route", async () => {
   for (const route of routes) {
     const response = await render(route);
     assert.equal(response.status, 200, route);
+
+    if (route === "/projects/super-maiden-riot") {
+      const html = await response.text();
+      assert.match(html, /Princesse 1 — coup de poing/);
+      assert.match(html, /Sous-titres propres à chaque personnage/);
+    }
   }
 });
 

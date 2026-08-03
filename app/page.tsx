@@ -416,6 +416,9 @@ const filterGroups = {
   engine: ["Unreal Engine 5", "Unity", "Figma"] as Engine[],
 };
 
+// Keep the filter feature ready to restore without removing its state or behavior.
+const SHOW_PROJECT_FILTERS = false;
+
 const projectOrderIndex = new Map<string, number>(projectOrder.map((slug, index) => [slug, index]));
 
 const withBasePath = (path: string) => `/Portfolio${path}`;
@@ -701,14 +704,14 @@ export default function Home() {
           <p className="eyebrow"><span>01 - {language === "en" ? "Projects" : "Projets"}</span></p>
         </div>
 
-        <div className="filter-panel" aria-label={t.filterBy}>
+        {SHOW_PROJECT_FILTERS && <div className="filter-panel" aria-label={t.filterBy}>
           <div className="filter-summary"><span className="filter-label">{t.filterBy}</span><span className="filter-count">{String(filteredProjects.length).padStart(2, "0")} / {String(projects.length).padStart(2, "0")}</span></div>
           <div className="filter-groups">
             <div className="filter-group"><span className="filter-group-title">{t.contribution}</span><div className="filter-options">{filterGroups.contribution.map((filter) => <button type="button" key={filter} className={activeContributions.includes(filter) ? "filter-chip is-selected" : "filter-chip"} onClick={() => toggleContributionFilter(filter)} aria-pressed={activeContributions.includes(filter)}>{t.contributionLabels[filter]}</button>)}</div></div>
             <div className="filter-group"><span className="filter-group-title">{t.engine}</span><div className="filter-options">{filterGroups.engine.map((filter) => <button type="button" key={filter} className={activeEngines.includes(filter) ? "filter-chip is-selected" : "filter-chip"} onClick={() => toggleEngineFilter(filter)} aria-pressed={activeEngines.includes(filter)}>{filter}</button>)}</div></div>
           </div>
           <button className="clear-filters" type="button" onClick={clearFilters}><span>{t.clear}</span><span>×</span></button>
-        </div>
+        </div>}
 
         <div className="project-grid">
           {filteredProjects.map((project) => (

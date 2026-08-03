@@ -10,14 +10,14 @@ export type ProjectMedia = {
 
 const projectMediaPath = (filename: string) => `/media/minimal-rpg/${filename}`;
 
-const imageAsset = (label: string, stem: string): ProjectMedia => ({
+const imageAsset = (label: ProjectMedia["label"], stem: string): ProjectMedia => ({
   label,
   kind: "image",
   src: projectMediaPath(`${stem}-preview.webp`),
   fullSrc: projectMediaPath(`${stem}-full.webp`),
 });
 
-const videoAsset = (label: string, stem: string): ProjectMedia => ({
+const videoAsset = (label: ProjectMedia["label"], stem: string): ProjectMedia => ({
   label,
   kind: "video",
   src: projectMediaPath(`${stem}-preview.webm`),
@@ -100,12 +100,12 @@ const projectPageEntries: ProjectPageContent[] = [
           fr: ["Princesse 1 : coup de poing, ruée et interaction avec sa partenaire", "Princesse 2 : rebond sur les cheveux, bris de blocs et interaction avec sa partenaire"],
         },
         media: [
-          videoAsset("Princess 1 — punch", "smr-p1-punch"),
-          videoAsset("Princess 1 — dash", "smr-p1-dash"),
-          videoAsset("Princess 1 — partner interaction", "smr-p1-interaction"),
-          videoAsset("Princess 2 — block break", "smr-p2-break"),
-          videoAsset("Princess 2 — partner interaction", "smr-p2-interaction"),
-          videoAsset("Princess 2 — rebound", "smr-p2-rebound"),
+          videoAsset({ en: "Princess 1 — punch", fr: "Princesse 1 — coup de poing" }, "smr-p1-punch"),
+          videoAsset({ en: "Princess 1 — dash", fr: "Princesse 1 — ruée" }, "smr-p1-dash"),
+          videoAsset({ en: "Princess 1 — partner interaction", fr: "Princesse 1 — interaction avec la Princesse 2" }, "smr-p1-interaction"),
+          videoAsset({ en: "Princess 2 — block break", fr: "Princesse 2 — bris de blocs" }, "smr-p2-break"),
+          videoAsset({ en: "Princess 2 — partner interaction", fr: "Princesse 2 — interaction avec la Princesse 1" }, "smr-p2-interaction"),
+          videoAsset({ en: "Princess 2 — rebound", fr: "Princesse 2 — rebond" }, "smr-p2-rebound"),
         ],
       },
       {
@@ -116,8 +116,8 @@ const projectPageEntries: ProjectPageContent[] = [
           fr: "Avec seulement A, B et la croix directionnelle, chaque invite et chaque transition de menu devait être utile. J'ai conçu le HUD, les menus de pause propres à chaque princesse, le flow du menu principal et les maquettes Figma associées.",
         },
         media: [
-          videoAsset("Princess pause menus", "smr-pause-menu"),
-          videoAsset("Main menu flow", "smr-menu-flow"),
+          videoAsset({ en: "Princess pause menus", fr: "Menus de pause des princesses" }, "smr-pause-menu"),
+          videoAsset({ en: "Main menu flow", fr: "Navigation du menu principal" }, "smr-menu-flow"),
         ],
       },
       {
@@ -128,9 +128,9 @@ const projectPageEntries: ProjectPageContent[] = [
           fr: "J'ai intégré la majorité des animations des princesses et développé les systèmes de score, de transition entre les niveaux et de sous-titres propres à chaque personnage. J'ai aussi observé des tests de jeu pour comprendre quelles interactions semblaient naturelles avant de les fixer dans les Blueprints.",
         },
         media: [
-          imageAsset("Princess 1 Animation Blueprint", "smr-p1-animation-blueprint"),
-          imageAsset("Princess 2 Animation Blueprint", "smr-p2-animation-blueprint"),
-          videoAsset("Character-specific subtitles", "smr-subtitle"),
+          imageAsset({ en: "Princess 1 Animation Blueprint", fr: "Blueprint d'animation de la Princesse 1" }, "smr-p1-animation-blueprint"),
+          imageAsset({ en: "Princess 2 Animation Blueprint", fr: "Blueprint d'animation de la Princesse 2" }, "smr-p2-animation-blueprint"),
+          videoAsset({ en: "Character-specific subtitles", fr: "Sous-titres propres à chaque personnage" }, "smr-subtitle"),
         ],
       },
     ],
