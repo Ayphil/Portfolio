@@ -344,7 +344,6 @@ const copy = {
     showing: "Showing",
     projects: "projects",
     all: "All work",
-    pageInProgress: "Page building in progress",
     aboutKicker: "A little context",
     aboutTitle: "About me.",
     aboutBody:
@@ -386,7 +385,6 @@ const copy = {
     showing: "Afficher",
     projects: "projets",
     all: "Tous les projets",
-    pageInProgress: "Page en construction",
     aboutKicker: "Un peu de contexte",
     aboutTitle: "À propos de moi.",
     aboutBody:
@@ -555,6 +553,7 @@ export default function Home() {
   const [isPlaying, setIsPlaying] = useState(true);
   const reelPlayerRef = useRef<HTMLVideoElement>(null);
   const t = copy[language];
+  const cvHref = withBasePath(language === "en" ? "/CV-2026-English.pdf" : "/CV_Emmanuel_Cyr.pdf");
 
   useEffect(() => {
     const video = reelPlayerRef.current;
@@ -656,7 +655,7 @@ export default function Home() {
           <a href="#work" onClick={handleSectionLink}>{t.nav.work}</a>
           <a href="#about" onClick={handleSectionLink}>{t.nav.about}</a>
           <a href="#contact" onClick={handleSectionLink}>{t.nav.contact}</a>
-          <a href={withBasePath("/CV_Emmanuel_Cyr.pdf")} target="_blank" rel="noreferrer">{t.nav.cv}</a>
+          <a href={cvHref} target="_blank" rel="noreferrer">{t.nav.cv}</a>
         </nav>
         <div className="header-tools">
           <button className="language-toggle" type="button" onClick={() => setLanguage((current) => current === "en" ? "fr" : "en")} aria-label="Switch language">
@@ -717,7 +716,7 @@ export default function Home() {
           {filteredProjects.map((project) => (
             <article className="project-card" key={project.slug} id={`project-${project.slug}`}>
               <ProjectVisual project={project} language={language} />
-              <div className="project-info"><div><p className="project-kicker">{project.subtitle[language]}</p><a className="project-title-link" href={withBasePath(`/projects/${project.slug}`)}><h3>{project.title[language]}</h3></a>{project.slug === "super-maiden-riot" && <span className="project-progress">{t.pageInProgress}</span>}</div><span className="project-year">{project.year}</span></div>
+              <div className="project-info"><div><p className="project-kicker">{project.subtitle[language]}</p><a className="project-title-link" href={withBasePath(`/projects/${project.slug}`)}><h3>{project.title[language]}</h3></a></div><span className="project-year">{project.year}</span></div>
               <p className="project-description">{project.description[language]}</p>
               <div className="project-tags">{project.contributions.map((contribution) => <span key={contribution}>{t.contributionLabels[contribution]}</span>)}<span className="engine-tag">{project.engine}</span></div>
               <div className="project-facts">{project.facts[language].map((fact) => <span key={fact}>{fact}</span>)}</div>
@@ -732,7 +731,7 @@ export default function Home() {
           <span>02</span>
           <span>{language === "en" ? <>ABOUT<br />THE<br />PRACTICE</> : <>À PROPOS<br />DE LA<br />PRATIQUE</>}</span>
         </div>
-        <div className="about-copy"><p className="eyebrow">{t.aboutKicker}</p><h2 id="about-title">{t.aboutTitle.split("\n").map((line) => <span key={line}>{line}</span>)}</h2><p className="about-body">{t.aboutBody}</p><div className="about-facts" aria-label={t.background}>{t.backgroundItems.map((item) => <div className="about-fact" key={item.label}><span>{item.label}</span><strong>{item.value}</strong></div>)}</div><div className="about-links"><a href="https://store.steampowered.com/app/3661570/Minimal_RPG/" target="_blank" rel="noreferrer">Minimal RPG / Steam <span>↗</span></a><a href="https://www.linkedin.com/in/emmanuelcyr/" target="_blank" rel="noreferrer">{t.linkedin} <span>↗</span></a><a href={withBasePath("/CV_Emmanuel_Cyr.pdf")} target="_blank" rel="noreferrer">{t.cv} <span>↗</span></a></div><div className="approach-row"><span className="approach-label">{t.approach}</span><span className="approach-text">{t.approachBody}</span></div></div>
+        <div className="about-copy"><p className="eyebrow">{t.aboutKicker}</p><h2 id="about-title">{t.aboutTitle.split("\n").map((line) => <span key={line}>{line}</span>)}</h2><p className="about-body">{t.aboutBody}</p><div className="about-facts" aria-label={t.background}>{t.backgroundItems.map((item) => <div className="about-fact" key={item.label}><span>{item.label}</span><strong>{item.value}</strong></div>)}</div><div className="about-links"><a href="https://store.steampowered.com/app/3661570/Minimal_RPG/" target="_blank" rel="noreferrer">Minimal RPG / Steam <span>↗</span></a><a href="https://www.linkedin.com/in/emmanuelcyr/" target="_blank" rel="noreferrer">{t.linkedin} <span>↗</span></a><a href={cvHref} target="_blank" rel="noreferrer">{t.cv} <span>↗</span></a></div><div className="approach-row"><span className="approach-label">{t.approach}</span><span className="approach-text">{t.approachBody}</span></div></div>
         <div className="about-visual">
           <img className="about-portrait" src={withBasePath("/contact-headshot.jpg")} alt="Portrait of Emmanuel Cyr" />
         </div>
@@ -741,7 +740,7 @@ export default function Home() {
       <footer className="contact-section section-wrap" id="contact">
         <div className="contact-topline"><span className="eyebrow">03 / {t.availability}</span><span className="contact-index">2026—∞</span></div>
         <div className="contact-grid"><h2>{t.contactTitle.split("\n").map((line) => <span key={line}>{line}</span>)}</h2><div className="contact-copy"><p>{t.contactBody}</p><a className="contact-cta" href="mailto:emmanuel.cyr159@gmail.com"><span>{t.contactCta}</span><span className="contact-arrow">↗</span></a></div></div>
-        <div className="footer-bottom"><span>{t.footer}</span><div className="footer-links"><a href="mailto:emmanuel.cyr159@gmail.com">Email</a><a href="https://www.linkedin.com/in/emmanuelcyr/" target="_blank" rel="noreferrer">{t.linkedin}</a><a href={withBasePath("/CV_Emmanuel_Cyr.pdf")} target="_blank" rel="noreferrer">{t.cv}</a><a href="#reel" onClick={handleSectionLink}>{t.backToTop}</a></div></div>
+        <div className="footer-bottom"><span>{t.footer}</span><div className="footer-links"><a href="mailto:emmanuel.cyr159@gmail.com">Email</a><a href="https://www.linkedin.com/in/emmanuelcyr/" target="_blank" rel="noreferrer">{t.linkedin}</a><a href={cvHref} target="_blank" rel="noreferrer">{t.cv}</a><a href="#reel" onClick={handleSectionLink}>{t.backToTop}</a></div></div>
       </footer>
     </main>
   );

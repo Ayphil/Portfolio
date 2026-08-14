@@ -175,6 +175,7 @@ function SectionBody({ section, language, t, onOpen, onAnchor }: { section: Proj
 export default function ProjectCaseStudy({ project }: { project: ProjectPageContent }) {
   const [language, setLanguage] = useLanguage();
   const t = copy[language];
+  const cvHref = withBasePath(language === "en" ? "/CV-2026-English.pdf" : "/CV_Emmanuel_Cyr.pdf");
   const order = useMemo(() => [...projectOrder], []);
   const currentIndex = useMemo(() => Math.max(0, order.indexOf(project.slug)), [order, project.slug]);
   const previous = order[(currentIndex + order.length - 1) % order.length];
@@ -220,7 +221,7 @@ export default function ProjectCaseStudy({ project }: { project: ProjectPageCont
         <nav className="case-study-nav" aria-label={t.menu}>
           <a href={withBasePath("/#work")}>{t.back}</a>
           <a href={withBasePath("/#contact")}>Contact</a>
-          <a href={withBasePath("/CV_Emmanuel_Cyr.pdf")} target="_blank" rel="noreferrer">{t.cv}</a>
+          <a href={cvHref} target="_blank" rel="noreferrer">{t.cv}</a>
         </nav>
         <button className="language-toggle" type="button" onClick={() => setLanguage((current) => current === "en" ? "fr" : "en")} aria-label="Switch language">
           <span className={language === "en" ? "is-active" : ""}>EN</span><span className="language-divider">/</span><span className={language === "fr" ? "is-active" : ""}>FR</span>
