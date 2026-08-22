@@ -92,8 +92,8 @@ const projectPageEntries: ProjectPageContent[] = [
         eyebrow: { en: "01 / Core systems", fr: "01 / Systèmes centraux" },
         title: { en: "Abilities built for symmetry", fr: "Des habiletés pensées pour la symétrie" },
         body: {
-          en: "I fully implemented the abilities for both princesses and designed them to work as a readable pair. Each character has a movement ability, a way to break blocks, and a way to move the other princess — the same categories, expressed through different verbs.",
-          fr: "J'ai entièrement implémenté les habiletés des deux princesses et je les ai conçues comme une paire lisible. Chaque personnage possède une habileté de déplacement, une façon de briser les blocs et une façon de déplacer l'autre princesse — les mêmes catégories, exprimées par des verbes différents.",
+          en: "I fully implemented the abilities for both princesses and designed them to work as a readable pair. Each character has a movement ability, a way to break blocks, and a way to move the other princess.",
+          fr: "J'ai entièrement implémenté les habiletés des deux princesses et je les ai conçues comme une paire lisible. Chaque personnage possède une habileté de déplacement, une façon de briser les blocs et une façon de déplacer l'autre princesse.",
         },
         bullets: {
           en: ["Princess 1: punch, dash, and partner interaction", "Princess 2: hair bounce, block breaking, and partner interaction"],
