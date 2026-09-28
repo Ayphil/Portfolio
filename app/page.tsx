@@ -43,18 +43,18 @@ const projects: Project[] = [
     slug: "super-maiden-riot",
     title: { en: "Super Maiden Riot", fr: "Super Maiden Riot" },
     subtitle: { en: "Co-op platformer / 10 weeks", fr: "Jeu de plateformes coop / 10 semaines" },
-    year: "2025",
+    year: "2026",
     engine: "Unreal Engine 5",
     contributions: ["Systems", "Tech design", "UX"],
     tone: "maiden",
     mark: "SMR",
     description: {
-      en: "A symmetrical co-op platformer built around two princesses, three-button controls, and abilities that must feel instantly readable.",
-      fr: "Un jeu de plateformes coopératif et symétrique autour de deux princesses, de trois boutons et d'habiletés immédiatement lisibles.",
+      en: "A symmetrical co-op platformer with two princesses and only three buttons. Each ability had to be easy to understand at a glance.",
+      fr: "Un jeu de plateformes coopératif et symétrique avec deux princesses et seulement trois boutons. Chaque habileté devait se comprendre d'un coup d'œil.",
     },
     facts: {
-      en: ["Released October 2026", "Best Game Design — Ubisoft GameLab 2026", "Best Prototype nominee"],
-      fr: ["Sorti en octobre 2026", "Meilleur Game Design — GameLab d'Ubisoft 2026", "Nomination — Meilleur Prototype"],
+      en: ["Released April 2026", "Best Game Design — Ubisoft GameLab 2026", "Three other nominations, including Best Prototype"],
+      fr: ["Sorti en avril 2026", "Meilleur Game Design — GameLab d'Ubisoft 2026", "Trois autres nominations, dont Meilleur Prototype"],
     },
     link: "https://humble-goats.itch.io/super-maiden-riot",
     sections: [
@@ -116,8 +116,8 @@ const projects: Project[] = [
     tone: "disk",
     mark: "TOD",
     description: {
-      en: "A 72-hour prototype where changing perspective changes movement, camera language, and the way the world is solved.",
-      fr: "Un prototype réalisé en 72 heures où changer de perspective transforme le mouvement, la caméra et la façon de résoudre le monde.",
+      en: "A prototype made in 72 hours where the player can switch perspective, which changes the camera, how the character moves, and how each level is solved.",
+      fr: "Un prototype réalisé en 72 heures où le joueur peut changer de perspective, ce qui modifie la caméra, les déplacements du personnage et la façon de résoudre chaque niveau.",
     },
     facts: {
       en: ["Released October 2025", "Best Prototype — UQAT internal competition"],
@@ -162,15 +162,15 @@ const projects: Project[] = [
     number: "04",
     slug: "drylite",
     title: { en: "Drylite", fr: "Drylite" },
-    subtitle: { en: "Weapon systems prototype / in progress", fr: "Prototype de systèmes d'armes / en cours" },
+    subtitle: { en: "Weapon systems prototype / on hold", fr: "Prototype de systèmes d'armes / en pause" },
     year: "2026",
     engine: "Unreal Engine 5",
     contributions: ["Systems", "Tech design"],
     tone: "drylite",
     mark: "DRY",
     description: {
-      en: "A data-driven Unreal weapon prototype focused on configurable firearms, modular attachments, enemy AI, and a clean inventory flow.",
-      fr: "Un prototype d'armes Unreal piloté par les données, centré sur les fusils configurables, les attaches modulaires, l'IA ennemie et un flow d'inventaire clair.",
+      en: "An Unreal prototype built around configurable weapons, modular attachments, a basic enemy AI, and an inventory.",
+      fr: "Un prototype Unreal construit autour d'armes configurables, d'attaches modulaires, d'une IA ennemie simple et d'un inventaire.",
     },
     facts: {
       en: ["Started April 2026", "Project currently on hold"],
@@ -231,8 +231,8 @@ const projects: Project[] = [
     tone: "graphic",
     mark: "UX",
     description: {
-      en: "A small collection of interface redesigns and a board-game sell sheet, focused on clarity, hierarchy, and audience-appropriate tone.",
-      fr: "Une collection de refontes d'interfaces et une feuille de vente pour un jeu de société, centrée sur la clarté, la hiérarchie et le ton adapté au public.",
+      en: "Interface redesigns for a government website and a sell sheet for a board game.",
+      fr: "Des refontes d'interface pour un site gouvernemental et une feuille de vente pour un jeu de société.",
     },
     facts: {
       en: ["Office of the Commissioner of Official Languages", "Board-game sell sheet"],
@@ -268,19 +268,19 @@ const projects: Project[] = [
     number: "02",
     slug: "minimal-rpg",
     title: { en: "Minimal RPG", fr: "Minimal RPG" },
-    subtitle: { en: "Solo RPG / 15 months", fr: "RPG en solo / 15 mois" },
+    subtitle: { en: "Solo RPG / since 2024", fr: "RPG en solo / depuis 2024" },
     year: "2026",
     engine: "Unity",
     contributions: ["Solo dev", "Systems", "UX"],
     tone: "minimalrpg",
     mark: "MRP",
     description: {
-      en: "A solo project inspired by Nodebuster, extended with RPG-style progression and mechanics. I built the entire game and most of its art, from custom production tools all the way to the Steam launch.",
-      fr: "Un projet solo inspiré de Nodebuster, enrichi d'une progression et de mécaniques de type RPG. J'ai développé l'ensemble du jeu et la majorité de son art, des outils de production maison jusqu'au lancement sur Steam.",
+      en: "A solo project inspired by Nodebuster, with RPG-style progression and mechanics. I made the whole game and most of its art, from the production tools to the Steam demo.",
+      fr: "Un projet solo inspiré de Nodebuster, avec une progression et des mécaniques de type RPG. J'ai réalisé tout le jeu et la majorité de son art, des outils de production jusqu'à la démo sur Steam.",
     },
     facts: {
-      en: ["Solo project — 15 months", "Demo available on Steam", "Planned release Q1 2027"],
-      fr: ["Projet solo — 15 mois", "Démo disponible sur Steam", "Sortie prévue T1 2027"],
+      en: ["Solo project — since October 2024", "Demo available on Steam", "Planned release Q1 2027"],
+      fr: ["Projet solo — depuis octobre 2024", "Démo disponible sur Steam", "Sortie prévue T1 2027"],
     },
     link: "https://store.steampowered.com/app/3661570/Minimal_RPG/",
     sections: [
@@ -347,7 +347,7 @@ const copy = {
     aboutKicker: "A little context",
     aboutTitle: "About me.",
     aboutBody:
-      "I'm Emmanuel, a bilingual game design student based in Montréal. I move between player research, paper prototypes, systems tuning, and the technical conversations that get ideas into a playable shape. Outside of games, I spend time canot-camping, hiking, running, and camping.",
+      "I'm Emmanuel, a bilingual game design student based in Montréal. I work mostly on UX, systems, and technical design, from paper prototypes to Blueprints and code. Outside of games, I enjoy canoe camping, hiking, and running.",
     background: "Background",
     backgroundItems: [
       { label: "Education", value: "B.A. in video game creation, design concentration — UQAT / 2025–present" },
@@ -358,7 +358,7 @@ const copy = {
     approach: "My approach",
     approachBody: "Understand the problem → prototype → restart.",
     availability: "Available for select collaborations",
-    contactTitle: "Wan to work with me?",
+    contactTitle: "Want to work with me?",
     contactBody: "Tell me what you're making. I'd love to hear about it!",
     contactCta: "Start a conversation",
     footer: "Technical Game Design, UX and Systems.",
@@ -382,13 +382,13 @@ const copy = {
     contributionLabels: { UX: "UX", Systems: "Systèmes", "Tech design": "Design technique", "Solo dev": "Développement solo" },
     engine: "Outil / moteur",
     clear: "Tout effacer",
-    showing: "Afficher",
+    showing: "Affichage",
     projects: "projets",
     all: "Tous les projets",
     aboutKicker: "Un peu de contexte",
     aboutTitle: "À propos de moi.",
     aboutBody:
-      "Je m'appelle Emmanuel et j'étudie le design de jeux vidéo à l'UQAT. Je navigue entre la recherche joueur, les prototypes papier, l'équilibrage des systèmes et les conversations techniques qui donnent une forme jouable aux idées. En dehors des jeux, j'aime le canot-camping, la randonnée, la course et le camping.",
+      "Je m'appelle Emmanuel et j'étudie le design de jeux vidéo à l'UQAT. Je travaille surtout en UX, en systèmes et en design technique, du prototype papier jusqu'aux Blueprints et au code. En dehors des jeux, j'aime le canot-camping, la randonnée et la course.",
     background: "Parcours",
     backgroundItems: [
       { label: "Éducation", value: "Baccalauréat en création de jeux vidéo, concentration Design — UQAT / 2025–aujourd'hui" },

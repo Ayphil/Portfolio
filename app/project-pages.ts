@@ -79,21 +79,21 @@ const projectPageEntries: ProjectPageContent[] = [
     mark: "SMR",
     cover: imageAsset("Super Maiden Riot cover", "super-maiden-riot-cover"),
     intro: {
-      en: "A symmetrical co-op platformer built around two princesses, a restricted three-button control scheme, and abilities that need to read instantly.",
-      fr: "Un jeu de plateformes coopératif et symétrique autour de deux princesses, d'un schéma de contrôle limité à trois boutons et d'habiletés immédiatement lisibles.",
+      en: "A symmetrical co-op platformer with two princesses and only three buttons. Each ability had to be easy to understand at a glance.",
+      fr: "Un jeu de plateformes coopératif et symétrique avec deux princesses et seulement trois boutons. Chaque habileté devait se comprendre d'un coup d'œil.",
     },
     facts: {
-      en: ["Released in April 2026", "Best Game Design — Ubisoft GameLab 2026", "Best Prototype nominee"],
-      fr: ["Sorti en avril 2026", "Meilleur Game Design — GameLab d'Ubisoft 2026", "Nomination — Meilleur Prototype"],
+      en: ["Released in April 2026", "Best Game Design — Ubisoft GameLab 2026", "Three other nominations, including Best Prototype"],
+      fr: ["Sorti en avril 2026", "Meilleur Game Design — GameLab d'Ubisoft 2026", "Trois autres nominations, dont Meilleur Prototype"],
     },
     link: "https://humble-goats.itch.io/super-maiden-riot",
     sections: [
       {
         eyebrow: { en: "01 / Core systems", fr: "01 / Systèmes centraux" },
-        title: { en: "Abilities built for symmetry", fr: "Des habiletés pensées pour la symétrie" },
+        title: { en: "Princess abilities", fr: "Habiletés des princesses" },
         body: {
-          en: "I fully implemented the abilities for both princesses and designed them to work as a readable pair. Each character has a movement ability, a way to break blocks, and a way to move the other princess.",
-          fr: "J'ai entièrement implémenté les habiletés des deux princesses et je les ai conçues comme une paire lisible. Chaque personnage possède une habileté de déplacement, une façon de briser les blocs et une façon de déplacer l'autre princesse.",
+          en: "I implemented all the abilities for both princesses and made sure they worked well together. Each princess has a movement ability, a way to break blocks, and a way to move the other princess.",
+          fr: "J'ai implémenté toutes les habiletés des deux princesses et je me suis assuré qu'elles fonctionnent bien ensemble. Chaque princesse possède une habileté de déplacement, une façon de briser les blocs et une façon de déplacer l'autre princesse.",
         },
         bullets: {
           en: ["Princess 1: punch, dash, and partner interaction", "Princess 2: hair bounce, block breaking, and partner interaction"],
@@ -110,10 +110,10 @@ const projectPageEntries: ProjectPageContent[] = [
       },
       {
         eyebrow: { en: "02 / Interface", fr: "02 / Interface" },
-        title: { en: "Less input, more clarity", fr: "Moins d'entrées, plus de clarté" },
+        title: { en: "UI / UX", fr: "UI / UX" },
         body: {
-          en: "With only A, B, and the D-pad available, every prompt and menu transition had to carry its weight. I designed the HUD, the unique pause menus, the main-menu flow, and the supporting Figma wireframes.",
-          fr: "Avec seulement A, B et la croix directionnelle, chaque invite et chaque transition de menu devait être utile. J'ai conçu le HUD, les menus de pause propres à chaque princesse, le flow du menu principal et les maquettes Figma associées.",
+          en: "The game only uses A, B, and the D-pad, so menus and prompts had to stay simple. I designed the HUD, a pause menu for each princess, and the main menu flow, along with the Figma wireframes.",
+          fr: "Le jeu n'utilise que A, B et la croix directionnelle, donc les menus et les indications devaient rester simples. J'ai conçu le HUD, un menu de pause pour chaque princesse et le flow du menu principal, ainsi que les maquettes Figma.",
         },
         media: [
           videoAsset({ en: "Princess pause menus", fr: "Menus de pause des princesses" }, "smr-pause-menu"),
@@ -122,10 +122,10 @@ const projectPageEntries: ProjectPageContent[] = [
       },
       {
         eyebrow: { en: "03 / Other mechanics", fr: "03 / Autres mécaniques" },
-        title: { en: "Animation and supporting systems", fr: "Animation et systèmes complémentaires" },
+        title: { en: "Animation and other systems", fr: "Animation et autres systèmes" },
         body: {
-          en: "I integrated most of the princess animations and built the score, level-transition, and character-specific subtitle systems. I also observed playtests to understand which interactions felt natural before committing them to Blueprints.",
-          fr: "J'ai intégré la majorité des animations des princesses et développé les systèmes de score, de transition entre les niveaux et de sous-titres propres à chaque personnage. J'ai aussi observé des tests de jeu pour comprendre quelles interactions semblaient naturelles avant de les fixer dans les Blueprints.",
+          en: "I integrated most of the princess animations and built the score, level transition, and character-specific subtitle systems, mostly in Blueprints.",
+          fr: "J'ai intégré la majorité des animations des princesses et développé les systèmes de score, de transition entre les niveaux et de sous-titres propres à chaque personnage, principalement avec les Blueprints.",
         },
         media: [
           imageAsset({ en: "Princess 1 Animation Blueprint", fr: "Blueprint d'animation de la Princesse 1" }, "smr-p1-animation-blueprint"),
@@ -148,8 +148,8 @@ const projectPageEntries: ProjectPageContent[] = [
     mark: "TOD",
     cover: imageAsset("Think Outside the Disk cover", "think-outside-disk-thumbnail"),
     intro: {
-      en: "A 72-hour prototype where changing perspective changes movement, camera language, and the way the world is solved.",
-      fr: "Un prototype réalisé en 72 heures où changer de perspective transforme le mouvement, la caméra et la façon de résoudre le monde.",
+      en: "A prototype made in 72 hours where the player can switch perspective, which changes the camera, how the character moves, and how each level is solved.",
+      fr: "Un prototype réalisé en 72 heures où le joueur peut changer de perspective, ce qui modifie la caméra, les déplacements du personnage et la façon de résoudre chaque niveau.",
     },
     facts: {
       en: ["Released October 2025", "Best Prototype — UQAT internal competition"],
@@ -159,10 +159,10 @@ const projectPageEntries: ProjectPageContent[] = [
     sections: [
       {
         eyebrow: { en: "01 / Main ability", fr: "01 / Habileté principale" },
-        title: { en: "A shift you can feel", fr: "Un changement que l'on ressent" },
+        title: { en: "Perspective shift", fr: "Changement de perspective" },
         body: {
-          en: "I programmed the sequence that shifts the game from one perspective to another. That meant coordinating camera movement, changing the character's movement possibilities, and using sound and music as a second feedback channel.",
-          fr: "J'ai programmé la séquence qui fait passer le jeu d'une perspective à une autre. Il fallait coordonner le mouvement de caméra, modifier les possibilités de mouvement du personnage et utiliser le son et la musique comme second canal de feedback.",
+          en: "I programmed the sequence that switches the game from one perspective to the other. This included the camera movement, changes to what the character can do, and the sound and music feedback.",
+          fr: "J'ai programmé la séquence qui fait passer le jeu d'une perspective à l'autre. Cela comprenait le mouvement de caméra, les changements aux possibilités de mouvement du personnage et le feedback sonore et musical.",
         },
         media: [
           videoAsset("Perspective-shift sequence", "think-outside-disk-perspective-switch"),
@@ -171,10 +171,10 @@ const projectPageEntries: ProjectPageContent[] = [
       },
       {
         eyebrow: { en: "02 / Environments", fr: "02 / Environnements" },
-        title: { en: "The level reacts too", fr: "Le niveau réagit aussi" },
+        title: { en: "Level elements", fr: "Éléments de niveau" },
         body: {
-          en: "The environment had to make the perspective change useful rather than merely spectacular. I implemented spinning disks, the timed bomb that opens the next door, and moving platforms that establish a clear rhythm through each level.",
-          fr: "L'environnement devait rendre le changement de perspective utile plutôt que simplement spectaculaire. J'ai implémenté les disques rotatifs, la bombe à retardement qui ouvre la prochaine porte et les plateformes mobiles qui donnent un rythme clair à chaque niveau.",
+          en: "I also implemented the level elements that use the perspective change: spinning disks for harder jumps, a timed bomb that breaks the door and can reset the level, and platforms that move between two points.",
+          fr: "J'ai aussi implémenté les éléments de niveau qui utilisent le changement de perspective : des disques rotatifs pour des sauts plus difficiles, une bombe à retardement qui brise la porte et peut réinitialiser le niveau, et des plateformes qui se déplacent entre deux points.",
         },
         media: [
           videoAsset("Spinning disks", "think-outside-disk-climb-disk"),
@@ -184,10 +184,10 @@ const projectPageEntries: ProjectPageContent[] = [
       },
       {
         eyebrow: { en: "03 / Short analysis", fr: "03 / Courte analyse" },
-        title: { en: "Keeping a 3,000-metre camera move smooth", fr: "Garder fluide un mouvement de caméra de 3 000 mètres" },
+        title: { en: "Making the camera shift smooth", fr: "Un changement de caméra fluide" },
         body: {
-          en: "We used a highly compressed perspective camera rather than an orthographic camera to preserve the 3D feeling. During the shift, the camera moves back roughly 3,000 metres while zooming by the same amount, so the transition curves needed careful tuning to avoid a noticeable hitch.",
-          fr: "Nous avons choisi une caméra en perspective très écrasée plutôt qu'une caméra orthographique pour préserver l'effet 3D. Pendant le changement, la caméra recule d'environ 3 000 mètres tout en zoomant d'autant, ce qui demandait des courbes soigneusement réglées pour éviter une saccade.",
+          en: "We used a very compressed perspective camera instead of an orthographic one to keep a 3D look. During the shift, the camera moves back about 3,000 metres while zooming in by the same amount, so we had to tune the curves carefully to avoid a visible jump.",
+          fr: "Nous avons utilisé une caméra en perspective très écrasée plutôt qu'une caméra orthographique pour garder un rendu 3D. Pendant le changement, la caméra recule d'environ 3 000 mètres tout en zoomant d'autant, donc nous avons dû régler les courbes avec soin pour éviter une saccade.",
         },
       },
     ],
@@ -196,7 +196,7 @@ const projectPageEntries: ProjectPageContent[] = [
     number: "04",
     slug: "drylite",
     title: { en: "Drylite", fr: "Drylite" },
-    subtitle: { en: "Weapon systems prototype / in progress", fr: "Prototype de systèmes d'armes / en cours" },
+    subtitle: { en: "Weapon systems prototype / on hold", fr: "Prototype de systèmes d'armes / en pause" },
     year: "2026",
     engine: "Unreal Engine 5",
     role: { en: "Systems / Tech design", fr: "Systèmes / Design technique" },
@@ -204,8 +204,8 @@ const projectPageEntries: ProjectPageContent[] = [
     tone: "drylite",
     mark: "DRY",
     intro: {
-      en: "A data-driven Unreal weapon prototype focused on configurable firearms, modular attachments, enemy AI, and a clean inventory flow.",
-      fr: "Un prototype d'armes Unreal piloté par les données, centré sur les fusils configurables, les attaches modulaires, l'IA ennemie et un flow d'inventaire clair.",
+      en: "An Unreal prototype built around configurable weapons, modular attachments, a basic enemy AI, and an inventory.",
+      fr: "Un prototype Unreal construit autour d'armes configurables, d'attaches modulaires, d'une IA ennemie simple et d'un inventaire.",
     },
     facts: {
       en: ["Started April 2026", "Full gun system + UI flow", "Project currently on hold"],
@@ -214,10 +214,10 @@ const projectPageEntries: ProjectPageContent[] = [
     sections: [
       {
         eyebrow: { en: "01 / Firearms", fr: "01 / Fusils" },
-        title: { en: "Weapons as editable data", fr: "Des armes définies par les données" },
+        title: { en: "Firearms", fr: "Fusils" },
         body: {
-          en: "I built configurable firearms in Blueprints with true projectiles rather than hitscan. The weapons are data-driven so tuning an existing rifle or adding a new one does not require rebuilding the system around it.",
-          fr: "J'ai créé des fusils configurables dans les Blueprints avec de vrais projectiles plutôt que des hitscans. Les armes sont pilotées par les données afin de faciliter l'équilibrage d'un fusil existant ou l'ajout d'une nouvelle arme sans reconstruire le système.",
+          en: "I built the firearms in Blueprints, with real projectiles instead of hitscan. Each weapon is defined by data, so tuning an existing weapon or adding a new one is quick.",
+          fr: "J'ai créé les fusils dans les Blueprints, avec de vrais projectiles plutôt que du hitscan. Chaque arme est définie par des données, ce qui rend rapide l'équilibrage d'une arme existante ou l'ajout d'une nouvelle.",
         },
         media: [
           imageAsset("Main firearm Blueprint", "drylite-gun-blueprint"),
@@ -227,10 +227,10 @@ const projectPageEntries: ProjectPageContent[] = [
       },
       {
         eyebrow: { en: "02 / Inventory", fr: "02 / Inventaire" },
-        title: { en: "A UI flow that stays maintainable", fr: "Un flow UI qui reste maintenable" },
+        title: { en: "Inventory", fr: "Inventaire" },
         body: {
-          en: "The HUD sends a request to an inventory that owns the player's item list. I used the Gameplay Message Subsystem to keep widgets decoupled and Common UI to keep only one foreground interface active at a time.",
-          fr: "Le HUD envoie une requête à un inventaire qui contient la liste des objets du joueur. J'ai utilisé le Gameplay Message Subsystem pour découpler les widgets et Common UI pour ne garder qu'une seule interface au premier plan.",
+          en: "The HUD sends a request to the inventory, which holds the player's items. I used the Gameplay Message Subsystem so the widgets don't depend on each other directly, and Common UI so only one menu is open at a time.",
+          fr: "Le HUD envoie une requête à l'inventaire, qui contient les objets du joueur. J'ai utilisé le Gameplay Message Subsystem pour que les widgets ne dépendent pas directement les uns des autres, et Common UI pour qu'un seul menu soit ouvert à la fois.",
         },
         media: [
           imageAsset("HUD → inventory request", "drylite-message-sender"),
@@ -240,10 +240,10 @@ const projectPageEntries: ProjectPageContent[] = [
       },
       {
         eyebrow: { en: "03 / Enemy AI", fr: "03 / IA ennemie" },
-        title: { en: "Simple behaviour, clear extension points", fr: "Un comportement simple, facile à étendre" },
+        title: { en: "Enemy AI", fr: "IA ennemie" },
         body: {
-          en: "The first enemy approaches the player, fires a laser at close range, pauses briefly, and resumes the chase. Behaviour Trees keep the current behaviour visible while leaving space for future tests.",
-          fr: "Le premier ennemi s'approche du joueur, tire un laser à courte portée, attend brièvement puis reprend sa poursuite. Les Behaviour Trees rendent le comportement actuel lisible tout en laissant de la place aux tests futurs.",
+          en: "The first enemy moves toward the player, fires a laser at close range, waits briefly, then starts chasing again. I used Behaviour Trees so the behaviour is easy to read and to expand later.",
+          fr: "Le premier ennemi s'approche du joueur, tire un laser à courte portée, attend brièvement puis reprend sa poursuite. J'ai utilisé les Behaviour Trees pour que le comportement soit facile à lire et à enrichir plus tard.",
         },
         media: [
           videoAsset("Enemy behavior", "drylite-enemy-showcase"),
@@ -252,10 +252,10 @@ const projectPageEntries: ProjectPageContent[] = [
       },
       {
         eyebrow: { en: "04 / Attachments", fr: "04 / Attaches" },
-        title: { en: "Strange parts with a visual identity", fr: "Des pièces étranges avec une identité visuelle" },
+        title: { en: "Attachments", fr: "Attaches" },
         body: {
-          en: "I helped design a system that turns enemy parts into memorable weapon attachments while preserving their original visual identity. One concept uses a mechanical hand to hold the rifle with an extra arm.",
-          fr: "J'ai participé au design d'un système qui transforme des parties d'ennemis en attaches mémorables tout en conservant leur identité visuelle. Un concept utilise une main mécanique pour tenir le fusil avec un bras supplémentaire.",
+          en: "I helped design a system that turns enemy parts into weapon attachments that keep the look of the enemy they came from. One concept is a mechanical hand that holds the rifle as an extra arm.",
+          fr: "J'ai participé au design d'un système qui transforme des parties d'ennemis en attaches d'armes qui gardent l'apparence de l'ennemi d'origine. Un des concepts est une main mécanique qui tient le fusil comme un bras supplémentaire.",
         },
         media: [imageAsset("Attachment concepts", "drylite-attachments")],
       },
@@ -273,8 +273,8 @@ const projectPageEntries: ProjectPageContent[] = [
     tone: "graphic",
     mark: "UX",
     intro: {
-      en: "A small collection of interface redesigns and a board-game sell sheet, focused on clarity, hierarchy, and an audience-appropriate tone.",
-      fr: "Une collection de refontes d'interfaces et une feuille de vente pour un jeu de société, centrée sur la clarté, la hiérarchie et un ton adapté au public.",
+      en: "Interface redesigns for a government website and a sell sheet for a board game.",
+      fr: "Des refontes d'interface pour un site gouvernemental et une feuille de vente pour un jeu de société.",
     },
     facts: {
       en: ["Office of the Commissioner of Official Languages", "Mobile and timeline navigation", "Board-game sell sheet"],
@@ -283,10 +283,10 @@ const projectPageEntries: ProjectPageContent[] = [
     sections: [
       {
         eyebrow: { en: "01 / Interface redesign", fr: "01 / Refonte d'interface" },
-        title: { en: "Making mobile navigation feel intentional", fr: "Rendre la navigation mobile intentionnelle" },
+        title: { en: "Official Languages website", fr: "Site des langues officielles" },
         body: {
-          en: "For the Office of the Commissioner of Official Languages website, I redesigned the mobile header and navigation menu, then reworked a timeline navigation pattern to feel more engaging for a younger audience.",
-          fr: "Pour le site du Commissariat aux langues officielles, j'ai refondu le header et le menu de navigation sur mobile, puis repensé une navigation de ligne du temps pour la rendre plus engageante auprès d'un public jeune.",
+          en: "For the Office of the Commissioner of Official Languages website, I redesigned the mobile header and navigation menu. I also reworked the timeline navigation to make it more interesting for a younger audience.",
+          fr: "Pour le site du Commissariat aux langues officielles, j'ai refait le header et le menu de navigation sur mobile. J'ai aussi retravaillé la navigation de la ligne du temps pour la rendre plus intéressante pour un public jeune.",
         },
         media: [
           imageAsset("Mobile header — before", "graphic-clo-ocol-header-avant"),
@@ -299,10 +299,10 @@ const projectPageEntries: ProjectPageContent[] = [
       },
       {
         eyebrow: { en: "02 / Communication", fr: "02 / Communication" },
-        title: { en: "A sell sheet that gets to the point", fr: "Une feuille de vente qui va droit au but" },
+        title: { en: "Board game sell sheet", fr: "Feuille de vente" },
         body: {
-          en: "I created a board-game sell sheet with a clear hierarchy and a concise visual rhythm, designed to communicate the game's value quickly and effectively.",
-          fr: "J'ai réalisé une feuille de vente pour un jeu de société avec une hiérarchie claire et un rythme visuel concis, afin de communiquer rapidement et efficacement la valeur du jeu.",
+          en: "I made a sell sheet for a board game, meant to show what makes the game worth playing at a glance.",
+          fr: "J'ai réalisé une feuille de vente pour un jeu de société, pensée pour montrer l'intérêt du jeu en un coup d'œil.",
         },
         media: [imageAsset("Sell sheet", "graphic-sell-sheet")],
       },
@@ -312,7 +312,7 @@ const projectPageEntries: ProjectPageContent[] = [
     number: "02",
     slug: "minimal-rpg",
     title: { en: "Minimal RPG", fr: "Minimal RPG" },
-    subtitle: { en: "Solo RPG / 15 months", fr: "RPG en solo / 15 mois" },
+    subtitle: { en: "Solo RPG / since 2024", fr: "RPG en solo / depuis 2024" },
     year: "2026",
     engine: "Unity",
     role: { en: "Solo developer — design, programming, art, publishing", fr: "Développeur solo — design, programmation, art, publication" },
@@ -321,12 +321,12 @@ const projectPageEntries: ProjectPageContent[] = [
     mark: "MRP",
     cover: imageAsset("Minimal RPG cover", "minimal-rpg-cover"),
     intro: {
-      en: "A solo project inspired by Nodebuster, extended with RPG-style progression and mechanics. I built the entire game and most of its art, from custom production tools all the way to the Steam launch.",
-      fr: "Un projet solo inspiré de Nodebuster, enrichi d'une progression et de mécaniques de type RPG. J'ai développé l'ensemble du jeu et la majorité de son art, des outils de production maison jusqu'au lancement sur Steam.",
+      en: "A solo project inspired by Nodebuster, with RPG-style progression and mechanics. I made the whole game and most of its art, from the production tools to the Steam demo.",
+      fr: "Un projet solo inspiré de Nodebuster, avec une progression et des mécaniques de type RPG. J'ai réalisé tout le jeu et la majorité de son art, des outils de production jusqu'à la démo sur Steam.",
     },
     facts: {
-      en: ["Solo developer", "15 months of development", "Demo available on Steam", "Planned release Q1 2027"],
-      fr: ["Développeur solo", "15 mois de développement", "Démo disponible sur Steam", "Sortie prévue T1 2027"],
+      en: ["Solo developer", "In development since October 2024", "Demo available on Steam", "Planned release Q1 2027"],
+      fr: ["Développeur solo", "En développement depuis octobre 2024", "Démo disponible sur Steam", "Sortie prévue T1 2027"],
     },
     link: "https://store.steampowered.com/app/3661570/Minimal_RPG/",
     sections: [
@@ -485,8 +485,8 @@ const projectPageEntries: ProjectPageContent[] = [
         blocks: [
           {
             type: "text",
-            en: "Publishing the game on Steam (currently as a demo) has been a valuable learning experience.",
-            fr: "Publier le jeu sur Steam (pour le moment sous forme de démo) a été une excellente expérience.",
+            en: "Publishing the game on Steam (currently as a demo) taught me a lot.",
+            fr: "Publier le jeu sur Steam (pour le moment sous forme de démo) m'a beaucoup appris.",
           },
           {
             type: "text",
